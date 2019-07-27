@@ -10,10 +10,12 @@ function execExportMD(program, version) {
   program
       .command('exportmd [markdownfile]')
       .description('export markdown file')
+      .option('-o, --output [filename]', 'export output file')
+      .option('-t, --template [filename]', 'template file')
       .action(function(markdownfile, options) {
         console.log('version is ', version);
 
-        if (!markdownfile) {
+        if (!markdownfile || !options.output || !options.template) {
           console.log(
               'command wrong, please type ' + 'adarender exportmd --help'
           );
@@ -21,15 +23,20 @@ function execExportMD(program, version) {
           return;
         }
 
-        console.log('markdownfile - ', markdownfile);
+        console.log('markdown file - ', markdownfile);
+        console.log('template file - ', options.template);
 
         const mdstr = fs.readFileSync(markdownfile).toString();
         console.log(mdstr);
 
-        const htmlstr = exportMarkdown(mdstr);
+        const tmpstr = fs.readFileSync(options.template).toString();
+
+        const htmlstr = exportMarkdown(mdstr, tmpstr);
 
         console.log('---');
         console.log(htmlstr);
+
+        fs.writeFileSync(options.output, htmlstr);
       });
 }
 

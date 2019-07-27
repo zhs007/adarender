@@ -1,6 +1,6 @@
 {
   "name": "adarender",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Ada render",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/zhs007/adarender#readme",
   "dependencies": {
     "commander": "^2.20.0",
+    "handlebars": "^4.1.2",
     "markdown-it": "^9.0.1"
   },
   "devDependencies": {
