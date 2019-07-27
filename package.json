@@ -20,6 +20,11 @@
   },
   "homepage": "https://github.com/zhs007/adarender#readme",
   "dependencies": {
+    "commander": "^2.20.0",
     "markdown-it": "^9.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-google": "^0.13.0"
   }
 }
