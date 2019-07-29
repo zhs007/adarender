@@ -7,6 +7,9 @@ message MarkdownData {
     string strData = 1;
     // binaryData - binary data, it's like images
     map<string, bytes> binaryData = 2;
+
+    // token - API token
+    string token = 100;
 }
 
 // MarkdownStream - markdown stream data

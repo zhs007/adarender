@@ -63,7 +63,8 @@ proto.adarender.MarkdownData.prototype.toObject = function(opt_includeInstance) 
 proto.adarender.MarkdownData.toObject = function(includeInstance, msg) {
   var f, obj = {
     strdata: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    binarydataMap: (f = msg.getBinarydataMap()) ? f.toObject(includeInstance, undefined) : []
+    binarydataMap: (f = msg.getBinarydataMap()) ? f.toObject(includeInstance, undefined) : [],
+    token: jspb.Message.getFieldWithDefault(msg, 100, "")
   };
 
   if (includeInstance) {
@@ -110,6 +111,10 @@ proto.adarender.MarkdownData.deserializeBinaryFromReader = function(msg, reader)
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readBytes, null, "");
          });
       break;
+    case 100:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setToken(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -150,6 +155,13 @@ proto.adarender.MarkdownData.serializeBinaryToWriter = function(message, writer)
   if (f && f.getLength() > 0) {
     f.serializeBinary(2, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeBytes);
   }
+  f = message.getToken();
+  if (f.length > 0) {
+    writer.writeString(
+      100,
+      f
+    );
+  }
 };
 
 
@@ -183,6 +195,21 @@ proto.adarender.MarkdownData.prototype.getBinarydataMap = function(opt_noLazyCre
 
 proto.adarender.MarkdownData.prototype.clearBinarydataMap = function() {
   this.getBinarydataMap().clear();
+};
+
+
+/**
+ * optional string token = 100;
+ * @return {string}
+ */
+proto.adarender.MarkdownData.prototype.getToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 100, ""));
+};
+
+
+/** @param {string} value */
+proto.adarender.MarkdownData.prototype.setToken = function(value) {
+  jspb.Message.setProto3StringField(this, 100, value);
 };
 
 
