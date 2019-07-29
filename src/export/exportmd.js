@@ -2,19 +2,52 @@ const MarkdownIt = require('markdown-it');
 const handlebars = require('handlebars');
 
 /**
+ * getTitle
+ * @param {object} md - MarkdownIt
+ * @param {string} mdstr - markdown string
+ * @return {string} title - title string
+ */
+function getTitle(md, mdstr) {
+  const ret = md.parse(mdstr);
+
+  for (let i = 0; i < ret.length; ++i) {
+    if (ret[i].tag == 'h1' && ret[i].type == 'heading_open') {
+      let title = '';
+
+      for (let j = 1; i + j < ret.length; ++j) {
+        if (ret[i + j].type == 'heading_close') {
+          break;
+        } else if (ret[i + j].type == 'inline') {
+          for (let k = 0; k < ret[i + j].children.length; ++k) {
+            if (ret[i + j].children[k].type == 'text') {
+              title += ret[i + j].children[k].content;
+            }
+          }
+        }
+      }
+
+      return title;
+    }
+  }
+
+  return '';
+}
+
+/**
  * exportMarkdown
  * @param {string} mdstr - markdown string
  * @param {string} tmpstr - template string
- * @return {string} htmlstr - html string
+ * @return {object} ret - {html, title}
  */
 function exportMarkdown(mdstr, tmpstr) {
   const md = new MarkdownIt();
 
+  const title = getTitle(md, mdstr);
   const htmlstr = md.render(mdstr);
   const template = handlebars.compile(tmpstr);
-  const html = template({title: 'Ada Render', html: htmlstr});
+  const html = template({title: 'Ada Render - ' + title, html: htmlstr});
 
-  return html;
+  return {html: html, title: title};
 }
 
 exports.exportMarkdown = exportMarkdown;

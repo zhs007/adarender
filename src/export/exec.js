@@ -31,12 +31,12 @@ function execExportMD(program, version) {
 
         const tmpstr = fs.readFileSync(options.template).toString();
 
-        const htmlstr = exportMarkdown(mdstr, tmpstr);
+        const ret = exportMarkdown(mdstr, tmpstr);
 
-        console.log('---');
-        console.log(htmlstr);
+        console.log('--- ' + ret.title + ' ---');
+        console.log(ret.html);
 
-        fs.writeFileSync(options.output, htmlstr);
+        fs.writeFileSync(options.output, ret.html);
       });
 }
 
