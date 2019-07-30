@@ -1,5 +1,13 @@
 const services = require('../../proto/adarender_grpc_pb');
-const {loadConfig, checkConfig, isValidToken} = require('./config');
+const {
+  loadConfig,
+  checkConfig,
+  isValidToken,
+  getTemplate,
+} = require('./config');
+const {MarkdownStream} = require('./markdownstream');
+const {HTMLStream} = require('./htmlstream');
+const {exportMarkdown} = require('../export/exportmd');
 
 const grpc = require('grpc');
 
@@ -20,15 +28,61 @@ async function startService(cfgfile) {
 
   server.addService(services.AdaRenderServiceService, {
     render: (call) => {
-      if (!isValidToken(cfg, call.request.getToken())) {
-        console.log('invalid token', call.request.getToken());
+      const mdstream = new MarkdownStream();
+      const htmlstream = new HTMLStream();
 
-        call.end();
+      call.on('data', async (markdownstream) => {
+        if (!isValidToken(cfg, markdownstream.getToken())) {
+          await htmlstream.sendErr(
+              call,
+              'invalid token ',
+              markdownstream.getToken()
+          );
 
-        return;
-      }
+          return;
+        }
 
-      // callExportArticle(call);
+        const err = mdstream.onData(markdownstream);
+        if (err) {
+          await htmlstream.sendErr(call, err);
+
+          return;
+        }
+      });
+
+      call.on('end', async () => {
+        const err = mdstream.onEnd();
+        if (err) {
+          await htmlstream.sendErr(call, err);
+
+          return;
+        }
+
+        if (mdstream.mdobj) {
+          let temp = '{{{html}}}';
+
+          const tempname = mdstream.mdobj.getTemplatename();
+          if (tempname) {
+            temp = getTemplate(cfg, tempname);
+          } else {
+            const tempdata = mdstream.mdobj.getTemplatedata();
+            if (tempdata) {
+              temp = tempdata;
+            }
+          }
+
+          const mdstr = mdstream.mdobj.getStrdata();
+          if (mdstr) {
+            const ret = exportMarkdown(mdstr, temp);
+
+            await htmlstream.sendHTMLData(call, {strData: ret.html});
+
+            return;
+          }
+
+          await htmlstream.sendErr(call, 'non-data');
+        }
+      });
     },
   });
 

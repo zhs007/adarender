@@ -58,6 +58,33 @@ function isValidToken(cfg, token) {
   return false;
 }
 
+/**
+ * getTemplate
+ * @param {object} cfg - config
+ * @param {string} tempname - template name
+ * @return {string} tempdata - template data
+ */
+function getTemplate(cfg, tempname) {
+  try {
+    if (!cfg) {
+      return '';
+    }
+
+    if (Array.isArray(cfg.templates)) {
+      for (let i = 0; i < cfg.templates.length; ++i) {
+        if (cfg.templates[i].name == tempname) {
+          return fs.readFileSync(cfg.templates[i].filename);
+        }
+      }
+    }
+  } catch (err) {
+    console.log('getTemplate ' + err);
+  }
+
+  return '';
+}
+
 exports.loadConfig = loadConfig;
 exports.checkConfig = checkConfig;
 exports.isValidToken = isValidToken;
+exports.getTemplate = getTemplate;

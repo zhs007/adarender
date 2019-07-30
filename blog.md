@@ -1,5 +1,11 @@
 # Ada Render Blog
 
+## 2019-07-30
+
+``` sh
+node ./bin/adarender.js startservice ./cfg/service.yaml
+```
+
 ## 2019-07-29
 
 目前用``github``的``css``配置，导出``markdown``文件。

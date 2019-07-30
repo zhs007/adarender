@@ -8,8 +8,10 @@ message MarkdownData {
     // binaryData - binary data, it's like images
     map<string, bytes> binaryData = 2;
 
-    // token - API token
-    string token = 100;
+    // templateName - template Name
+    string templateName = 10;
+    // templateData - template data
+    string templateData = 11;
 }
 
 // MarkdownStream - markdown stream data
@@ -32,6 +34,9 @@ message MarkdownStream {
 
     // markdownData - If the data does not exceed 4mb, this is the data that is directly available.
     MarkdownData markdownData = 200;
+
+    // token - API token
+    string token = 300;
 }
 
 // HTMLData - HTML data
