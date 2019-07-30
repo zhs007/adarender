@@ -73,7 +73,7 @@ function getTemplate(cfg, tempname) {
     if (Array.isArray(cfg.templates)) {
       for (let i = 0; i < cfg.templates.length; ++i) {
         if (cfg.templates[i].name == tempname) {
-          return fs.readFileSync(cfg.templates[i].filename);
+          return fs.readFileSync(cfg.templates[i].filename).toString();
         }
       }
     }

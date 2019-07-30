@@ -136,7 +136,7 @@ class HTMLStream {
   async sendErr(call, errstr) {
     try {
       const htmlstream = new adarender.HTMLStream();
-      htmlstream.setErr(errstr);
+      htmlstream.setError(errstr);
 
       await call.write(htmlstream);
       call.end();

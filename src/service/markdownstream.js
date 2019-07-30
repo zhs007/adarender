@@ -1,4 +1,4 @@
-const {getMD5String} = require('./utils');
+const {getMD5String, newMarkdownData} = require('./utils');
 const adarender = require('../../proto/adarender_pb');
 
 /**
@@ -126,6 +126,28 @@ class MarkdownStream {
     }
 
     return 'non error or mdobj';
+  }
+
+  /**
+   * sendMarkdownData
+   * @param {object} call - call
+   * @param {object} obj - {strData, templateName}
+   * @param {string} token - token
+   */
+  async sendMarkdownData(call, obj, token) {
+    try {
+      const mdstream = new adarender.MarkdownStream();
+
+      const mddata = newMarkdownData(obj);
+      mdstream.setMarkdowndata(mddata);
+
+      mdstream.setToken(token);
+
+      await call.write(mdstream);
+      call.end();
+    } catch (err) {
+      console.log('MarkdownStream.sendMarkdownData ' + err);
+    }
   }
 }
 

@@ -37,17 +37,21 @@ function getTitle(md, mdstr) {
  * exportMarkdown
  * @param {string} mdstr - markdown string
  * @param {string} tmpstr - template string
- * @return {object} ret - {html, title}
+ * @return {object} ret - {err, html, title}
  */
 function exportMarkdown(mdstr, tmpstr) {
-  const md = new MarkdownIt();
+  try {
+    const md = new MarkdownIt();
 
-  const title = getTitle(md, mdstr);
-  const htmlstr = md.render(mdstr);
-  const template = handlebars.compile(tmpstr);
-  const html = template({title: 'Ada Render - ' + title, html: htmlstr});
+    const title = getTitle(md, mdstr);
+    const htmlstr = md.render(mdstr);
+    const template = handlebars.compile(tmpstr);
+    const html = template({title: 'Ada Render - ' + title, html: htmlstr});
 
-  return {html: html, title: title};
+    return {html: html, title: title};
+  } catch (err) {
+    return {err: 'exportMarkdown ' + err};
+  }
 }
 
 exports.exportMarkdown = exportMarkdown;

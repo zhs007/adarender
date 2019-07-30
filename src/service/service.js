@@ -75,6 +75,12 @@ async function startService(cfgfile) {
           if (mdstr) {
             const ret = exportMarkdown(mdstr, temp);
 
+            if (ret.err) {
+              await htmlstream.sendErr(call, ret.err);
+
+              return;
+            }
+
             await htmlstream.sendHTMLData(call, {strData: ret.html});
 
             return;

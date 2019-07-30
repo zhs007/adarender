@@ -13,7 +13,7 @@ function getMD5String(buf) {
 
 /**
  * new HTMLData with object
- * @param {object} obj - Paragraph object
+ * @param {object} obj - object
  * @return {object} htmldata - adarender.HTMLData
  */
 function newHTMLData(obj) {
@@ -26,5 +26,25 @@ function newHTMLData(obj) {
   return result;
 }
 
+/**
+ * new MarkdownData with object
+ * @param {object} obj - {strData, templateName}
+ * @return {object} mddata - adarender.MarkdownData
+ */
+function newMarkdownData(obj) {
+  const result = new adarender.MarkdownData();
+
+  if (obj.strData) {
+    result.setStrdata(obj.strData);
+  }
+
+  if (obj.templateName) {
+    result.setTemplatename(obj.templateName);
+  }
+
+  return result;
+}
+
 exports.getMD5String = getMD5String;
 exports.newHTMLData = newHTMLData;
+exports.newMarkdownData = newMarkdownData;
