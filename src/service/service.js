@@ -32,6 +32,8 @@ async function startService(cfgfile) {
       const htmlstream = new HTMLStream();
 
       call.on('data', async (markdownstream) => {
+        // console.log('get data.');
+
         if (!isValidToken(cfg, markdownstream.getToken())) {
           await htmlstream.sendErr(
               call,
@@ -51,6 +53,8 @@ async function startService(cfgfile) {
       });
 
       call.on('end', async () => {
+        // console.log('get end.');
+
         const err = mdstream.onEnd();
         if (err) {
           await htmlstream.sendErr(call, err);
