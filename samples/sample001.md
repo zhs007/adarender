@@ -2,48 +2,74 @@
 
 This is a ``markdown`` file.
 
-``` js
-const {exportMarkdown} = require('./exportmd');
-const fs = require('fs');
+``` go
+package main
 
-/**
- * execExportMD
- * @param {object} program - program
- * @param {string} version - version
- */
-function execExportMD(program, version) {
-  program
-      .command('exportmd [markdownfile]')
-      .description('export markdown file')
-      .option('-o, --output [filename]', 'export output file')
-      .option('-t, --template [filename]', 'template file')
-      .action(function(markdownfile, options) {
-        console.log('version is ', version);
+import (
+	"context"
+	"fmt"
+	"io/ioutil"
 
-        if (!markdownfile || !options.output || !options.template) {
-          console.log(
-              'command wrong, please type ' + 'adarender exportmd --help'
-          );
+	"github.com/zhs007/adacore"
+	adacorepb "github.com/zhs007/adacore/proto"
+)
 
-          return;
-        }
+func genMarkdown() string {
+	km, err := adacore.LoadKeywordMappingList("./keywordmapping.yaml")
+	if err != nil {
+		fmt.Printf("load keywordmapping error %v", err)
+	}
 
-        console.log('markdown file - ', markdownfile);
-        console.log('template file - ', options.template);
+	md := adacore.NewMakrdown("Ada Core")
 
-        const mdstr = fs.readFileSync(markdownfile).toString();
-        console.log(mdstr);
+	md.AppendParagraph("This is a Markdown API for Ada.")
+	md.AppendParagraph("This libraray is write by Zerro.\nThis is a multi-line text.")
 
-        const tmpstr = fs.readFileSync(options.template).toString();
+	md.AppendTable([]string{"head0", "head1", "head2"}, [][]string{
+		[]string{"text0_0", "text1_0", "text2_0"},
+		[]string{"text0_1", "text1_1", "text2_1"}})
 
-        const ret = exportMarkdown(mdstr, tmpstr);
+	fd, err := ioutil.ReadFile("./main.go")
+	if err != nil {
+		return ""
+	}
 
-        console.log('--- ' + ret.title + ' ---');
-        console.log(ret.html);
+	md.AppendCode(string(fd), "golang")
 
-        fs.writeFileSync(options.output, ret.html);
-      });
+	return md.GetMarkdownString(km)
 }
 
-exports.execExportMD = execExportMD;
+func startClient(cfg *adacore.Config) error {
+	client := adacore.NewClient("47.91.209.141:7201", "x7sSGGHgmKwUMoa5S4VZlr9bUF2lCCzF")
+
+	reply, err := client.BuildWithMarkdown(context.Background(), &adacorepb.MarkdownData{
+		StrData:      genMarkdown(),
+		TemplateName: "default",
+	})
+	if err != nil {
+		fmt.Printf("startClient BuildWithMarkdownFile %v", err)
+
+		return err
+	}
+
+	if reply != nil {
+		// fmt.Print(reply.HashName)
+		fmt.Print(reply.Url)
+	}
+
+	return nil
+}
+
+func main() {
+	cfg, err := adacore.LoadConfig("./config.yaml")
+	if err != nil {
+		fmt.Printf("startServ LoadConfig %v", err)
+
+		return
+	}
+
+	adacore.InitLogger(cfg)
+
+	startClient(cfg)
+}
 ```

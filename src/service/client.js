@@ -1,5 +1,6 @@
 const services = require('../../proto/adarender_grpc_pb');
 const {renderMarkdown} = require('./clientcore');
+const fs = require('fs');
 
 const grpc = require('grpc');
 
@@ -35,8 +36,6 @@ function render(servAddr, mdstr, tempname) {
 
 render(
     '127.0.0.1:7052',
-    '# Ada Render Sample\
-    \
-    This is a ``markdown`` file.',
+    fs.readFileSync('./samples/sample001.md').toString(),
     'default'
 );
