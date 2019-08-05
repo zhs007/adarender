@@ -1,5 +1,6 @@
 const MarkdownIt = require('markdown-it');
 const handlebars = require('handlebars');
+const hljs = require('highlight.js');
 
 /**
  * getTitle
@@ -41,7 +42,25 @@ function getTitle(md, mdstr) {
  */
 function exportMarkdown(mdstr, tmpstr) {
   try {
-    const md = new MarkdownIt();
+    const md = new MarkdownIt({
+      highlight: (str, lang) => {
+        if (lang && hljs.getLanguage(lang)) {
+          try {
+            return (
+              '<pre class="hljs"><code>' +
+              hljs.highlight(lang, str, true).value +
+              '</code></pre>'
+            );
+          } catch (__) {}
+        }
+
+        return (
+          '<pre class="hljs"><code>' +
+          md.utils.escapeHtml(str) +
+          '</code></pre>'
+        );
+      },
+    });
 
     const title = getTitle(md, mdstr);
     const htmlstr = md.render(mdstr);

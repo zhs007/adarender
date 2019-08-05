@@ -1,6 +1,6 @@
 {
   "name": "adarender",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Ada Render",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,7 @@
     "google-protobuf": "^3.9.0",
     "grpc": "^1.22.2",
     "handlebars": "^4.1.2",
+    "highlight.js": "^9.15.9",
     "markdown-it": "^9.0.1",
     "yaml-js": "^0.2.3"
   },
