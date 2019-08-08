@@ -73,3 +73,11 @@ func main() {
 	startClient(cfg)
 }
 ```
+
+This is a ``markdown`` file.  
+This a multiline string.
+
+![This a image](sample001.jpg)
+
+This is a ``markdown`` file.  
+This a multiline string too.

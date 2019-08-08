@@ -8,7 +8,17 @@ const adarender = require('../../proto/adarender_pb');
  */
 function getMD5String(buf) {
   const md5 = crypto.createHash('md5');
-  return md5.update(buf).digest('hex');
+  return md5.update(buf).digest('base64');
+}
+
+/**
+ * getSHA256String
+ * @param {object} buf - buffer
+ * @return {string} str - str
+ */
+function getSHA256String(buf) {
+  const md5 = crypto.createHash('sha256');
+  return md5.update(buf).digest('base64');
 }
 
 /**
@@ -48,3 +58,4 @@ function newMarkdownData(obj) {
 exports.getMD5String = getMD5String;
 exports.newHTMLData = newHTMLData;
 exports.newMarkdownData = newMarkdownData;
+exports.getSHA256String = getSHA256String;
