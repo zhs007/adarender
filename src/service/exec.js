@@ -1,3 +1,5 @@
+'use strict';
+
 const {startService} = require('./service');
 
 /**

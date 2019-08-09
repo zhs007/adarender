@@ -1,3 +1,5 @@
+'use strict';
+
 const crypto = require('crypto');
 const fs = require('fs');
 
@@ -9,10 +11,26 @@ const fs = require('fs');
 function hashFile(fn) {
   try {
     const buf = fs.readFileSync(fn);
-    const sha256 = crypto.createHash('sha256');
-    return sha256.update(buf).digest('base64').replace(/\//g, '_');
+    return hashBuffer(buf);
   } catch (err) {
     return 'nofile';
+  }
+}
+
+/**
+ * hashBuffer
+ * @param {Buffer} buf - buffer
+ * @return {string} str - str
+ */
+function hashBuffer(buf) {
+  try {
+    const sha256 = crypto.createHash('sha256');
+    return sha256
+        .update(buf)
+        .digest('base64')
+        .replace(/\//g, '_');
+  } catch (err) {
+    return 'hasherr';
   }
 }
 
@@ -30,3 +48,4 @@ function copyFile(srcfn, targetfn) {
 
 exports.hashFile = hashFile;
 exports.copyFile = copyFile;
+exports.hashBuffer = hashBuffer;

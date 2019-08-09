@@ -1,3 +1,5 @@
+'use strict';
+
 const services = require('../../proto/adarender_grpc_pb');
 const {
   loadConfig,

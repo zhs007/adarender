@@ -1,3 +1,5 @@
+'use strict';
+
 const {exportMarkdown} = require('./exportmd');
 const fs = require('fs');
 const path = require('path');

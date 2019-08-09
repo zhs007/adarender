@@ -1,3 +1,5 @@
+'use strict';
+
 const MarkdownIt = require('markdown-it');
 const handlebars = require('handlebars');
 const hljs = require('highlight.js');

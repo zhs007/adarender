@@ -1,3 +1,5 @@
+'use strict';
+
 const {MarkdownStream} = require('./markdownstream');
 const {HTMLStream} = require('./htmlstream');
 

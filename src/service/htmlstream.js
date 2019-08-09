@@ -1,3 +1,5 @@
+'use strict';
+
 const {getMD5String, newHTMLData} = require('./utils');
 const adarender = require('../../proto/adarender_pb');
 

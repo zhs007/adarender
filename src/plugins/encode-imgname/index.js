@@ -1,6 +1,6 @@
 'use strict';
 
-const {hashFile, copyFile} = require('../../utils');
+const {hashFile, copyFile, hashBuffer} = require('../../utils');
 const {join} = require('path');
 
 /**
@@ -25,9 +25,50 @@ function getImgType(fn) {
 }
 
 /**
+ * hashFileEx
+ * @param {object} vfs - VFS
+ * @param {string} inpath - input path
+ * @param {string} fn - filename
+ * @return {string} hash - hash
+ */
+function hashFileEx(vfs, inpath, fn) {
+  if (vfs) {
+    const buf = vfs.getFile(fn);
+    if (buf) {
+      return hashBuffer(buf);
+    }
+
+    return 'nofile';
+  }
+
+  return hashFile(join(inpath, fn));
+}
+
+/**
+ * copyFileEx
+ * @param {object} vfs - VFS
+ * @param {string} inpath - input path
+ * @param {string} outputpath - output path
+ * @param {string} srcfn - source filename
+ * @param {string} targetfn - target filename
+ */
+function copyFileEx(vfs, inpath, outputpath, srcfn, targetfn) {
+  if (vfs) {
+    const buf = vfs.getFile(srcfn);
+    if (buf) {
+      vfs.addFile(targetfn, buf);
+    }
+
+    return;
+  }
+
+  copyFile(join(inpath, srcfn), join(outputpath, targetfn));
+}
+
+/**
  * markdownitEncodeImgName
  * @param {object} md - MarkdownIt
- * @param {object} config - {input, output, onlyname}
+ * @param {object} config - {input, output, onlyname, vfs}
  */
 function markdownitEncodeImgName(md, config) {
   config = config || {};
@@ -50,10 +91,12 @@ function markdownitEncodeImgName(md, config) {
   md.renderer.rules.image = (tokens, idx, options, env, self) => {
     const token = tokens[idx];
     const srcIndex = token.attrIndex('src');
-    let url = join(input, token.attrs[srcIndex][1]);
-    const newname = hashFile(url) + '.' + getImgType(url);
-    const newnamewithpath = join(output, newname);
-    copyFile(url, newnamewithpath);
+    let url = token.attrs[srcIndex][1];
+
+    const newname = hashFileEx(config.vfs, input, url) + '.' + getImgType(url);
+    copyFileEx(config.vfs, input, output, url, newname);
+    // const newnamewithpath = join(output, newname);
+    // copyFile(url, newnamewithpath);
 
     if (onlyname) {
       url = newname;
