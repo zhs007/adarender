@@ -77,7 +77,7 @@ async function startService(cfgfile) {
 
           const mdstr = mdstream.mdobj.getStrdata();
           if (mdstr) {
-            const ret = exportMarkdown(mdstr, temp);
+            const ret = exportMarkdown(mdstr, temp, './');
 
             if (ret.err) {
               await htmlstream.sendErr(call, ret.err);

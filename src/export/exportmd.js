@@ -1,6 +1,7 @@
 const MarkdownIt = require('markdown-it');
 const handlebars = require('handlebars');
 const hljs = require('highlight.js');
+const pluginEncodeImgName = require('../plugins/encode-imgname');
 
 /**
  * getTitle
@@ -38,9 +39,11 @@ function getTitle(md, mdstr) {
  * exportMarkdown
  * @param {string} mdstr - markdown string
  * @param {string} tmpstr - template string
+ * @param {string} inpath - inpath
+ * @param {string} outputpath - outputpath
  * @return {object} ret - {err, html, title}
  */
-function exportMarkdown(mdstr, tmpstr) {
+function exportMarkdown(mdstr, tmpstr, inpath, outputpath) {
   try {
     const md = new MarkdownIt({
       highlight: (str, lang) => {
@@ -60,6 +63,12 @@ function exportMarkdown(mdstr, tmpstr) {
           '</code></pre>'
         );
       },
+    });
+
+    md.use(pluginEncodeImgName, {
+      input: inpath,
+      output: outputpath,
+      onlyname: true,
     });
 
     const title = getTitle(md, mdstr);

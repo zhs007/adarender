@@ -1,6 +1,6 @@
 {
   "name": "adarender",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Ada Render",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,7 @@
     "grpc": "^1.22.2",
     "handlebars": "^4.1.2",
     "highlight.js": "^9.15.9",
+    "jimp": "^0.6.4",
     "markdown-it": "^9.0.1",
     "yaml-js": "^0.2.3"
   },
