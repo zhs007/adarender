@@ -11,6 +11,7 @@ const {MarkdownStream} = require('./markdownstream');
 const {HTMLStream} = require('./htmlstream');
 const {exportMarkdown} = require('../export/exportmd');
 const {newVFSFromMarkdownData} = require('../vfs');
+const {buildHTMLData} = require('./utils');
 
 const grpc = require('grpc');
 
@@ -46,7 +47,7 @@ async function procMarkdownData(cfg, call, htmlstream, mddata) {
       return;
     }
 
-    await htmlstream.sendHTMLData(call, {strData: ret.html});
+    await htmlstream.sendHTMLData(call, buildHTMLData(vfs, ret.html));
 
     return;
   }

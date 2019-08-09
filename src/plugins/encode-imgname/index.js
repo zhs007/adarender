@@ -56,7 +56,7 @@ function copyFileEx(vfs, inpath, outputpath, srcfn, targetfn) {
   if (vfs) {
     const buf = vfs.getFile(srcfn);
     if (buf) {
-      vfs.addFile(targetfn, buf);
+      vfs.addFile(targetfn, buf, true);
     }
 
     return;

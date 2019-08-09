@@ -38,6 +38,17 @@ function newHTMLData(obj) {
     result.setStrdata(obj.strData);
   }
 
+  if (obj.binaryData) {
+    const bd = result.getBinarydataMap();
+    if (bd) {
+      for (const k in obj.binaryData) {
+        if (Object.prototype.hasOwnProperty.call(obj.binaryData, k)) {
+          bd.set(k, obj.binaryData[k]);
+        }
+      }
+    }
+  }
+
   return result;
 }
 
@@ -98,8 +109,28 @@ function buildMarkdownData(inpath, fn) {
   return undefined;
 }
 
+/**
+ * buildHTMLData - build HTMLData object
+ * @param {VFS} vfs - VFS
+ * @param {string} htmlstr - html string
+ * @return {obj} html - HTMLData object
+ */
+function buildHTMLData(vfs, htmlstr) {
+  const obj = {
+    strData: htmlstr,
+    binaryData: {},
+  };
+
+  vfs.eachTag((fn, buf) => {
+    obj.binaryData[fn] = buf;
+  });
+
+  return obj;
+}
+
 exports.getMD5String = getMD5String;
 exports.newHTMLData = newHTMLData;
 exports.newMarkdownData = newMarkdownData;
 exports.getSHA256String = getSHA256String;
 exports.buildMarkdownData = buildMarkdownData;
+exports.buildHTMLData = buildHTMLData;
