@@ -10,8 +10,49 @@ const {
 const {MarkdownStream} = require('./markdownstream');
 const {HTMLStream} = require('./htmlstream');
 const {exportMarkdown} = require('../export/exportmd');
+const {newVFSFromMarkdownData} = require('../vfs');
 
 const grpc = require('grpc');
+
+/**
+ * procMarkdownData
+ * @param {object} cfg - config
+ * @param {object} call - grpc call
+ * @param {HTMLStream} htmlstream - HTMLStream
+ * @param {object} mddata - adarender.MarkdownData
+ */
+async function procMarkdownData(cfg, call, htmlstream, mddata) {
+  let temp = '{{{html}}}';
+
+  const vfs = newVFSFromMarkdownData(mddata);
+
+  const tempname = mddata.getTemplatename();
+  if (tempname) {
+    temp = getTemplate(cfg, tempname);
+  } else {
+    const tempdata = mddata.getTemplatedata();
+    if (tempdata) {
+      temp = tempdata;
+    }
+  }
+
+  const mdstr = mddata.getStrdata();
+  if (mdstr) {
+    const ret = exportMarkdown(mdstr, temp, './', './', vfs);
+
+    if (ret.err) {
+      await htmlstream.sendErr(call, ret.err);
+
+      return;
+    }
+
+    await htmlstream.sendHTMLData(call, {strData: ret.html});
+
+    return;
+  }
+
+  await htmlstream.sendErr(call, 'non-data');
+}
 
 /**
  * startService
@@ -65,34 +106,7 @@ async function startService(cfgfile) {
         }
 
         if (mdstream.mdobj) {
-          let temp = '{{{html}}}';
-
-          const tempname = mdstream.mdobj.getTemplatename();
-          if (tempname) {
-            temp = getTemplate(cfg, tempname);
-          } else {
-            const tempdata = mdstream.mdobj.getTemplatedata();
-            if (tempdata) {
-              temp = tempdata;
-            }
-          }
-
-          const mdstr = mdstream.mdobj.getStrdata();
-          if (mdstr) {
-            const ret = exportMarkdown(mdstr, temp, './');
-
-            if (ret.err) {
-              await htmlstream.sendErr(call, ret.err);
-
-              return;
-            }
-
-            await htmlstream.sendHTMLData(call, {strData: ret.html});
-
-            return;
-          }
-
-          await htmlstream.sendErr(call, 'non-data');
+          await procMarkdownData(cfg, call, htmlstream, mdstream.mdobj);
         }
       });
     },

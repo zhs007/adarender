@@ -43,9 +43,10 @@ function getTitle(md, mdstr) {
  * @param {string} tmpstr - template string
  * @param {string} inpath - inpath
  * @param {string} outputpath - outputpath
+ * @param {object} vfs - VFS
  * @return {object} ret - {err, html, title}
  */
-function exportMarkdown(mdstr, tmpstr, inpath, outputpath) {
+function exportMarkdown(mdstr, tmpstr, inpath, outputpath, vfs) {
   try {
     const md = new MarkdownIt({
       highlight: (str, lang) => {
@@ -71,6 +72,7 @@ function exportMarkdown(mdstr, tmpstr, inpath, outputpath) {
       input: inpath,
       output: outputpath,
       onlyname: true,
+      vfs: vfs,
     });
 
     const title = getTitle(md, mdstr);

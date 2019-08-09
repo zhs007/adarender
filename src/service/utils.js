@@ -2,6 +2,9 @@
 
 const crypto = require('crypto');
 const adarender = require('../../proto/adarender_pb');
+const {getImages} = require('../export/utils');
+const fs = require('fs');
+const path = require('path');
 
 /**
  * getMD5String
@@ -50,6 +53,17 @@ function newMarkdownData(obj) {
     result.setStrdata(obj.strData);
   }
 
+  if (obj.binaryData) {
+    const bd = result.getBinarydataMap();
+    if (bd) {
+      for (const k in obj.binaryData) {
+        if (Object.prototype.hasOwnProperty.call(obj.binaryData, k)) {
+          bd.set(k, obj.binaryData[k]);
+        }
+      }
+    }
+  }
+
   if (obj.templateName) {
     result.setTemplatename(obj.templateName);
   }
@@ -57,7 +71,35 @@ function newMarkdownData(obj) {
   return result;
 }
 
+/**
+ * buildMarkdownData - build MarkdownData object
+ * @param {string} inpath - input path
+ * @param {string} fn - filename
+ * @return {obj} md - markdowndata object
+ */
+function buildMarkdownData(inpath, fn) {
+  const buf = fs.readFileSync(path.join(inpath, fn));
+  if (buf) {
+    const obj = {
+      strData: buf.toString(),
+      binaryData: {},
+    };
+
+    const imgs = getImages(inpath, fn);
+    if (imgs && Array.isArray(imgs)) {
+      for (let i = 0; i < imgs.length; ++i) {
+        obj.binaryData[imgs[i]] = fs.readFileSync(path.join(inpath, imgs[i]));
+      }
+    }
+
+    return obj;
+  }
+
+  return undefined;
+}
+
 exports.getMD5String = getMD5String;
 exports.newHTMLData = newHTMLData;
 exports.newMarkdownData = newMarkdownData;
 exports.getSHA256String = getSHA256String;
+exports.buildMarkdownData = buildMarkdownData;
