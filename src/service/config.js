@@ -1,6 +1,6 @@
 'use strict';
 
-const yaml = require('yaml-js');
+const yaml = require('js-yaml');
 const fs = require('fs');
 
 /**
@@ -11,7 +11,11 @@ const fs = require('fs');
 function loadConfig(cfgfile) {
   const fd = fs.readFileSync(cfgfile);
   if (fd) {
-    return yaml.load(fd);
+    try {
+      return yaml.safeLoad(fd);
+    } catch (err) {
+
+    }
   }
 
   return undefined;
