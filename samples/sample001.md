@@ -81,3 +81,10 @@ This a multiline string.
 
 This is a ``markdown`` file.  
 This a multiline string too.
+
+``` ada.dataset
+name: testdata
+data:
+  xdata: [1,2,3,4,5]
+  ydata: [5,4,3,2,1]
+```

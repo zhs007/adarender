@@ -4,6 +4,7 @@ const MarkdownIt = require('markdown-it');
 const handlebars = require('handlebars');
 const hljs = require('highlight.js');
 const pluginEncodeImgName = require('../plugins/encode-imgname');
+const markdownitAdaDataset = require('../plugins/adadataset');
 
 /**
  * getTitle
@@ -74,6 +75,8 @@ function exportMarkdown(mdstr, tmpstr, inpath, outputpath, vfs) {
       onlyname: true,
       vfs: vfs,
     });
+
+    md.use(markdownitAdaDataset, {});
 
     const title = getTitle(md, mdstr);
     const htmlstr = md.render(mdstr);
