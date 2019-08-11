@@ -85,6 +85,18 @@ This a multiline string too.
 ``` ada.dataset
 name: testdata
 data:
-  xdata: [1,2,3,4,5]
-  ydata: [5,4,3,2,1]
+  namedata: ['a', 'b', 'c', 'd', 'e']
+  valdata: [5, 4, 3, 2, 1]
+```
+
+``` ada.pie
+id: pie001
+datasetname: testdata
+title: Pie
+width: 600
+height: 600
+subtext: this is a test pie
+a: pie name
+bval: namedata
+cval: valdata
 ```
