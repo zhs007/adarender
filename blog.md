@@ -1,5 +1,13 @@
 # Ada Render Blog
 
+### 2019-08-12
+
+增加了图表插件。
+
+这一组图表插件的做法比较简单，依然处理代码段，但语言识别是ada.pie或ada.line这样的。  
+用yaml格式，简单而且可读性强。  
+后面的render，也是直接用handlebars，如果有需要，修改模板即可，整体实现相当简洁。
+
 ### 2019-08-09
 
 考虑了引用文件，所以参数有些调整。
@@ -13,7 +21,7 @@ node ./bin/adarender.js exportmd -o samples/output001.html -t samples/template.h
 
 还加了一个 nodejs 处理图片的库，暂时没用到。
 
-调整了hex编码到base64，这样字符占用小点，但如果用于文件名编码的话，需要把 / 换成 _，同理，解码的时候也要换回来（目前貌似没有解码需求）。
+调整了hex编码到base64，这样字符占用小点，但如果用于文件名编码的话，需要把 / 换成 _，把 = 换成 -，同理，解码的时候也要换回来（目前貌似没有解码需求）。
 
 ``` sh
 npm publish https://github.com/zhs007/adarender/archive/v0.2.1.tar.gz
