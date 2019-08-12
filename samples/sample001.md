@@ -93,10 +93,25 @@ data:
 id: pie001
 datasetname: testdata
 title: Pie
-width: 600
-height: 600
+width: 1280
+height: 800
 subtext: this is a test pie
 a: pie name
 bval: namedata
 cval: valdata
+```
+
+``` ada.line
+id: line001
+datasetname: testdata
+title: Line
+width: 1280
+height: 800
+subtext: this is a test line
+xtype: category
+xdata: namedata
+ytype: value
+ydata:
+  - name: val1
+    data: valdata
 ```
