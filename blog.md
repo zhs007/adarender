@@ -21,7 +21,7 @@ node ./bin/adarender.js exportmd -o samples/output001.html -t samples/template.h
 
 还加了一个 nodejs 处理图片的库，暂时没用到。
 
-调整了hex编码到base64，这样字符占用小点，但如果用于文件名编码的话，需要把 / 换成 _，把 = 换成 -，同理，解码的时候也要换回来（目前貌似没有解码需求）。
+调整了hex编码到base64，这样字符占用小点，但如果用于文件名编码的话，需要把 / 换成 _，把 = 去掉，同理，解码的时候也要换回来，然后根据字符长度补=（目前貌似没有解码需求）。
 
 ``` sh
 npm publish https://github.com/zhs007/adarender/archive/v0.2.1.tar.gz

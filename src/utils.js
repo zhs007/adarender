@@ -29,7 +29,7 @@ function hashBuffer(buf) {
         .update(buf)
         .digest('base64')
         .replace(/\//g, '_')
-        .replace(/=/g, '-');
+        .replace(/=/g, '');
   } catch (err) {
     return 'hasherr';
   }
