@@ -8,6 +8,7 @@ const markdownitAdaDataset = require('../plugins/adadataset');
 const markdownitAdaPie = require('../plugins/adapie');
 const markdownitAdaLine = require('../plugins/adaline');
 const markdownitAdaBar = require('../plugins/adabar');
+const markdownitAdaTreeMap = require('../plugins/adatreemap');
 
 /**
  * getTitle
@@ -83,6 +84,7 @@ function exportMarkdown(mdstr, tmpstr, inpath, outputpath, vfs) {
     md.use(markdownitAdaPie, {});
     md.use(markdownitAdaLine, {});
     md.use(markdownitAdaBar, {});
+    md.use(markdownitAdaTreeMap, {});
 
     const title = getTitle(md, mdstr);
     const htmlstr = md.render(mdstr);

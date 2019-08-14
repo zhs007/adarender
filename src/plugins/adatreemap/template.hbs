@@ -1,0 +1,17 @@
+<div id="{{id}}" style="width: {{width}}px;height: {{height}}px;"></div>
+<script type="text/javascript">
+  var chart_{{id}} = echarts.init(document.getElementById('{{id}}'));
+
+  var option = {
+    title: {
+      text: '{{title}}',
+      subtext: '{{subtext}}',
+    },    
+    series: [{
+      type: 'treemap',
+      data: {{{jsondata}}}
+    }]
+  };
+
+  chart_{{id}}.setOption(option);
+</script>

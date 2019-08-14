@@ -132,3 +132,27 @@ ydata:
   - name: val1
     data: valdata
 ```
+
+``` ada.treemap
+id: treemap001
+datasetname: testdata
+title: Treemap
+width: 1280
+height: 800
+subtext: this is a test treemap
+data: 
+- name: nodeA
+  children:
+  - name: nodeAa
+    value: 4
+  - name: nodeAb
+    value: 6
+- name: nodeB
+  children: 
+  - name: nodeBa
+    value: 1
+    children:
+    - name: nodeBa1
+      value: 20
+
+```
