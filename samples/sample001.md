@@ -125,6 +125,7 @@ height: 800
 subtext: this is a test bar
 legenddata: ["val1"]
 xtype: category
+xshowall: true
 xdata: namedata
 ytype: value
 ydata:

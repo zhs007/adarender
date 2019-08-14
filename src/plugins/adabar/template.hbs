@@ -20,6 +20,11 @@
         splitLine: {
             show: false
         },
+{{#if xshowall}}        
+        axisLabel: {
+          interval:0
+        },
+{{/if}}
         data: adadata_{{datasetname}}.{{xdata}}
     },
     yAxis: {

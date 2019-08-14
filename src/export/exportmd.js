@@ -1,7 +1,7 @@
 'use strict';
 
 const MarkdownIt = require('markdown-it');
-const handlebars = require('handlebars');
+const {compileString} = require('../handlebarsutils');
 const hljs = require('highlight.js');
 const pluginEncodeImgName = require('../plugins/encode-imgname');
 const markdownitAdaDataset = require('../plugins/adadataset');
@@ -86,7 +86,7 @@ function exportMarkdown(mdstr, tmpstr, inpath, outputpath, vfs) {
 
     const title = getTitle(md, mdstr);
     const htmlstr = md.render(mdstr);
-    const template = handlebars.compile(tmpstr);
+    const template = compileString(tmpstr);
     const html = template({title: 'Ada Render - ' + title, html: htmlstr});
 
     return {html: html, title: title};

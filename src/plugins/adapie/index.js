@@ -1,12 +1,12 @@
 'use strict';
 
 const yaml = require('js-yaml');
-const handlebars = require('handlebars');
+const {compileString} = require('../../handlebarsutils');
 const path = require('path');
 const fs = require('fs');
 
 const tmpbuf = fs.readFileSync(path.join(__dirname, 'template.hbs'));
-const template = handlebars.compile(tmpbuf.toString());
+const template = compileString(tmpbuf.toString());
 
 /**
  * renderPie - render for pie
