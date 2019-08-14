@@ -16,7 +16,7 @@ const template = compileString(tmpbuf.toString());
 function recountValue(obj) {
   let v = 0;
 
-  if (Array.isArray(obj.children)) {
+  if (Array.isArray(obj.children) && obj.children.length > 0) {
     for (let i = 0; i < obj.children.length; ++i) {
       obj.children[i].value = recountValue(obj.children[i]);
 
