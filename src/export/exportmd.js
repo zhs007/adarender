@@ -7,6 +7,7 @@ const pluginEncodeImgName = require('../plugins/encode-imgname');
 const markdownitAdaDataset = require('../plugins/adadataset');
 const markdownitAdaPie = require('../plugins/adapie');
 const markdownitAdaLine = require('../plugins/adaline');
+const markdownitAdaBar = require('../plugins/adabar');
 
 /**
  * getTitle
@@ -81,6 +82,7 @@ function exportMarkdown(mdstr, tmpstr, inpath, outputpath, vfs) {
     md.use(markdownitAdaDataset, {});
     md.use(markdownitAdaPie, {});
     md.use(markdownitAdaLine, {});
+    md.use(markdownitAdaBar, {});
 
     const title = getTitle(md, mdstr);
     const htmlstr = md.render(mdstr);

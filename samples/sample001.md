@@ -115,3 +115,18 @@ ydata:
   - name: val1
     data: valdata
 ```
+
+``` ada.bar
+id: bar001
+datasetname: testdata
+title: Bar
+width: 1280
+height: 800
+subtext: this is a test bar
+xtype: category
+xdata: namedata
+ytype: value
+ydata:
+  - name: val1
+    data: valdata
+```

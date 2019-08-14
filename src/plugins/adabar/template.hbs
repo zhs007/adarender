@@ -1,0 +1,35 @@
+<div id="{{id}}" style="width: {{width}}px;height: {{height}}px;"></div>
+<script type="text/javascript">
+  var chart_{{id}} = echarts.init(document.getElementById('{{id}}'));
+
+  var option = {
+    title: {
+      text: '{{title}}',
+      subtext: '{{subtext}}',
+      x: 'center'
+    },    
+    xAxis: {
+        type: '{{xtype}}',
+        silent: false,
+        splitLine: {
+            show: false
+        },
+        data: adadata_{{datasetname}}.{{xdata}}
+    },
+    yAxis: {
+        type: '{{ytype}}'
+    },
+    series: [
+{{#each ydata}}
+    {
+        name: '{{{this.name}}}',
+        data: adadata_{{../datasetname}}.{{{this.data}}},
+        type: 'bar',
+        areaStyle: {}
+    },
+{{/each}}    
+    ]
+  };
+
+  chart_{{id}}.setOption(option);
+</script>
