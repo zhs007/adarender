@@ -8,6 +8,13 @@
       subtext: '{{subtext}}',
       x: 'center'
     },    
+    legend: {
+      data: [
+{{#each legenddata}}      
+        '{{this}}',
+{{/each}}          
+      ],
+    },    
     xAxis: {
         type: '{{xtype}}',
         silent: false,

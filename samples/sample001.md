@@ -123,6 +123,7 @@ title: Bar
 width: 1280
 height: 800
 subtext: this is a test bar
+legenddata: ["val1"]
 xtype: category
 xdata: namedata
 ytype: value
