@@ -140,19 +140,22 @@ title: Treemap
 width: 1280
 height: 800
 subtext: this is a test treemap
-data: 
-- name: nodeA
-  children:
-  - name: nodeAa
-    value: 4
-  - name: nodeAb
-    value: 6
-- name: nodeB
-  children: 
-  - name: nodeBa
-    value: 1
+legenddata:
+- test1
+treemap: 
+- name: test1
+  data:
+  - name: nodeA
     children:
-    - name: nodeBa1
-      value: 20
-
+    - name: nodeAa
+      value: 4
+    - name: nodeAb
+      value: 6
+  - name: nodeB
+    children: 
+    - name: nodeBa
+      value: 1
+      children:
+      - name: nodeBa1
+        value: 20
 ```

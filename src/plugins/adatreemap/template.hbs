@@ -2,16 +2,7 @@
 <script type="text/javascript">
   var chart_{{id}} = echarts.init(document.getElementById('{{id}}'));
 
-  var option = {
-    title: {
-      text: '{{title}}',
-      subtext: '{{subtext}}',
-    },
-    series: [{
-      name: '{{title}}',
-      type: 'treemap',
-      leafDepth: 2,
-      levels: [
+  var treemaplevels = [
         {
           itemStyle: {
             normal: {
@@ -43,9 +34,31 @@
         {
           colorSaturation: [0.3, 0.5]
         }
+      ];
+
+  var option = {
+    title: {
+      text: '{{title}}',
+      subtext: '{{subtext}}',
+    },
+    legend: {
+      data: [
+{{#each legenddata}}
+        '{{this}}',
+{{/each}}
       ],
-      data: {{{jsondata}}},
-    }]
+    },
+    series: [
+{{#each treemap}}    
+    {
+      name: '{{this.name}}',
+      type: 'treemap',
+      leafDepth: 1,
+      levels: treemaplevels,
+      data: {{{this.jsondata}}},
+    },
+{{/each}}    
+    ]
   };
 
   chart_{{id}}.setOption(option);

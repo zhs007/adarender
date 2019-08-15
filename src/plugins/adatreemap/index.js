@@ -41,12 +41,16 @@ function recountValue(obj) {
 function renderTreeMap(content) {
   try {
     const treemap = yaml.safeLoad(content);
-    if (treemap && treemap.data && Array.isArray(treemap.data)) {
-      for (let i = 0; i < treemap.data.length; ++i) {
-        treemap.data[i].value = recountValue(treemap.data[i]);
-      }
+    if (treemap && treemap.treemap && Array.isArray(treemap.treemap)) {
+      for (let i = 0; i < treemap.treemap.length; ++i) {
+        for (let j = 0; j < treemap.treemap[i].data.length; ++j) {
+          treemap.treemap[i].data[j].value = recountValue(
+              treemap.treemap[i].data[j]
+          );
+        }
 
-      treemap.jsondata = JSON.stringify(treemap.data);
+        treemap.treemap[i].jsondata = JSON.stringify(treemap.treemap[i].data);
+      }
 
       const html = template(treemap);
 
