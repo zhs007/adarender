@@ -47,6 +47,11 @@
         '{{this}}',
 {{/each}}
       ],
+      selected: {
+{{#each legenddataselected}}
+        '{{this.name}}': {{this.selected}},
+{{/each}}
+      },      
     },
     series: [
 {{#each treemap}}    

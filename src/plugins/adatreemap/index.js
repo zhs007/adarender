@@ -52,6 +52,16 @@ function renderTreeMap(content) {
         treemap.treemap[i].jsondata = JSON.stringify(treemap.treemap[i].data);
       }
 
+      if (Array.isArray(treemap.legenddata) && treemap.legenddata.length > 0) {
+        treemap.legenddataselected = [];
+        for (let i = 0; i < treemap.legenddata.length; ++i) {
+          treemap.legenddataselected.push({
+            name: treemap.legenddata[i],
+            selected: i == 0,
+          });
+        }
+      }
+
       const html = template(treemap);
 
       return html;
