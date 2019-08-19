@@ -68,4 +68,17 @@
   };
 
   chart_{{id}}.setOption(option);
+  chart_{{id}}.on('click', (ele) => {
+    if (ele && ele.componentSubType == 'treemap' && 
+      ele.componentType == 'series' && ele.seriesType = 'treemap') {
+      
+      if (ele.treePathInfo && ele.treePathInfo.length > 0) {
+        if (typeof ele.treePathInfo[ele.treePathInfo.length - 1].url === 'string' && 
+          ele.treePathInfo[ele.treePathInfo.length - 1].url != '') {
+
+          window.open(ele.treePathInfo[ele.treePathInfo.length - 1].url, '_blank');
+        }
+      }
+    }
+  });
 </script>
