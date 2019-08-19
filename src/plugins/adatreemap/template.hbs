@@ -72,11 +72,11 @@
     if (ele && ele.componentSubType == 'treemap' && 
       ele.componentType == 'series' && ele.seriesType = 'treemap') {
       
-      if (ele.treePathInfo && ele.treePathInfo.length > 0) {
-        if (typeof ele.treePathInfo[ele.treePathInfo.length - 1].url === 'string' && 
-          ele.treePathInfo[ele.treePathInfo.length - 1].url != '') {
+      if (ele.data) {
+        if (typeof ele.data.url === 'string' && 
+          ele.data.url != '') {
 
-          window.open(ele.treePathInfo[ele.treePathInfo.length - 1].url, '_blank');
+          window.open(ele.data.url, '_blank');
         }
       }
     }
