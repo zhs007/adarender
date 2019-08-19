@@ -70,7 +70,7 @@
   chart_{{id}}.setOption(option);
   chart_{{id}}.on('click', (ele) => {
     if (ele && ele.componentSubType == 'treemap' && 
-      ele.componentType == 'series' && ele.seriesType = 'treemap') {
+      ele.componentType == 'series' && ele.seriesType == 'treemap') {
       
       if (ele.data) {
         if (typeof ele.data.url === 'string' && 

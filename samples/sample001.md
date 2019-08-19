@@ -150,6 +150,7 @@ treemap:
     children:
     - name: nodeAa
       value: 4
+      url: https://www.google.com
     - name: nodeAb
       value: 6
   - name: nodeB
