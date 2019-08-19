@@ -11,19 +11,28 @@ const template = compileString(tmpbuf.toString());
 /**
  * recountValue - recount value
  * @param {object} obj - treemap object
+ * @param {string} recounttype - [sum (default) | average]
  * @return {number} value - sum(all children value)
  */
-function recountValue(obj) {
+function recountValue(obj, recounttype) {
   let v = 0;
+
+  if (!(recounttype == 'sum' || recounttype == 'average')) {
+    recounttype = 'sum';
+  }
 
   if (Array.isArray(obj.children) && obj.children.length > 0) {
     for (let i = 0; i < obj.children.length; ++i) {
-      obj.children[i].value = recountValue(obj.children[i]);
+      obj.children[i].value = recountValue(obj.children[i], recounttype);
 
       v += obj.children[i].value;
     }
 
-    obj.value = v;
+    if (recounttype == 'average') {
+      obj.value = v / obj.children.length;
+    } else {
+      obj.value = v;
+    }
   }
 
   if (typeof obj.value == 'number') {
@@ -45,7 +54,8 @@ function renderTreeMap(content) {
       for (let i = 0; i < treemap.treemap.length; ++i) {
         for (let j = 0; j < treemap.treemap[i].data.length; ++j) {
           treemap.treemap[i].data[j].value = recountValue(
-              treemap.treemap[i].data[j]
+              treemap.treemap[i].data[j],
+              treemap.recounttype
           );
         }
 

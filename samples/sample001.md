@@ -139,6 +139,7 @@ datasetname: testdata
 title: Treemap
 width: 1280
 height: 800
+recounttype: average
 subtext: this is a test treemap
 legenddata:
 - test1
@@ -166,6 +167,7 @@ title: 资源大小分布
 subtext: ""
 width: 800
 height: 600
+recounttype: sum
 legenddata:
 - http://47.90.46.159:8090
 - http://at.alicdn.com
