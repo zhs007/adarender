@@ -1,6 +1,6 @@
 'use strict';
 
-const {getMD5String, newHTMLData} = require('./utils');
+const {getMD5String, newHTMLData, buildHTMLDataStream} = require('./utils');
 const adarender = require('../../proto/adarender_pb');
 
 /**
@@ -154,12 +154,11 @@ class HTMLStream {
    */
   async sendHTMLData(call, obj) {
     try {
-      const htmlstream = new adarender.HTMLStream();
-
       const htmldata = newHTMLData(obj);
-      htmlstream.setHtmldata(htmldata);
+      await buildHTMLDataStream(htmldata, async (htmstream) => {
+        await call.write(htmstream);
+      });
 
-      await call.write(htmlstream);
       call.end();
     } catch (err) {
       console.log('HTMLStream.sendHTMLData ' + err);

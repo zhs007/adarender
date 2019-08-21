@@ -78,6 +78,9 @@ class MarkdownStream {
         return 'invalid md5str or hashdata ' + md5str + ' ' + hashdata;
       }
 
+      const nbuf = new Uint8Array(this.buf.length + curbuf.length);
+      nbuf.set(this.buf, 0);
+      this.buf = nbuf;
       this.buf.set(curbuf, curstart);
 
       const totalhashdata = mdstream.getTotalhashdata();

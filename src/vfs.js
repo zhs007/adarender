@@ -1,6 +1,7 @@
 'use strict';
 
-// const adarender = require('../../proto/adarender_pb');
+const path = require('path');
+const fs = require('fs');
 
 /**
  * VFS - virtual file system
@@ -45,6 +46,18 @@ class VFS {
     for (const k in this.maptag) {
       if (Object.prototype.hasOwnProperty.call(this.maptag, k)) {
         cb(k, this.mapfile[k]);
+      }
+    }
+  }
+
+  /**
+   * export - export files to path
+   * @param {string} dirname - dirname
+   */
+  export(dirname) {
+    for (const k in this.mapfile) {
+      if (Object.prototype.hasOwnProperty.call(this.mapfile, k)) {
+        fs.writeFileSync(path.join(dirname, k), this.mapfile[k]);
       }
     }
   }

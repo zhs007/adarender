@@ -47,6 +47,8 @@ async function procMarkdownData(cfg, call, htmlstream, mddata) {
       return;
     }
 
+    // vfs.export('./output');
+
     await htmlstream.sendHTMLData(call, buildHTMLData(vfs, ret.html));
 
     return;

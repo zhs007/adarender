@@ -6,6 +6,9 @@ const {getImages} = require('../export/utils');
 const fs = require('fs');
 const path = require('path');
 
+
+const BIGMSGSIZE = 4 * 1024 * 1024 - 1024;
+
 /**
  * getMD5String
  * @param {object} buf - buffer
@@ -128,9 +131,53 @@ function buildHTMLData(vfs, htmlstr) {
   return obj;
 }
 
+/**
+ * buildHTMLDataStream - build HTMLDataStream
+ * @param {adarender.HTMLData} htmldata - adarender.HTMLData
+ * @param {function} funcsend - async function send(htmlstream)
+ */
+async function buildHTMLDataStream(htmldata, funcsend) {
+  const buf = htmldata.serializeBinary();
+  if (buf.length <= BIGMSGSIZE) {
+    const htmlstream = new adarender.HTMLStream();
+    htmlstream.setHtmldata(htmldata);
+
+    await funcsend(htmlstream);
+
+    return;
+  }
+
+  const totalmd5 = getMD5String(buf);
+
+  for (let s = 0; s < buf.byteLength;) {
+    const cs = new adarender.HTMLStream();
+    cs.setTotallength(buf.byteLength);
+    cs.setCurstart(s);
+
+    let cl = BIGMSGSIZE;
+    if (s + BIGMSGSIZE >= buf.byteLength) {
+      cl = buf.byteLength - s;
+
+      cs.setTotalhashdata(totalmd5);
+    }
+
+    cs.setCurlength(cl);
+
+    const curbuf = buf.subarray(s, s + cl);
+    cs.setHashdata(getMD5String(curbuf));
+
+    cs.setData(curbuf);
+
+    await funcsend(cs);
+
+    s += cl;
+  }
+}
+
 exports.getMD5String = getMD5String;
 exports.newHTMLData = newHTMLData;
 exports.newMarkdownData = newMarkdownData;
 exports.getSHA256String = getSHA256String;
 exports.buildMarkdownData = buildMarkdownData;
 exports.buildHTMLData = buildHTMLData;
+exports.buildHTMLDataStream = buildHTMLDataStream;
