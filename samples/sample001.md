@@ -89,6 +89,11 @@ data:
   valdata: [5, 4, 3, 2, 1]
 ```
 
+``` ada.table
+ namedata: ['a', 'b', 'c', 'd', 'e']
+ valdata: [5, 4, 3, 2, 1]
+``` 
+
 ``` ada.pie
 id: pie001
 datasetname: testdata
