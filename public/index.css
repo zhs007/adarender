@@ -1,0 +1,12 @@
+.adarender {
+    width: 730px;
+    margin:0 auto;
+}
+.adarender p img {
+    display: block;
+    margin:0 auto;
+    max-width: 400px;
+}
+.adarender table {
+    width: 100%;
+}
