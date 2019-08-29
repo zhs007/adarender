@@ -87,12 +87,30 @@ name: testdata
 data:
   namedata: ['a', 'b', 'c', 'd', 'e']
   valdata: [5, 4, 3, 2, 1]
+  multivaldata: [[5, 4, 3, 2, 1],[6, 5, 4, 3, 2],[7, 6, 5, 4, 3],[8, 7, 6, 5, 4],[9, 8, 7, 6, 5],[10, 9, 8, 7, 6]]
 ```
+	
+``` ada.table
+ id: testtable
+ datasetname: testdata
+ tablehead: namedata
+ tablebody: valdata
+ 
+``` 
 
 ``` ada.table
- namedata: ['a', 'b', 'c', 'd', 'e']
- valdata: [5, 4, 3, 2, 1]
+ id: testtable02
+ datasetname: testdata
+ tablehead: namedata
+ tablebody: multivaldata
+ 
 ``` 
+
+
+name | 111 | 222 | 333 | 444
+- | :-: | :-: | :-: | -:
+aaa | bbb | ccc | ddd | eee| 
+fff | ggg| hhh | iii | 000|
 
 ``` ada.pie
 id: pie001
@@ -146,6 +164,35 @@ width: 1280
 height: 800
 recounttype: average
 subtext: this is a test treemap
+legenddata:
+- test1
+treemap: 
+- name: test1
+  data:
+  - name: nodeA
+    children:
+    - name: nodeAa
+      value: 4
+      url: https://www.google.com
+    - name: nodeAb
+      value: 6
+  - name: nodeB
+    children: 
+    - name: nodeBa
+      value: 1
+      children:
+      - name: nodeBa1
+        value: 20
+```
+
+``` ada.sunburst
+id: sunburst001
+datasetname: testdata
+title: Sunburst
+width: 1280
+height: 800
+recounttype: sum
+subtext: this is a test sunburst
 legenddata:
 - test1
 treemap: 
