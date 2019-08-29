@@ -24,5 +24,7 @@
         ada_table_body_html = '<tr>' + ada_table_body_html.join('') + '</tr>';
     }    
     table_{{id}}.innerHTML = `<thead><tr>${ada_table_head_html}</tr></thead><tbody>${ada_table_body_html}</tbody>`
-    new TableSorter("{{id}}")
+    window.onload = function() {
+        new TableSorter("{{id}}")
+    }
 </script>

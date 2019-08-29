@@ -58,7 +58,7 @@ TableSorter.prototype = {
             if (value1 == value2) {
                 return 0;
             }
-            if (SortAsNumber) {
+            if (!SortAsNumber) {
                 result = parseFloat(value1) > parseFloat(value2);
             } else {
                 result = value1 > value2;
