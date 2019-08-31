@@ -14,6 +14,19 @@
             align: 'center'
       }
     },
+    tooltip: {
+        trigger: 'item',
+        formatter:function(params) { 
+            if(params.treePathInfo.length === 2) {
+                return params.treePathInfo[1].name + ':' + params.treePathInfo[1].value
+            } else if(params.treePathInfo.length === 3)
+            {
+                return params.treePathInfo[1].name + ' / ' + params.treePathInfo[2].name + ' : ' +  params.treePathInfo[2].value
+            } else if(params.treePathInfo.length === 4) {
+                return params.treePathInfo[1].name + ' / ' + params.treePathInfo[2].name + ' / ' + params.treePathInfo[3].name + ' : ' + params.treePathInfo[3].value 
+            }
+        }
+    },
     series: {
         {{#each treemap}} 
                 type: 'sunburst',
@@ -44,7 +57,7 @@
                         silent: false
                     },
                     itemStyle: {
-                        borderWidth: 3
+                        borderWidth: 3,
                     }
                 }]
         {{/each}}    
