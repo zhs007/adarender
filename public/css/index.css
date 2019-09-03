@@ -10,7 +10,7 @@
 .adarender table {
     width: 100%;
 }
-.SortDescCss {
+/* .SortDescCss {
     background-image: url(../img/Desc.gif);
     background-repeat: no-repeat;
     background-position: right center;
@@ -20,4 +20,47 @@
     background-image: url(../img/Asc.gif);
     background-repeat: no-repeat;
     background-position: right center;
+} */
+.markdown-body table .ant-table-body td, .markdown-body table .ant-table-head th {
+    border:0;
+}
+.markdown-body table tr {
+    border-top:0;
+}
+.ant-table-head>tr>th,.ant-table-body>tr>td {
+    padding:16px 16px;
+}
+.markdown-body table .ant-table-head>tr>th {
+    color: rgba(0,0,0,0.85);
+    font-weight: 500;
+    text-align: left;
+    background-color: #fafafa;
+    border-bottom: 1px solid #e8e8e8;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+.markdown-body table .ant-table-body>tr>td {
+    border-bottom: 1px solid #e8e8e8;
+    -webkit-transition: all .3s,border 0s;
+    transition: all .3s,border 0s;
+}
+.markdown-body table tr:nth-child(2n) {
+    background-color:transparent;
+}
+.markdown-body .ant-table-head>tr>th:hover {
+    background-color: #f2f2f2;
+}
+.markdown-body .ant-table-body>tr:hover {
+    background: #e6f7ff;
+}
+.ant-table-head th {
+    position: relative;
+}
+.ant-table-head th .icon-sortdesc,.ant-table-head th .icon-sort-up {
+    color:#bfbfbf;
+    position: absolute;
+    margin-left: 5px;
+}
+.ant-table-head th.SortDescCss .icon-sortdesc, .ant-table-head th.SortAscCss .icon-sort-up{
+    color:#1890ff;
 }

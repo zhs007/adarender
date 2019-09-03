@@ -6,7 +6,7 @@
     var ada_table_head_html= [];
     var ada_table_body_html= [];
     for(var i= 0;i< ada_table_head.length;i++) {
-        ada_table_head_html.push('<th>' + ada_table_head[i] + '</th>')
+        ada_table_head_html.push('<th>' + ada_table_head[i] + '<span class="iconfont icon-sortdesc"></span><span class="iconfont icon-sort-up"></span></th>')
     }
     ada_table_head_html = ada_table_head_html.join('');    
     if(Array.isArray(ada_table_body[0])) {
@@ -23,7 +23,7 @@
         }
         ada_table_body_html = '<tr>' + ada_table_body_html.join('') + '</tr>';
     }    
-    table_{{id}}.innerHTML = `<thead><tr>${ada_table_head_html}</tr></thead><tbody>${ada_table_body_html}</tbody>`
+    table_{{id}}.innerHTML = `<thead class="ant-table-head"><tr>${ada_table_head_html}</tr></thead><tbody class="ant-table-body">${ada_table_body_html}</tbody>`
     window.onload = function() {
         new TableSorter("{{id}}")
     }
