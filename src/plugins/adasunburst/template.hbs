@@ -1,8 +1,13 @@
 <div id="{{id}}" style="width: {{width}}px;height: {{height}}px;margin-left:-50px;max-width:1000px;"></div>
 <script type="text/javascript">
   var chart_{{id}} = echarts.init(document.getElementById('{{id}}'));  
-
-  var option = {
+  var sunburstData_{{id}} = {
+      {{#each treemap}}
+        data:{{{this.jsondata}}}
+      {{/each}}
+  };
+  var legendSelectedData = '{{legenddata}}';
+  var sunburst_option_{{id}} = {
     title: {
       text: '{{title}}',
       subtext: '{{subtext}}',
@@ -13,6 +18,7 @@
       subtextStyle: {
             align: 'center'
       }
+
     },
     tooltip: {
         trigger: 'item',
@@ -27,7 +33,7 @@
             }
         }
     },
-    series: {
+    series: [{
         {{#each treemap}} 
                 type: 'sunburst',
                 data: {{{this.jsondata}}},
@@ -61,14 +67,32 @@
                     }
                 }]
         {{/each}}    
-        }
+        }]
   };
-
-  chart_{{id}}.setOption(option);
+  var sunburstLegend_{{id}} = [];
+  var sunburstCommonSeries = {
+      type: 'sunburst',
+      data:[],
+  }  
+  for(let i= 0;i< sunburstData_{{id}}.data.length;i++) {
+      sunburstLegend_{{id}}.push(((sunburstData_{{id}}.data)[i]).name);
+      if(sunburst_option_{{id}}.series.length < sunburstData_{{id}}.data.length) {
+        sunburst_option_{{id}}.series.push(JSON.parse(JSON.stringify(sunburstCommonSeries)));
+      }      
+      sunburst_option_{{id}}.series[i].name = ((sunburstData_{{id}}.data)[i]).name
+  } 
+  sunburst_option_{{id}}.legend = {
+      type:'scroll',
+      left:10,
+      top:20,
+      data:sunburstLegend_{{id}},
+      selected:{}
+  };
+  console.log(sunburst_option_{{id}});
+  chart_{{id}}.setOption(sunburst_option_{{id}});
   chart_{{id}}.on('click', (ele) => {
     if (ele && ele.componentSubType == 'sunburst' && 
-      ele.componentType == 'series' && ele.seriesType == 'sunburst') {
-      
+      ele.componentType == 'series' && ele.seriesType == 'sunburst') {      
       if (ele.data) {
         if (typeof ele.data.url === 'string' && 
           ele.data.url != '') {
@@ -78,4 +102,33 @@
       }
     }
   });
+  chart_{{id}}.on('legendselectchanged',function(obj) {
+      var selected = obj.selected;
+      var legend = obj.name;
+      var copyData = sunburstData_{{id}}.data.concat();
+      var refreshData = [];      
+      chart_{{id}}.clear();
+      var new_chart_{{id}} = echarts.init(document.getElementById('{{id}}'));  
+      if(selected[legend] == false) {
+          (sunburst_option_{{id}}.legend.selected)[legend] = false;
+          for(var i=0;i<sunburstLegend_{{id}}.length;i++) {
+              if(!(sunburstLegend_{{id}}[i].indexOf(legend))) {
+                  (sunburst_option_{{id}}.series)[0].data[i].value = 0;
+                  (sunburst_option_{{id}}.series)[0].data[i].children = [];
+              }
+          }
+      }else {
+          (sunburst_option_{{id}}.legend.selected)[legend] = true;
+          for(var i=0;i<sunburstLegend_{{id}}.length;i++) {
+              if(!(sunburstLegend_{{id}}[i].indexOf(legend))) {
+                  (sunburst_option_{{id}}.series)[0].data[i] = copyData[i]
+              }
+          }
+      } 
+     chart_{{id}}.setOption(sunburst_option_{{id}});
+     var excessDOm = document.getElementById('{{id}}');
+     if(excessDOm.childNodes.length > 2) {
+         excessDOm.removeChild(excessDOm.lastChild);
+     }
+  })
 </script>
