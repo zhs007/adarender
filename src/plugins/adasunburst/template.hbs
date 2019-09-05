@@ -24,14 +24,11 @@
         trigger: 'item',
         formatter:function(params) { 
             if(params.treePathInfo.length === 2) {
-                console.log(1)
                 return params.treePathInfo[1].name + ':' + params.treePathInfo[1].value + '(' + ((params.treePathInfo[1].value)/(params.treePathInfo[0].value)*100).toFixed(1) + '%)' 
             } else if(params.treePathInfo.length === 3)
             {   
-                console.log(2)
                 return params.treePathInfo[1].name + ' / ' + params.treePathInfo[2].name + ' : ' +  params.treePathInfo[2].value + '(' + ((params.treePathInfo[2].value)/(params.treePathInfo[1].value)*100).toFixed(1) + '%)' 
             } else if(params.treePathInfo.length === 4) {
-                console.log(3)
                 return params.treePathInfo[1].name + ' / ' + params.treePathInfo[2].name + ' / ' + params.treePathInfo[3].name + ' : ' + params.treePathInfo[3].value +'(' + ((params.treePathInfo[3].value)/(params.treePathInfo[2].value)*100).toFixed(1) + '%)' 
             }
         }
@@ -96,7 +93,6 @@
   sunburst_option_{{id}}.color = sunburstLegendColor_{{id}};
   var sunburst_series_length_{{id}} = sunburst_option_{{id}}.series.length;
   sunburst_option_{{id}}.series[sunburst_series_length_{{id}}-1].data = sunburst_bak_data_{{id}};
-  console.log(sunburst_option_{{id}});
   chart_{{id}}.setOption(sunburst_option_{{id}});
   chart_{{id}}.on('click', (ele) => {
     if (ele && ele.componentSubType == 'sunburst' && 
@@ -132,7 +128,6 @@
               }
           }
       } 
-      console.log(sunburst_option_{{id}},sunburst_option_{{id}}.tooltip);
      chart_{{id}}.setOption(sunburst_option_{{id}});
      var excessDOm = document.getElementById('{{id}}');
      if(excessDOm.childNodes.length > 3) {
