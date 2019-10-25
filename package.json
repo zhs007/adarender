@@ -1,6 +1,6 @@
 {
   "name": "adarender",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Ada Render",
   "main": "index.js",
   "scripts": {
@@ -23,17 +23,17 @@
   },
   "homepage": "https://github.com/zhs007/adarender#readme",
   "dependencies": {
-    "commander": "^2.20.0",
-    "google-protobuf": "^3.9.1",
-    "grpc": "^1.23.3",
-    "handlebars": "^4.1.2",
+    "commander": "^3.0.2",
+    "google-protobuf": "^3.10.0",
+    "grpc": "^1.24.1",
+    "handlebars": "^4.4.5",
     "highlight.js": "^9.15.10",
-    "jimp": "^0.6.4",
+    "jimp": "^0.8.5",
     "js-yaml": "^3.13.1",
-    "markdown-it": "^9.1.0"
+    "markdown-it": "^10.0.0"
   },
   "devDependencies": {
-    "eslint": "^6.2.2",
-    "eslint-config-google": "^0.13.0"
+    "eslint": "^6.5.1",
+    "eslint-config-google": "^0.14.0"
   }
 }
