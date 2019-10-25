@@ -1,16 +1,30 @@
- <table>
-     <thead>
-         <tr>
-            {{#each namedata}}
-                <th>{{this}}</th>
-            {{/each}}
-        </tr>
-     </thead>
-     <tbody>
-         <tr>
-            {{#each valdata}}
-              <td>{{this}}</td>
-            {{/each}}
-        </tr>
-     </tbody>
- </table> 
+<table id={{id}}></table>
+<script type="text/javascript">
+    var table_{{id}} = document.getElementById('{{id}}');
+    var ada_table_head = adadata_{{datasetname}}.{{tablehead}}
+    var ada_table_body = adadata_{{datasetname}}.{{tablebody}}    
+    var ada_table_head_html= [];
+    var ada_table_body_html= [];
+    for(var i= 0;i< ada_table_head.length;i++) {
+        ada_table_head_html.push('<th>' + ada_table_head[i] + '<span class="iconfont icon-sortdesc"></span><span class="iconfont icon-sort-up"></span></th>')
+    }
+    ada_table_head_html = ada_table_head_html.join('');    
+    if(Array.isArray(ada_table_body[0])) {
+        for(let k= 0;k< ada_table_body.length;k++) {
+            for(let l= 0;l<ada_table_body[k].length;l++) {
+                ada_table_body[k][l] = '<td>' + ada_table_body[k][l] + '</td>'
+            } 
+            ada_table_body[k] = '<tr>' + ada_table_body[k].join('') + '</tr>'        
+        }
+        ada_table_body_html = ada_table_body.join('')
+    }else {
+        for (var j = 0; j < ada_table_body.length; j++) {
+            ada_table_body_html.push('<td>' + ada_table_body[j] + '</td>')
+        }
+        ada_table_body_html = '<tr>' + ada_table_body_html.join('') + '</tr>';
+    }    
+    table_{{id}}.innerHTML = `<thead class="ant-table-head"><tr>${ada_table_head_html}</tr></thead><tbody class="ant-table-body">${ada_table_body_html}</tbody>`
+    window.onload = function() {
+        new TableSorter("{{id}}")
+    }
+</script>
