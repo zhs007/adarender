@@ -1,12 +1,9 @@
-<div id="{{id}}" style="width: {{width}}px;height: {{height}}px;margin-left:-50px;max-width:1000px;"></div>
+<div style="width:100%;text-align:center;">
+  <div id="{{id}}" style="width:80%;height:0;padding-bottom:60%;margin:auto;"></div>
+  <p>{{title}}</p>
+</div>
 <script type="text/javascript">
-  var chart_{{id}} = echarts.init(document.getElementById('{{id}}'));
-
   var option = {
-    title: {
-      text: '{{title}}',
-      subtext: '{{subtext}}',
-    },
     xAxis: {
         type: '{{xtype}}',
         boundaryGap: false,
@@ -27,5 +24,5 @@
     ]
   };
 
-  chart_{{id}}.setOption(option);
+  var chart_{{ id }} = adarender.initChart(document.getElementById('{{id}}'), option);
 </script>

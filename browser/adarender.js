@@ -14,17 +14,17 @@ function initChart(ele, ops) {
     window.WebKitMutationObserver ||
     window.MozMutationObserver;
 
-  let ow = 0;
-  let oh = 0;
+  cobj._adarender_ow = 0;
+  cobj._adarender_oh = 0;
 
   const observer = new MutationObserver((mutations) => {
     for (let i = 0; i < mutations.length; ++i) {
       const w = ele.offsetWidth;
       const h = ele.offsetHeight;
 
-      if (ow != w || oh != h) {
-        ow = w;
-        oh = h;
+      if (cobj._adarender_ow != w || cobj._adarender_oh != h) {
+        cobj._adarender_ow = w;
+        cobj._adarender_oh = h;
 
         cobj.resize({width: w, height: h});
       }
