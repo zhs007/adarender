@@ -7,7 +7,7 @@ import echarts from 'echarts';
  * @return {object} obj - chart object
  */
 function initChart(ele, ops) {
-  const cobj = echarts.init();
+  const cobj = echarts.init(ele);
 
   const MutationObserver =
     window.MutationObserver ||
