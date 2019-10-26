@@ -1,5 +1,20 @@
 # Ada Render Blog
 
+### 2019-10-26
+
+这几天把Hexo的插件完成了，hexo-renderer-adarender。  
+优化的过程中，发现一些js代码最好能整合一下。
+
+发现一个可以直接npm就可以cdn的服务，jsdelivr。  
+
+```
+https://cdn.jsdelivr.net/npm/adarender@0.3.3/index.js
+```
+
+上面这样就可以直接js文件走cdn了，这样前端js用起来就省事了。  
+
+然后就是echart，大小需要在启动的时候显示指定，如果div里通过宽度决定高度的方案，那么只能想办法后面改变宽高。
+
 ### 2019-08-12
 
 增加了图表插件。

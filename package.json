@@ -1,6 +1,6 @@
 {
   "name": "adarender",
-  "version": "0.3.3",
+  "version": "0.3.5",
   "description": "Ada Render",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,13 @@
     "markdown-it": "^10.0.0"
   },
   "devDependencies": {
-    "eslint": "^6.5.1",
-    "eslint-config-google": "^0.14.0"
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.6.0",
+    "eslint-config-google": "^0.14.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
   }
 }
