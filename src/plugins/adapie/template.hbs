@@ -1,4 +1,7 @@
-<div id="{{id}}" style="width:80%;height:0;padding-bottom:60%;margin-left:-50px;"></div>
+<div style="width:100%;text-align:center;">
+  <div id="{{id}}" style="width:80%;height:0;padding-bottom:60%;margin:auto;"></div>
+  <p>{{title}}</p>
+</div>
 <script type="text/javascript">
   var piedata_{{ id }} =[];
   for (let i = 0; i < adadata_{{ datasetname }}.{{ bval }}.length; ++i) {
@@ -21,22 +24,22 @@
       bottom: 20,
       data: adadata_{{ datasetname }}.{{ bval }},
     },
-    series: [
-      {
-        name: '{{adachart.a}}',
-        type: 'pie',
-        radius: '55%',
-        center: ['40%', '50%'],
-        data: piedata_{{ id }},
-        itemStyle: {
-          emphasis: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
+  series: [
+    {
+      name: '{{adachart.a}}',
+      type: 'pie',
+      radius: '55%',
+      center: ['40%', '50%'],
+      data: piedata_{{ id }},
+    itemStyle: {
+      emphasis: {
+        shadowBlur: 10,
+        shadowOffsetX: 0,
+        shadowColor: 'rgba(0, 0, 0, 0.5)'
       }
-    ]
+    }
+      }
+  ]
   };
 
   var chart_{{ id }} = adarender.initChart(document.getElementById('{{id}}'), option);
