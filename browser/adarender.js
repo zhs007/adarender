@@ -26,7 +26,7 @@ function initChart(ele, ops) {
         ow = w;
         oh = h;
 
-        cobj.resize();
+        cobj.resize({width: w, height: h});
       }
     }
   });
