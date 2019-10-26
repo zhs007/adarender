@@ -1,7 +1,5 @@
 <div id="{{id}}" style="width:80%;height:0;padding-bottom:60%;margin-left:-50px;"></div>
 <script type="text/javascript">
-  var chart_{{ id }} = echarts.init(document.getElementById('{{id}}'));
-
   var piedata_{{ id }} =[];
   for (let i = 0; i < adadata_{{ datasetname }}.{{ bval }}.length; ++i) {
     piedata_{{ id }}.push({
@@ -41,16 +39,5 @@
     ]
   };
 
-  var MutationObserver;
-  if (MutationObserver == undefined) {
-    MutationObserver = window.MutationObserver ||
-      window.WebKitMutationObserver ||
-      window.MozMutationObserver;
-  }
-
-  var observer_{{ id }} = new MutationObserver(function () {
-    
-  });
-
-  chart_{{ id }}.setOption(option);
+  var chart_{{ id }} = adarender.initChart(document.getElementById('{{id}}'), option);
 </script>
