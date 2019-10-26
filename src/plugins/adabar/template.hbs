@@ -1,12 +1,8 @@
-<div id="{{id}}" style="width: {{width}}px;height: {{height}}px;margin-left:-50px;max-width:1000px;"></div>
+<div id="{{id}}" style="width: 70%;margin-left:-50px;max-width:1000px;"></div>
 <script type="text/javascript">
   var chart_{{id}} = echarts.init(document.getElementById('{{id}}'));
 
   var option = {
-    title: {
-      text: '{{title}}',
-      subtext: '{{subtext}}',
-    },    
     legend: {
       data: [
 {{#each legenddata}}      

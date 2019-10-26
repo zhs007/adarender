@@ -1,20 +1,16 @@
-<div id="{{id}}" style="width: {{width}}px;height: {{height}}px;margin-left:-50px;max-width:1000px;"></div>
+<div id="{{id}}" style="width:80%;height:0;padding-bottom:60%;margin-left:-50px;"></div>
 <script type="text/javascript">
-  var chart_{{id}} = echarts.init(document.getElementById('{{id}}'));
+  var chart_{{ id }} = echarts.init(document.getElementById('{{id}}'));
 
-  var piedata_{{id}} = [];
-  for (let i = 0; i < adadata_{{datasetname}}.{{bval}}.length; ++i) {
-    piedata_{{id}}.push({
-      name: adadata_{{datasetname}}.{{bval}}[i],
-      value: adadata_{{datasetname}}.{{cval}}[i],
+  var piedata_{{ id }} =[];
+  for (let i = 0; i < adadata_{{ datasetname }}.{{ bval }}.length; ++i) {
+    piedata_{{ id }}.push({
+      name: adadata_{{ datasetname }}.{{ bval }} [i],
+        value: adadata_{{ datasetname }}.{{ cval }} [i],
     });
   }
 
   var option = {
-    title: {
-      text: '{{title}}',
-      subtext: '{{subtext}}',
-    },
     tooltip: {
       trigger: 'item',
       formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -25,7 +21,7 @@
       right: 10,
       top: 20,
       bottom: 20,
-      data: adadata_{{datasetname}}.{{bval}},
+      data: adadata_{{ datasetname }}.{{ bval }},
     },
     series: [
       {
@@ -33,7 +29,7 @@
         type: 'pie',
         radius: '55%',
         center: ['40%', '50%'],
-        data: piedata_{{id}},
+        data: piedata_{{ id }},
         itemStyle: {
           emphasis: {
             shadowBlur: 10,
@@ -45,5 +41,11 @@
     ]
   };
 
-  chart_{{id}}.setOption(option);
+  var MutationObserver = window.MutationObserver ||
+    window.WebKitMutationObserver ||
+    window.MozMutationObserver;
+
+  var observer = new MutationObserver(callback)
+
+  chart_{{ id }}.setOption(option);
 </script>
