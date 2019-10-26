@@ -19,8 +19,8 @@ function initChart(ele, ops) {
 
   const observer = new MutationObserver((mutations) => {
     for (let i = 0; i < mutations.length; ++i) {
-      const w = parseInt(ele.getPropertyValue('width'));
-      const h = parseInt(ele.getPropertyValue('height'));
+      const w = ele.offsetWidth;
+      const h = ele.offsetHeight;
 
       if (ow != w || oh != h) {
         ow = w;
