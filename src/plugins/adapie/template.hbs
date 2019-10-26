@@ -41,11 +41,16 @@
     ]
   };
 
-  var MutationObserver = window.MutationObserver ||
-    window.WebKitMutationObserver ||
-    window.MozMutationObserver;
+  var MutationObserver;
+  if (MutationObserver == undefined) {
+    MutationObserver = window.MutationObserver ||
+      window.WebKitMutationObserver ||
+      window.MozMutationObserver;
+  }
 
-  var observer = new MutationObserver(callback)
+  var observer_{{ id }} = new MutationObserver(function () {
+    
+  });
 
   chart_{{ id }}.setOption(option);
 </script>

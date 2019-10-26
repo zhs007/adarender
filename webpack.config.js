@@ -6,6 +6,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'adarender.js',
+    libraryTarget: 'umd',
+    library: 'adarender',
   },
   module: {
     rules: [
