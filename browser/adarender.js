@@ -1,3 +1,5 @@
+import echarts from 'echarts';
+
 /**
  * initChart
  * @param {object} ele - element
