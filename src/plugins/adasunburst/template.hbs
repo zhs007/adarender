@@ -1,6 +1,11 @@
 <div style="width:100%;text-align:center;">
   <div id="{{id}}" style="width:92%;height:0;padding-bottom:69%;margin:auto;"></div>
+{{#if subtext}}
+  <p>{{title}} - {{subtext}}</p>
+{{else}}  
   <p>{{title}}</p>
+{{/if}}
+  <p></p>
 </div>
 <script type="text/javascript">
   var sunburstData_{{id}} = {
