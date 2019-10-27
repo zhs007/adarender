@@ -3,40 +3,6 @@
   <p>{{title}}</p>
 </div>
 <script type="text/javascript">
-  var treemaplevels = [
-        {
-          itemStyle: {
-            normal: {
-              borderColor: '#555',
-              borderWidth: 4,
-              gapWidth: 4
-            }
-          }
-        },
-        {
-          colorSaturation: [0.3, 0.6],
-          itemStyle: {
-            normal: {
-              borderColorSaturation: 0.7,
-              gapWidth: 2,
-              borderWidth: 2
-            }
-          }
-        },
-        {
-          colorSaturation: [0.3, 0.5],
-          itemStyle: {
-            normal: {
-              borderColorSaturation: 0.6,
-              gapWidth: 1
-            }
-          }
-        },
-        {
-          colorSaturation: [0.3, 0.5]
-        }
-      ];
-
   var option = {
     legend: {
       data: [
@@ -56,7 +22,7 @@
       name: '{{this.name}}',
       type: 'treemap',
       leafDepth: 1,
-      levels: treemaplevels,
+      levels: adarender.buildTreemapLevels(),
       data: {{{this.jsondata}}},
       roam: false,
     },
@@ -65,17 +31,5 @@
   };
 
   var chart_{{ id }} = adarender.initChart(document.getElementById('{{id}}'), option);
-  chart_{{id}}.on('click', (ele) => {
-    if (ele && ele.componentSubType == 'treemap' && 
-      ele.componentType == 'series' && ele.seriesType == 'treemap') {
-      
-      if (ele.data) {
-        if (typeof ele.data.url === 'string' && 
-          ele.data.url != '') {
-
-          window.open(ele.data.url, '_blank');
-        }
-      }
-    }
-  });
+  adarender.onInitTreemap(chart_{{ id }});
 </script>
