@@ -77,6 +77,8 @@ node.js这边相对简单，我们其实是将yaml通过一个模板(少量代�
 前端js代码这边，我们现在代码放在browser目录下，最后会webpack打包到dist目录下，建议通过``jsdelivr``的cdn访问。  
 前面node.js用到的html里的js代码，最好能放到browser里开发。  
 browser目录下代码，可以使用ES6语法。  
+所有前端需要用到的资源，包括css和js都应该通过webpack打包发布到dist目录下。  
+如果有必要，可以修改``webpack.config.js``文件。
 
 开发完以后，通过npm来build。
 
