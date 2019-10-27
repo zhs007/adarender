@@ -82,6 +82,7 @@ function renderSunburst(content) {
               treemap.treemap[i].data[j],
               treemap.recounttype
           );
+          //第一层颜色
           if(j < firstLevel.length) {
             treemap.treemap[i].data[j].itemStyle = {
               color:firstLevel[j]
@@ -91,6 +92,7 @@ function renderSunburst(content) {
               color:firstLevel[parseInt((firstLevel.length)*Math.random())]
             }
           }
+          //第二层颜色，当数据过多，颜色随机
           for(let k= 0; k< treemap.treemap[i].data[j].children.length; k++) {
             if(j < firstLevel.length && k < secondLevel[0].length+1) {
               treemap.treemap[i].data[j].children[k].itemStyle = {
@@ -101,6 +103,7 @@ function renderSunburst(content) {
                 color:secondLevel[parseInt((secondLevel.length)*Math.random())][parseInt((secondLevel[0].length)*Math.random())]
               }
             } 
+            //第三层颜色
             if(treemap.treemap[i].data[j].children[k].children) {
               for(let l= 0; l< treemap.treemap[i].data[j].children[k].children.length; l++) {
                   if(j < firstLevel.length && k < secondLevel[0].length && l < thirdLevel[0].length) {
