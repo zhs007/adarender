@@ -1,47 +1,14 @@
 <div style="width:100%;text-align:center;">
-  <div id="{{id}}" style="width:80%;height:0;padding-bottom:60%;margin:auto;"></div>
+  <div id="{{id}}" style="width:92%;height:0;padding-bottom:69%;margin:auto;"></div>
+{{#if subtext}}
+  <p>{{title}} - {{subtext}}</p>
+{{else}}  
   <p>{{title}}</p>
+{{/if}}
+  <p></p>
 </div>
 <script type="text/javascript">
-  var treemaplevels = [
-        {
-          itemStyle: {
-            normal: {
-              borderColor: '#555',
-              borderWidth: 4,
-              gapWidth: 4
-            }
-          }
-        },
-        {
-          colorSaturation: [0.3, 0.6],
-          itemStyle: {
-            normal: {
-              borderColorSaturation: 0.7,
-              gapWidth: 2,
-              borderWidth: 2
-            }
-          }
-        },
-        {
-          colorSaturation: [0.3, 0.5],
-          itemStyle: {
-            normal: {
-              borderColorSaturation: 0.6,
-              gapWidth: 1
-            }
-          }
-        },
-        {
-          colorSaturation: [0.3, 0.5]
-        }
-      ];
-
   var option = {
-    title: {
-      text: '{{title}}',
-      subtext: '{{subtext}}',
-    },
     legend: {
       data: [
 {{#each legenddata}}
@@ -60,7 +27,7 @@
       name: '{{this.name}}',
       type: 'treemap',
       leafDepth: 1,
-      levels: treemaplevels,
+      levels: adarender.buildTreemapLevels(),
       data: {{{this.jsondata}}},
       roam: false,
     },
@@ -69,17 +36,5 @@
   };
 
   var chart_{{ id }} = adarender.initChart(document.getElementById('{{id}}'), option);
-  chart_{{id}}.on('click', (ele) => {
-    if (ele && ele.componentSubType == 'treemap' && 
-      ele.componentType == 'series' && ele.seriesType == 'treemap') {
-      
-      if (ele.data) {
-        if (typeof ele.data.url === 'string' && 
-          ele.data.url != '') {
-
-          window.open(ele.data.url, '_blank');
-        }
-      }
-    }
-  });
+  adarender.onInitTreemap(chart_{{ id }});
 </script>

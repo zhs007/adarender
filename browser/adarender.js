@@ -58,7 +58,7 @@ class AdaRender {
 
     this.observer = new MutationObserver(onMutationObserver);
 
-    this.observer._adarender = this;
+    // this.observer._adarender = this;
 
     this.observer.observe(ele, {
       attributes: true,

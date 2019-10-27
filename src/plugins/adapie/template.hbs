@@ -1,15 +1,14 @@
 <div style="width:100%;text-align:center;">
-  <div id="{{id}}" style="width:80%;height:0;padding-bottom:60%;margin:auto;"></div>
+  <div id="{{id}}" style="width:92%;height:0;padding-bottom:69%;margin:auto;"></div>
+{{#if subtext}}
+  <p>{{title}} - {{subtext}}</p>
+{{else}}  
   <p>{{title}}</p>
+{{/if}}
+  <p></p>
 </div>
 <script type="text/javascript">
-  var piedata_{{ id }} =[];
-  for (let i = 0; i < adadata_{{ datasetname }}.{{ bval }}.length; ++i) {
-    piedata_{{ id }}.push({
-      name: adadata_{{ datasetname }}.{{ bval }} [i],
-        value: adadata_{{ datasetname }}.{{ cval }} [i],
-    });
-  }
+  var piedata_{{ id }} = adarender.buildPieData(adadata_{{ datasetname }}, '{{ bval }}', '{{ cval }}');
 
   var option = {
     tooltip: {
@@ -24,22 +23,22 @@
       bottom: 20,
       data: adadata_{{ datasetname }}.{{ bval }},
     },
-  series: [
-    {
-      name: '{{adachart.a}}',
-      type: 'pie',
-      radius: '55%',
-      center: ['40%', '50%'],
-      data: piedata_{{ id }},
-    itemStyle: {
-      emphasis: {
-        shadowBlur: 10,
-        shadowOffsetX: 0,
-        shadowColor: 'rgba(0, 0, 0, 0.5)'
+    series: [
+      {
+        name: '{{adachart.a}}',
+        type: 'pie',
+        radius: '55%',
+        center: ['40%', '50%'],
+        data: piedata_{{ id }},
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
       }
-    }
-      }
-  ]
+    ]
   };
 
   var chart_{{ id }} = adarender.initChart(document.getElementById('{{id}}'), option);

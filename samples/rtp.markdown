@@ -2213,7 +2213,7 @@ bval: namedata
 cval: valdata
 
 ```
-``` ada.sunburst
+``` ada.treemap
 id: "89669764"
 title: 游戏单场赔付比率树形图
 subtext: ""
