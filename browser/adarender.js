@@ -1,45 +1,71 @@
-import echarts from 'echarts';
-
 /**
- * initChart
- * @param {object} ele - element
- * @param {object} ops - options
- * @return {object} obj - chart object
+ * onMutationObserver
+ * @param {array} mutations - mutation list
+ * @param {object} observer - observer
  */
-function initChart(ele, ops) {
-  const cobj = echarts.init(ele);
-
-  const MutationObserver =
-    window.MutationObserver ||
-    window.WebKitMutationObserver ||
-    window.MozMutationObserver;
-
-  cobj._adarender_ow = 0;
-  cobj._adarender_oh = 0;
-
-  const observer = new MutationObserver((mutations) => {
+function onMutationObserver(mutations, observer) {
+  const ar = observer._adarender;
+  if (ar && ar.ecele && ar.ecobj) {
     for (let i = 0; i < mutations.length; ++i) {
-      const w = ele.offsetWidth;
-      const h = ele.offsetHeight;
+      const w = ar.ecele.offsetWidth;
+      const h = ar.ecele.offsetHeight;
 
-      if (cobj._adarender_ow != w || cobj._adarender_oh != h) {
-        cobj._adarender_ow = w;
-        cobj._adarender_oh = h;
+      if (ar.oldw != w || ar.oldh != h) {
+        ar.oldw = w;
+        ar.oldh = h;
 
-        cobj.resize({width: w, height: h});
+        ar.ecobj.resize({width: w, height: h});
+
+        // observer.disconnect();
       }
     }
-  });
-
-  observer.observe(ele, {
-    attributes: true,
-    attributeFilter: ['style'],
-    attributeOldValue: true,
-  });
-
-  cobj.setOption(ops);
-
-  return cobj;
+  }
 }
 
-export {initChart};
+/**
+ * AdaRender class
+ */
+class AdaRender {
+  /**
+   * constructor
+   */
+  constructor() {
+    this.oldw = 0;
+    this.oldh = 0;
+    this.ecobj = undefined;
+    this.ecele = undefined;
+    this.observer = undefined;
+  }
+
+  /**
+   * setEChartResize - echart初始化时，如果height是动态赋值的，可能就是0，
+   *  这时echart会显示不出来，所以有这个接口。
+   *  如果当第一次echartinstance.resize 传入一个正常值，后面echartinstance就会自己resize了。
+   *
+   * @param {object} ecobj - echart object
+   * @param {object} ele - element object
+   */
+  setEChartResize(ecobj, ele) {
+    const MutationObserver =
+      window.MutationObserver ||
+      window.WebKitMutationObserver ||
+      window.MozMutationObserver;
+
+    this.ecobj = ecobj;
+    this.ecele = ele;
+    this.oldw = 0;
+    this.oldh = 0;
+
+    this.observer = new MutationObserver(onMutationObserver);
+
+    this.observer._adarender = this;
+
+    this.observer.observe(ele, {
+      attributes: true,
+      attributeFilter: ['style'],
+      attributeOldValue: true,
+    });
+  }
+}
+
+export {AdaRender};
