@@ -66,3 +66,20 @@ adarender.registerAllPlugins(md, {});
 ### 接入hexo
 
 可以直接使用 ``hexo-renderer-adarender`` 。
+
+### 插件开发
+
+adarender插件分为2部分，一部分是node.js这边的模板解析模块，一部分是前端页面js代码。
+
+node.js这边相对简单，我们其实是将yaml通过一个模板(少量代码)，解析成html。  
+现在默认的模板引擎是``handlebars``，这个感觉选错了，但其实如果插件需要用自己的模板引擎也是可以的，这部分没有限制。
+
+前端js代码这边，我们现在代码放在browser目录下，最后会webpack打包到dist目录下，建议通过``jsdelivr``的cdn访问。  
+前面node.js用到的html里的js代码，最好能放到browser里开发。  
+browser目录下代码，可以使用ES6语法。  
+
+开发完以后，通过npm来build。
+
+```js
+npm run build
+```
