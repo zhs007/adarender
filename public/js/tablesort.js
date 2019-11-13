@@ -89,3 +89,4 @@ TableSorter.prototype = {
         return;
     }
 }
+export {TableSorter};

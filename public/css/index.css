@@ -10,17 +10,6 @@
 .adarender table {
     width: 100%;
 }
-/* .SortDescCss {
-    background-image: url(../img/Desc.gif);
-    background-repeat: no-repeat;
-    background-position: right center;
-}
-
-.SortAscCss {
-    background-image: url(../img/Asc.gif);
-    background-repeat: no-repeat;
-    background-position: right center;
-} */
 .markdown-body table .ant-table-body td, .markdown-body table .ant-table-head th {
     border:0;
 }
@@ -64,3 +53,90 @@
 .ant-table-head th.SortDescCss .icon-sortdesc, .ant-table-head th.SortAscCss .icon-sort-up{
     color:#1890ff;
 }
+
+/* commodity start */
+.item-wrap {
+    width:100%;
+    text-align: center;
+}
+.item-wrap .item {
+    display: inline-block;
+    width:180px;
+    height:320px;
+    margin-right: 20px;
+}
+.item-wrap .item .pic {
+    width: 180px;
+    height:180px;
+    background-image: url('../img/c.jpg')
+}
+.item-wrap .item .ctx {
+    display: block;
+    font-size: 12px;
+}
+.item-wrap .item .ctx .title {
+    text-align: left;
+}
+.item-wrap .item .ctx .shop {
+    color:#888;
+    text-align:left
+}
+.item-wrap .item .ctx .shop>span:nth-child(1) {
+    float: left;
+}
+.item-wrap .item .ctx .shop>span:nth-child(2) {
+    float: right;
+}
+.item-wrap .item .ctx .price {
+    display: block;
+    margin-top:11px;
+    height:22px;
+    line-height: 22px;
+    overflow: hidden;
+}
+.item-wrap .item .ctx .price .g-price-highlight {
+    float:left;
+    font-size: 18px;
+    line-height: 22px;
+} 
+.item-wrap .item .ctx .price .g-price-highlight>span:nth-child(1) {
+    float: left;
+}
+.H {
+    color:#F40;
+}  
+.item-wrap .item .ctx .deal-cnt {
+    float: right;
+    color:#888;
+}
+.item-wrap .item .ctx .posttage {
+    background-color: #F40;
+    color:#fff;
+    font-size: 12px;
+}
+.item-wrap .item .ctx .feature {
+    font-size: 12px;
+}
+.item-wrap .item .ctx .feature .hot {
+    background-color: #F40;
+    color:#fff;
+    margin-left: 3px;
+}
+.item-wrap .item .ctx .feature>span:nth-child(1) {
+    float: left;
+}
+.item-wrap .item .ctx .feature>span:nth-child(2) {
+    float: right;
+}
+.clearfix {
+    zoom:1
+}
+.clearfix:after{
+    content:".";        
+    display:block;        
+    height:0;        
+    clear:both;        
+    visibility:hidden;        
+
+}
+/* commodity end */
