@@ -1,6 +1,6 @@
 {
   "name": "adarender",
-  "version": "0.3.25",
+  "version": "0.3.26",
   "description": "Ada Render",
   "main": "index.js",
   "scripts": {
@@ -25,21 +25,21 @@
   },
   "homepage": "https://github.com/zhs007/adarender#readme",
   "dependencies": {
-    "commander": "^3.0.2",
+    "commander": "^4.0.1",
     "echarts": "^4.4.0",
     "google-protobuf": "^3.10.0",
-    "grpc": "^1.24.1",
-    "handlebars": "^4.4.5",
-    "highlight.js": "^9.15.10",
+    "grpc": "^1.24.2",
+    "handlebars": "^4.5.1",
+    "highlight.js": "^9.16.2",
     "jimp": "^0.8.5",
     "js-yaml": "^3.13.1",
     "markdown-it": "^10.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "@typescript-eslint/eslint-plugin": "^2.5.0",
-    "@typescript-eslint/parser": "^2.5.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@typescript-eslint/eslint-plugin": "^2.7.0",
+    "@typescript-eslint/parser": "^2.7.0",
     "babel": "^6.23.0",
     "babel-loader": "^8.0.6",
     "babel-preset-es2015": "^6.24.1",
@@ -50,6 +50,6 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^2.2.0",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.10"
   }
 }

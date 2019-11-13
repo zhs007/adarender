@@ -1,6 +1,6 @@
 import {initChart} from './utils';
 import {AdaRender} from './adarender';
-import {buildPieData,buildAllPieData} from './datapie';
+import {buildPieData, buildAllPieData} from './datapie';
 import {buildTreemapLevels, onInitTreemap} from './treemap';
 import {TableSorter} from '../public/js/tablesort';
 import '../public/css/index.css';
