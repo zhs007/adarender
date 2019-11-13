@@ -84,6 +84,12 @@ data:
  tablebody: multivaldata
  
 ``` 
+### 商品栏
+
+```ada.commodity
+	id:commodity
+
+``` 
 
 ## 游戏赔付率树形图
 

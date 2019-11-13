@@ -10,6 +10,7 @@ const markdownitAdaLine = require('../plugins/adaline');
 const markdownitAdaBar = require('../plugins/adabar');
 const markdownitAdaTreeMap = require('../plugins/adatreemap');
 const markdownitAdaTable = require('../plugins/adatable');
+const markdownitAdaCommodity = require('../plugins/commodity');
 const markdownitAdaSunburst = require('../plugins/adasunburst');
 
 /**
@@ -88,6 +89,7 @@ function exportMarkdown(mdstr, tmpstr, inpath, outputpath, vfs) {
     md.use(markdownitAdaBar, {});
     md.use(markdownitAdaTreeMap, {});
     md.use(markdownitAdaTable, {});
+    md.use(markdownitAdaCommodity, {});
     md.use(markdownitAdaSunburst, {});
 
     const title = getTitle(md, mdstr);
