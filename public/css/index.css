@@ -99,6 +99,9 @@
     font-size: 18px;
     line-height: 22px;
 } 
+.item-wrap .item .ctx .price .g-price-highlight>span:nth-child(1) {
+    float: left;
+}
 .H {
     color:#F40;
 }  
