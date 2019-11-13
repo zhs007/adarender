@@ -24,29 +24,29 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        use:[
+        use: [
           {
             loader: 'url-loader',
             options: {
               limit: 10000,
-            }
-          }          
-        ]        
-      },  
+            },
+          },
+        ],
+      },
       {
         test: /\.css$/,
-        use: ['style-loader','css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        use:[
+        use: [
           {
             loader: 'url-loader',
             options: {
               limit: 10000,
-            }
-          }  
-        ]        
+            },
+          },
+        ],
       },
     ],
   },
