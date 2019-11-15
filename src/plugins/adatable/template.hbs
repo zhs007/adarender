@@ -1,4 +1,4 @@
-<table id={{id}}></table>
+<table id={{id}} class="sortable"></table>
 <script type="text/javascript">
     var table_{{id}} = document.getElementById('{{id}}');
     var ada_table_head = adadata_{{datasetname}}.{{tablehead}}
@@ -24,7 +24,4 @@
         ada_table_body_html = '<tr>' + ada_table_body_html.join('') + '</tr>';
     }    
     table_{{id}}.innerHTML = `<thead class="ant-table-head"><tr>${ada_table_head_html}</tr></thead><tbody class="ant-table-body">${ada_table_body_html}</tbody>`
-    window.onload = function() {
-        new adarender.TableSorter("{{id}}")
-    }
 </script>

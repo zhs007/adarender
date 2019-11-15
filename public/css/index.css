@@ -22,7 +22,7 @@
 .markdown-body table .ant-table-head>tr>th {
     color: rgba(0,0,0,0.85);
     font-weight: 500;
-    text-align: left;
+    text-align: center;
     background-color: #fafafa;
     border-bottom: 1px solid #e8e8e8;
     -webkit-transition: all .3s ease;
@@ -48,7 +48,23 @@
 .ant-table-head th .icon-sortdesc,.ant-table-head th .icon-sort-up {
     color:#bfbfbf;
     position: absolute;
+    right: 6px;
     margin-left: 5px;
+}
+.sorttable_sorted span#sorttable_sortfwdind {
+    position: absolute;
+    color: #1890ff;
+    font-size: 25px;
+    top: 13px;
+    right: 3px;
+}
+.sorttable_sorted_reverse span#sorttable_sortrevind {
+    position: absolute;
+    color: #1890ff;
+    font-size: 25px;
+    top: 3px;
+    right:3px;
+
 }
 .ant-table-head th.SortDescCss .icon-sortdesc, .ant-table-head th.SortAscCss .icon-sort-up{
     color:#1890ff;
