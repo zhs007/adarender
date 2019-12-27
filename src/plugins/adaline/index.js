@@ -30,7 +30,7 @@ function renderLine(content) {
 /**
  * markdownitAdaLine
  * @param {object} md - MarkdownIt
- * @param {object} config - {input, output, onlyname, vfs}
+ * @param {object} config - {}
  */
 function markdownitAdaLine(md, config) {
   config = config || {};

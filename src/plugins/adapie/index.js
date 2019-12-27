@@ -43,7 +43,7 @@ function renderPie(content) {
 /**
  * markdownitAdaPie
  * @param {object} md - MarkdownIt
- * @param {object} config - {input, output, onlyname, vfs}
+ * @param {object} config - {}
  */
 function markdownitAdaPie(md, config) {
   config = config || {};

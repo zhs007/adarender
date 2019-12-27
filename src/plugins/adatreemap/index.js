@@ -87,7 +87,7 @@ function renderTreeMap(content) {
 /**
  * markdownitAdaTreeMap
  * @param {object} md - MarkdownIt
- * @param {object} config - {input, output, onlyname, vfs}
+ * @param {object} config - {}
  */
 function markdownitAdaTreeMap(md, config) {
   config = config || {};

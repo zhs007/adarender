@@ -1,6 +1,6 @@
 {
   "name": "adarender",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Ada Render",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,8 @@
     "highlight.js": "^9.17.1",
     "jimp": "^0.9.3",
     "js-yaml": "^3.13.1",
-    "markdown-it": "^10.0.0"
+    "markdown-it": "^10.0.0",
+    "mermaid": "^8.4.4"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

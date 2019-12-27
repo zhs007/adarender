@@ -30,7 +30,7 @@ function renderTable(content) {
 /**
  * markdownitAdaTable
  * @param {object} md - MarkdownIt
- * @param {object} config - {input, output, onlyname, vfs}
+ * @param {object} config - {}
  */
 function markdownitAdaTable(md, config) {
   config = config || {};

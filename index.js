@@ -8,6 +8,7 @@ const markdownitAdaBar = require('./src/plugins/adabar');
 const markdownitAdaTreeMap = require('./src/plugins/adatreemap');
 const markdownitAdaTable = require('./src/plugins/adatable');
 const markdownitAdaSunburst = require('./src/plugins/adasunburst');
+const markdownitMermaid = require('./src/plugins/mermaid');
 
 /**
  * registerAllPlugins
@@ -15,13 +16,14 @@ const markdownitAdaSunburst = require('./src/plugins/adasunburst');
  * @param {object} cfg - config
  */
 function registerAllPlugins(md, cfg) {
-  md.use(markdownitAdaDataset, {});
-  md.use(markdownitAdaPie, {});
-  md.use(markdownitAdaLine, {});
-  md.use(markdownitAdaBar, {});
-  md.use(markdownitAdaTreeMap, {});
-  md.use(markdownitAdaTable, {});
-  md.use(markdownitAdaSunburst, {});
+  md.use(markdownitAdaDataset, cfg.adadataset);
+  md.use(markdownitAdaPie, cfg.adapie);
+  md.use(markdownitAdaLine, cfg.adaline);
+  md.use(markdownitAdaBar, cfg.adabar);
+  md.use(markdownitAdaTreeMap, cfg.adatreemap);
+  md.use(markdownitAdaTable, cfg.adatable);
+  md.use(markdownitAdaSunburst, cfg.adasunburst);
+  md.use(markdownitMermaid, cfg.adamermaid);
 }
 
 exports.registerAllPlugins = registerAllPlugins;

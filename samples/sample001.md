@@ -911,3 +911,20 @@ treemap:
         value: 53611
         children: []
 ```
+
+
+``` mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
+$$mermaid$$
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+$$mermaid$$
