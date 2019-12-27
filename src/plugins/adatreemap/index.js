@@ -2,6 +2,7 @@
 
 const yaml = require('js-yaml');
 const {compileString} = require('../../handlebarsutils');
+const {makeBlockFunc} = require('../../mdutils');
 const path = require('path');
 const fs = require('fs');
 
@@ -55,7 +56,7 @@ function renderTreeMap(content) {
         for (let j = 0; j < treemap.treemap[i].data.length; ++j) {
           treemap.treemap[i].data[j].value = recountValue(
               treemap.treemap[i].data[j],
-              treemap.recounttype
+              treemap.recounttype,
           );
         }
 
@@ -100,6 +101,20 @@ function markdownitAdaTreeMap(md, config) {
     }
 
     return oldRule(tokens, idx, options, env, slf);
+  };
+
+  const adatreemapblock = makeBlockFunc(
+      '$$ada.treemap$$',
+      '$$ada.treemap$$',
+      'adatreemap_block',
+      'adatreemap',
+  );
+
+  md.block.ruler.after('blockquote', 'adatreemap_block', adatreemapblock, {
+    alt: ['paragraph', 'reference', 'blockquote', 'list'],
+  });
+  md.renderer.rules.adatreemap_block = (tokens, idx) => {
+    return renderTreeMap(tokens[idx].content);
   };
 }
 

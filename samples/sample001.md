@@ -156,6 +156,23 @@ ydata:
     data: valdata
 ```
 
+$$ada.bar$$
+id: bar002
+datasetname: testdata
+title: Bar
+width: 1280
+height: 800
+subtext: this is a test bar
+legenddata: ["val1"]
+xtype: category
+xshowall: true
+xdata: namedata
+ytype: value
+ydata:
+  - name: val1
+    data: valdata
+$$ada.bar$$
+
 ```ada.treemap
 id: treemap001
 datasetname: testdata

@@ -2,6 +2,7 @@
 
 const yaml = require('js-yaml');
 const {compileString} = require('../../handlebarsutils');
+const {makeBlockFunc} = require('../../mdutils');
 const path = require('path');
 const fs = require('fs');
 
@@ -21,9 +22,7 @@ function renderCommodity(content) {
 
       return html;
     }
-  } catch (err) {
-
-  }
+  } catch (err) {}
 
   return '';
 }
@@ -45,6 +44,20 @@ function markdownitAdaCommodity(md, config) {
     }
 
     return oldRule(tokens, idx, options, env, slf);
+  };
+
+  const adacommodityblock = makeBlockFunc(
+      '$$ada.commodity$$',
+      '$$ada.commodity$$',
+      'adacommodity_block',
+      'adacommodity',
+  );
+
+  md.block.ruler.after('blockquote', 'adacommodity_block', adacommodityblock, {
+    alt: ['paragraph', 'reference', 'blockquote', 'list'],
+  });
+  md.renderer.rules.adacommodity_block = (tokens, idx) => {
+    return renderCommodity(tokens[idx].content);
   };
 }
 
