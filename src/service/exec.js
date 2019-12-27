@@ -16,7 +16,7 @@ async function execStartService(program, version) {
 
         if (!cfgfile) {
           console.log(
-              'command wrong, please type ' + 'adarender startservice --help'
+              'command wrong, please type ' + 'adarender startservice --help',
           );
 
           return;

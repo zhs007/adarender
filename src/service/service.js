@@ -84,7 +84,7 @@ async function startService(cfgfile) {
           await htmlstream.sendErr(
               call,
               'invalid token ',
-              markdownstream.getToken()
+              markdownstream.getToken(),
           );
 
           return;

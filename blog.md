@@ -1,5 +1,10 @@
 # Ada Render Blog
 
+### 2019-12-27
+
+因为Hexo对于highlight的处理放在底层了，所以对于Markdown-it来说，如果不关掉Hexo的highlight就处理不了fence rule。  
+所以需要在fence rule以外，还有一套别的标识。
+
 ### 2019-10-26
 
 这几天把Hexo的插件完成了，hexo-renderer-adarender。  

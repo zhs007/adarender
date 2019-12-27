@@ -22,7 +22,7 @@ function execExportMD(program, version) {
 
         if (!markdownfile || !options.output || !options.template) {
           console.log(
-              'command wrong, please type ' + 'adarender exportmd --help'
+              'command wrong, please type ' + 'adarender exportmd --help',
           );
 
           return;
@@ -42,7 +42,7 @@ function execExportMD(program, version) {
             mdstr,
             tmpstr,
             options.inputpath,
-            options.path
+            options.path,
         );
 
         console.log('--- ' + ret.title + ' ---');
