@@ -251,7 +251,7 @@ function renderSunburst(content) {
 /**
  * markdownitAdaSunburst
  * @param {object} md - MarkdownIt
- * @param {object} config - {input, output, onlyname, vfs}
+ * @param {object} config - {}
  */
 function markdownitAdaSunburst(md, config) {
   config = config || {};

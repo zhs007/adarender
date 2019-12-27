@@ -30,7 +30,7 @@ function renderBar(content) {
 /**
  * markdownitAdaBar
  * @param {object} md - MarkdownIt
- * @param {object} config - {input, output, onlyname, vfs}
+ * @param {object} config - {}
  */
 function markdownitAdaBar(md, config) {
   config = config || {};

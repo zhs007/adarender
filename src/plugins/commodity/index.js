@@ -30,7 +30,7 @@ function renderCommodity(content) {
 /**
  * markdownitAdaCommodity
  * @param {object} md - MarkdownIt
- * @param {object} config - {input, output, onlyname, vfs}
+ * @param {object} config - {}
  */
 function markdownitAdaCommodity(md, config) {
   config = config || {};

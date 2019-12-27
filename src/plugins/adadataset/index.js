@@ -43,7 +43,7 @@ function renderDataset(content) {
 /**
  * markdownitAdaDataset
  * @param {object} md - MarkdownIt
- * @param {object} config - {input, output, onlyname, vfs}
+ * @param {object} config - {}
  */
 function markdownitAdaDataset(md, config) {
   config = config || {};

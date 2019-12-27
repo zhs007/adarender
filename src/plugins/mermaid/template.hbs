@@ -1,0 +1,23 @@
+<div style="width:100%;text-align:center;">
+  <div id="mermaidp{{id}}" style="width:92%;margin:auto;">
+    <div id="mermaid{{id}}"></div>
+  </div>
+  <p></p>
+</div>
+<script type="text/javascript">
+  var adamermaidinited;
+  if (!adamermaidinited) {
+    mermaid.initialize({
+      theme: '{{theme}}',
+      startOnLoad: true,
+    });
+    adamermaidinited = true;
+  }
+  var mermaidcb{{id}} = function(svgGraph) {
+    var pnode = document.getElementById('mermaidp{{id}}');
+    if (pnode) {
+      pnode.innerHTML = svgGraph;
+    }
+  };  
+  mermaid.render('mermaid{{id}}', `{{{code}}}`, mermaidcb{{id}});
+</script>
