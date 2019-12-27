@@ -2,6 +2,7 @@
 
 const yaml = require('js-yaml');
 const {compileString} = require('../../handlebarsutils');
+const {makeBlockFunc} = require('../../mdutils');
 const path = require('path');
 const fs = require('fs');
 
@@ -21,9 +22,7 @@ function renderBar(content) {
 
       return html;
     }
-  } catch (err) {
-
-  }
+  } catch (err) {}
 
   return '';
 }
@@ -45,6 +44,20 @@ function markdownitAdaBar(md, config) {
     }
 
     return oldRule(tokens, idx, options, env, slf);
+  };
+
+  const adabarblock = makeBlockFunc(
+      '$$ada.bar$$',
+      '$$ada.bar$$',
+      'adabar_block',
+      'adabar',
+  );
+
+  md.block.ruler.after('blockquote', 'adabar_block', adabarblock, {
+    alt: ['paragraph', 'reference', 'blockquote', 'list'],
+  });
+  md.renderer.rules.adabar_block = (tokens, idx) => {
+    return renderBar(tokens[idx].content);
   };
 }
 

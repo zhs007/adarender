@@ -2,6 +2,7 @@
 
 const yaml = require('js-yaml');
 const {compileString} = require('../../handlebarsutils');
+const {makeBlockFunc} = require('../../mdutils');
 const path = require('path');
 const fs = require('fs');
 
@@ -17,10 +18,10 @@ function renderPie(content) {
   try {
     const pie = yaml.safeLoad(content);
     if (pie) {
-    //   const params = {
-    //     datasetname: dataset.name,
-    //     datasetval: {},
-    //   };
+      //   const params = {
+      //     datasetname: dataset.name,
+      //     datasetval: {},
+      //   };
 
       //   for (const k in dataset.data) {
       //     if (Object.prototype.hasOwnProperty.call(dataset.data, k)) {
@@ -34,9 +35,7 @@ function renderPie(content) {
 
       return html;
     }
-  } catch (err) {
-
-  }
+  } catch (err) {}
 
   return '';
 }
@@ -58,6 +57,20 @@ function markdownitAdaPie(md, config) {
     }
 
     return oldRule(tokens, idx, options, env, slf);
+  };
+
+  const adapieblock = makeBlockFunc(
+      '$$ada.pie$$',
+      '$$ada.pie$$',
+      'adapie_block',
+      'adapie',
+  );
+
+  md.block.ruler.after('blockquote', 'adapie_block', adapieblock, {
+    alt: ['paragraph', 'reference', 'blockquote', 'list'],
+  });
+  md.renderer.rules.adapie_block = (tokens, idx) => {
+    return renderPie(tokens[idx].content);
   };
 }
 

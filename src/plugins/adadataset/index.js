@@ -2,6 +2,7 @@
 
 const yaml = require('js-yaml');
 const {compileString} = require('../../handlebarsutils');
+const {makeBlockFunc} = require('../../mdutils');
 const path = require('path');
 const fs = require('fs');
 
@@ -34,9 +35,7 @@ function renderDataset(content) {
 
       return html;
     }
-  } catch (err) {
-
-  }
+  } catch (err) {}
 
   return '';
 }
@@ -58,6 +57,20 @@ function markdownitAdaDataset(md, config) {
     }
 
     return oldRule(tokens, idx, options, env, slf);
+  };
+
+  const adadatasetblock = makeBlockFunc(
+      '$$ada.dataset$$',
+      '$$ada.dataset$$',
+      'adadataset_block',
+      'adadataset',
+  );
+
+  md.block.ruler.after('blockquote', 'adadataset_block', adadatasetblock, {
+    alt: ['paragraph', 'reference', 'blockquote', 'list'],
+  });
+  md.renderer.rules.adadataset_block = (tokens, idx) => {
+    return renderDataset(tokens[idx].content);
   };
 }
 
