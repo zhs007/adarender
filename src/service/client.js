@@ -19,7 +19,7 @@ const TOKEN = 'RVhVrt13P6i5xCrL5Fc3GcuHC03kaunA';
 function render(servAddr, inpath, fn, tempname) {
   const client = new services.AdaRenderServiceClient(
       servAddr,
-      grpc.credentials.createInsecure()
+      grpc.credentials.createInsecure(),
   );
 
   const md = buildMarkdownData(inpath, fn);
