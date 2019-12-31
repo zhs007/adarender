@@ -928,3 +928,5 @@ graph TD;
     B-->D;
     C-->D;
 $$mermaid$$
+
+![This a svg image](heyalgo002.svg)

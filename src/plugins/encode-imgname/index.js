@@ -18,6 +18,10 @@ function getImgType(fn) {
       return 'png';
     } else if (exname == 'gif') {
       return 'gif';
+    } else if (exname == 'svg') {
+      return 'svg';
+    } else if (exname == 'webp') {
+      return 'webp';
     }
   }
 

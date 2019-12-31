@@ -36,7 +36,7 @@ function getImages(inpath, fn) {
     const str = buf.toString();
     const md = new MarkdownIt();
 
-    const tokens = md.parse(str);
+    const tokens = md.parse(str, {});
 
     for (let i = 0; i < tokens.length; ++i) {
       if (tokens[i].type == 'inline') {

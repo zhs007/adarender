@@ -21,7 +21,7 @@ const {registerAllPlugins} = require('../../index');
  * @return {string} title - title string
  */
 function getTitle(md, mdstr) {
-  const ret = md.parse(mdstr);
+  const ret = md.parse(mdstr, {});
 
   for (let i = 0; i < ret.length; ++i) {
     if (ret[i].tag == 'h1' && ret[i].type == 'heading_open') {
