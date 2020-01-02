@@ -1,8 +1,8 @@
 'use strict';
 
 // const mermaid = require('mermaid');
-const {compileString} = require('../../handlebarsutils');
-const {makeBlockFunc} = require('../../mdutils');
+const {compileString} = require('../../handlebars.utils');
+const {makeBlockFunc} = require('../../md.utils');
 const path = require('path');
 const fs = require('fs');
 

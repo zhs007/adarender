@@ -88,6 +88,10 @@ npm run build
 
 ### 更新记录
 
+##### v0.6
+
+- 切换 ``handlebars`` 到 ``ejs``。
+
 ##### v0.5
 
 - 结构调整，前端js用webpack打包。
