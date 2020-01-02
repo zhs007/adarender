@@ -1,13 +1,14 @@
 'use strict';
 
 const yaml = require('js-yaml');
-const {compileString} = require('../../ejs.utils');
+// const {compileString} = require('../../ejs.utils');
 const {makeBlockFunc} = require('../../md.utils');
 const path = require('path');
-const fs = require('fs');
+const ejs = require('ejs');
+// const fs = require('fs');
 
-const tmpbuf = fs.readFileSync(path.join(__dirname, 'template.ejs'));
-const template = compileString(tmpbuf.toString());
+// const tmpbuf = fs.readFileSync(path.join(__dirname, 'template.ejs'));
+// const template = compileString(tmpbuf.toString());
 
 /**
  * renderTable - render for table
@@ -18,11 +19,22 @@ function renderTable(content) {
   try {
     const table = yaml.safeLoad(content);
     if (table) {
-      const html = template(table);
+      let html = '';
+      ejs.renderFile(path.join(__dirname, 'template.ejs'), table, {}, function(
+          err,
+          str,
+      ) {
+        if (err) {
+          console.log('renderTable:renderFile', err);
+        }
+        html = str;
+      });
 
       return html;
     }
-  } catch (err) {}
+  } catch (err) {
+    console.log('renderTable:catch', err);
+  }
 
   return '';
 }

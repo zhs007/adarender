@@ -98,6 +98,14 @@ data:
 
 ```
 
+```ada.table2
+ id: testtable2
+ datasetname: testdata
+ tablehead: namedata
+ tablebody: valdata
+
+```
+
 ```ada.table
  id: testtable02
  datasetname: testdata
