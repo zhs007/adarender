@@ -1,6 +1,6 @@
 {
   "name": "adarender",
-  "version": "0.5.10",
+  "version": "0.5.11",
   "description": "Ada Render",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,7 @@
   "dependencies": {
     "commander": "^4.0.1",
     "echarts": "^4.6.0",
+    "ejs": "^3.0.1",
     "google-protobuf": "^3.11.2",
     "grpc": "^1.24.2",
     "handlebars": "^4.5.3",
