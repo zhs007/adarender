@@ -6,7 +6,7 @@
  * @return {error} err - error
  */
 function setTableData(eleTable, dsHead, dsData) {
-  const strhead = '';
+  let strhead = '';
   for (let i = 0; i < dsHead.length; i++) {
     strhead += '<th>' + dsHead[i] + '</th>';
   }
