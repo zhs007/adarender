@@ -85,3 +85,30 @@ browser目录下代码，可以使用ES6语法。
 ```js
 npm run build
 ```
+
+### 更新记录
+
+##### v0.5
+
+- 结构调整，前端js用webpack打包。
+- 各种引用和依赖通过``jsdelivr``加载。
+- 增加了非 `fence rule` 的标记处理。
+- 新增Hexo插件。
+
+##### v0.3
+
+- 加入Action工作流。
+- 代码会自动发布到npm。
+- 代码会自动发布到DockerHub。
+
+##### v0.2
+
+- 支持grpc服务。
+- 提供Docker部署。
+- Golangadacore
+
+##### v0.1
+
+- 搭建基本框架。
+- 基本echart插件体系。
+- 支持命令行处理。
