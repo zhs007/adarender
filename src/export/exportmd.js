@@ -1,7 +1,7 @@
 'use strict';
 
 const MarkdownIt = require('markdown-it');
-const {compileString} = require('../handlebarsutils');
+const {compileString} = require('../handlebars.utils');
 const hljs = require('highlight.js');
 const pluginEncodeImgName = require('../plugins/encode-imgname');
 const {registerAllPlugins} = require('../../index');
