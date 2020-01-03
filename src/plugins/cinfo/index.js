@@ -54,56 +54,96 @@ function renderClose(token) {
 function tokenize(state, silent) {
   //   let i;
   //   let scanned;
-  let token;
+  // let token;
   //   let len;
   //   let ch;
-  const start = state.pos;
-  const marker = state.src.charCodeAt(start);
+  // const start = state.pos;
+  // const marker = state.src.charCodeAt(start);
 
   if (silent) {
     return false;
   }
 
-  if (marker !== 0x3d /* = */) {
-    return false;
-  }
+  if (state.src.length - state.pos >= 2) {
+    if (state.src[state.pos] == '-' && state.src[state.pos + 1] == '=') {
+      const token = state.push('text', '', 0);
+      token.content = '-=';
 
-  const scanned = state.scanDelims(state.pos, true);
-  let len = scanned.length;
-  const ch = String.fromCharCode(marker);
+      state.delimiters.push({
+        marker: 0x3d,
+        length: 0, // disable "rule of 3" length checks meant for emphasis
+        jump: 0,
+        token: state.tokens.length - 1,
+        end: -1,
+        open: true,
+        close: false,
+      });
 
-  if (len < 2) {
-    return false;
-  }
+      state.pos += 2;
 
-  if (len % 2) {
-    token = state.push('text', '', 0);
-    token.content = ch;
-    len--;
-  }
+      return true;
+    } else if (state.src[state.pos] == '=' && state.src[state.pos + 1] == '-') {
+      const token = state.push('text', '', 0);
+      token.content = '=-';
 
-  for (let i = 0; i < len; i += 2) {
-    token = state.push('text', '', 0);
-    token.content = ch + ch;
+      state.delimiters.push({
+        marker: 0x3d,
+        length: 0, // disable "rule of 3" length checks meant for emphasis
+        jump: 0,
+        token: state.tokens.length - 1,
+        end: -1,
+        open: false,
+        close: true,
+      });
 
-    if (!scanned.can_open && !scanned.can_close) {
-      continue;
+      state.pos += 2;
+
+      return true;
     }
-
-    state.delimiters.push({
-      marker: marker,
-      length: 0, // disable "rule of 3" length checks meant for emphasis
-      jump: i,
-      token: state.tokens.length - 1,
-      end: -1,
-      open: scanned.can_open,
-      close: scanned.can_close,
-    });
   }
 
-  state.pos += scanned.length;
+  return false;
 
-  return true;
+  // if (marker !== 0x3d /* = */) {
+  //   return false;
+  // }
+
+  // const scanned = state.scanDelims(state.pos, true);
+  // let len = scanned.length;
+  // const ch = String.fromCharCode(marker);
+
+  // if (len < 2) {
+  //   return false;
+  // }
+
+  // if (len % 2) {
+  //   token = state.push('text', '', 0);
+  //   token.content = ch;
+  //   len--;
+  // }
+
+  // for (let i = 0; i < len; i += 2) {
+  //   token = state.push('text', '', 0);
+  //   token.content = ch + ch;
+
+  //   if (!scanned.can_open && !scanned.can_close) {
+  //     continue;
+  //   }
+
+  //   state.delimiters.push({
+  //     marker: marker,
+  //     length: 0, // disable "rule of 3" length checks meant for emphasis
+  //     jump: i,
+  //     token: state.tokens.length - 1,
+  //     end: -1,
+  //     open: scanned.can_open,
+  //     close: scanned.can_close,
+  //   });
+  // }
+
+  // state.pos += scanned.length;
+
+  // return true;
 }
 
 /**
