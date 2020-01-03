@@ -1,6 +1,6 @@
 {
   "name": "adarender",
-  "version": "0.6.1",
+  "version": "0.6.7",
   "description": "Ada Render",
   "main": "index.js",
   "scripts": {

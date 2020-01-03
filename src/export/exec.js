@@ -34,7 +34,7 @@ function execExportMD(program, version) {
         const mdstr = fs
             .readFileSync(path.join(options.inputpath, markdownfile))
             .toString();
-        console.log(mdstr);
+        // console.log(mdstr);
 
         const tmpstr = fs.readFileSync(options.template).toString();
 
@@ -45,8 +45,8 @@ function execExportMD(program, version) {
             options.path,
         );
 
-        console.log('--- ' + ret.title + ' ---');
-        console.log(ret.html);
+        // console.log('--- ' + ret.title + ' ---');
+        // console.log(ret.html);
 
         fs.writeFileSync(options.output, ret.html);
       });

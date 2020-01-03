@@ -1,18 +1,18 @@
-import {initChart} from './utils';
-import {AdaRender} from './adarender';
-import {buildPieData, buildAllPieData} from './datapie';
-import {sortDataset} from './datasetutils';
-import {buildTreemapLevels, onInitTreemap} from './treemap';
-import {TableSorter} from '../public/js/tablesort';
-import '../public/css/index.css';
-import '../public/css/iconfont.css';
+import {initChart} from './src/utils';
+import {AdaRender} from './src/adarender';
+import {buildPieData, buildAllPieData} from './src/datapie';
+import {sortDataset} from './src/dataset.utils';
+import {setTableData} from './src/table.utils';
+import {buildTreemapLevels, onInitTreemap} from './src/treemap';
+import './css/index.css';
+import './css/iconfont.css';
 export {
   initChart,
   AdaRender,
   sortDataset,
+  setTableData,
   buildPieData,
   buildAllPieData,
   buildTreemapLevels,
   onInitTreemap,
-  TableSorter,
 };

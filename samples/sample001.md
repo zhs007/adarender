@@ -86,23 +86,15 @@ This a multiline string too.
 name: testdata
 data:
   namedata: ['a', 'b', 'c', 'd', 'e']
-  valdata: [5, 4, 3, 2, 1]
+  valdata: [[5, 4, 3, 2, 1]]
   multivaldata: [[5, 4, 3, 2, 1],[6, 5, 4, 3, 2],[7, 6, 5, 4, 3],[8, 7, 6, 5, 4],[9, 8, 7, 6, 5],[10, 9, 8, 7, 6]]
 ```
 
-```ada.table
- id: testtable
+```ada.table2
+ id: testtable2
  datasetname: testdata
  tablehead: namedata
  tablebody: valdata
-
-```
-
-```ada.table
- id: testtable02
- datasetname: testdata
- tablehead: namedata
- tablebody: multivaldata
 
 ```
 

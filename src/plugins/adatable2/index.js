@@ -4,6 +4,7 @@ const yaml = require('js-yaml');
 const {compileString} = require('../../ejs.utils');
 const {makeBlockFunc} = require('../../md.utils');
 const path = require('path');
+// const ejs = require('ejs');
 const fs = require('fs');
 
 const tmpbuf = fs.readFileSync(path.join(__dirname, 'template.ejs'));
@@ -22,7 +23,9 @@ function renderTable(content) {
 
       return html;
     }
-  } catch (err) {}
+  } catch (err) {
+    console.log('renderTable:catch', err);
+  }
 
   return '';
 }

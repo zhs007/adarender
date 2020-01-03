@@ -91,6 +91,7 @@ npm run build
 ##### v0.6
 
 - 切换 ``handlebars`` 到 ``ejs``。
+- 前端项目结构调整，取消public目录。
 
 ##### v0.5
 

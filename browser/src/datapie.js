@@ -1,4 +1,4 @@
-import {sortDataset} from './datasetutils';
+import {sortDataset} from './dataset.utils';
 
 /**
  * buildPieData
