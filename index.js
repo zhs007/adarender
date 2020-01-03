@@ -9,6 +9,7 @@ const markdownitAdaTreeMap = require('./src/plugins/adatreemap');
 const markdownitAdaTable = require('./src/plugins/adatable');
 const markdownitAdaTable2 = require('./src/plugins/adatable2');
 const markdownitAdaSunburst = require('./src/plugins/adasunburst');
+const markdownitCenterInfo = require('./src/plugins/cinfo');
 const markdownitMermaid = require('./src/plugins/mermaid');
 
 /**
@@ -26,6 +27,7 @@ function registerAllPlugins(md, cfg) {
   md.use(markdownitAdaTable2, cfg.adatable2);
   md.use(markdownitAdaSunburst, cfg.adasunburst);
   md.use(markdownitMermaid, cfg.adamermaid);
+  md.use(markdownitCenterInfo, cfg.cinfo);
 }
 
 exports.registerAllPlugins = registerAllPlugins;
