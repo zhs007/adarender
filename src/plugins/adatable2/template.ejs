@@ -1,7 +1,7 @@
 <div style="text-align:center">
   <table id="<%= id %>" style="margin:auto;width:auto;display:table;"></table>
   <script type="text/javascript">
-    adarender.setTableData(
+    var st<%= id %> = new adarender.SortTable('<%= id %>',       
       document.getElementById('<%= id %>'),
       adadata_<%= datasetname %>.<%= tablehead %>,
       adadata_<%= datasetname %>.<%= tablebody %>);
