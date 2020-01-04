@@ -99,6 +99,17 @@ data:
 ```
 -=I am center text.=-
 
+
+```ada.table2
+ id: testtable3
+ datasetname: testdata
+ tablehead: namedata
+ tablebody: multivaldata
+
+```
+
+
+
 | name | 111 | 222 | 333 | 444 |
 | ---- | :-: | :-: | :-: | --: |
 | aaa  | bbb | ccc | ddd | eee |
