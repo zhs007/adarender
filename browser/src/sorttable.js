@@ -1,18 +1,22 @@
+const mapSortTable = {};
+
 /**
  * SortTable class - sort table
  *  eleID - element ID
  *  eleTable - element for table
  *  arrHead - [{data, sort, id, ele}]
- *  arrRow - [{data, id, ele}]
+ *  arrRow - [{data, id, ele, arr}]
  *  arrData - [[{data, id, ele}]]
+ *  dsHead - dataset head
+ *  dsData - dataset data
  */
 class SortTable {
   /**
    * constructor
    * @param {string} eleID - element ID
    * @param {object} eleTable - eleTable
-   * @param {array} dsHead - dataset head
-   * @param {array} dsData - dataset data
+   * @param {array} dsHead - dataset head, [...]
+   * @param {array} dsData - dataset data, [[...] ...]
    */
   constructor(eleID, eleTable, dsHead, dsData) {
     this.eleID = eleID;
@@ -24,7 +28,16 @@ class SortTable {
       for (let i = 0; i < dsHead.length; i++) {
         const ch = {data: dsHead[i], sort: 0, id: this.buildID('h', i, -1)};
 
-        strhead += '<th id="' + ch.id + '">' + ch.data + '</th>';
+        strhead +=
+          '<th id="' +
+          ch.id +
+          '" onclick="adarender.mapSortTable.' +
+          eleID +
+          '.sort(' +
+          i +
+          ')">' +
+          ch.data +
+          '</th>';
 
         this.arrHead.push(ch);
       }
@@ -37,11 +50,15 @@ class SortTable {
       this.arrRow = [];
       this.arrData = [];
 
-      if (dsHead.length > 1) {
+      // 如果这里dsData不是数组，只可能表格只有1列
+      if (Array.isArray(dsData[0])) {
         for (let i = 0; i < dsData.length; i++) {
           if (Array.isArray(dsData[i]) && dsData[i].length >= dsHead.length) {
-            const cr = {data: dsData[i], id: this.buildID('r', -1, i)};
-            const cdl = [];
+            const cr = {
+              data: dsData[i],
+              id: this.buildID('r', -1, i),
+              arr: [],
+            };
 
             strdata += '<tr id="' + cr.id + '">';
             for (let j = 0; j < dsData[i].length; j++) {
@@ -49,17 +66,24 @@ class SortTable {
 
               strdata += '<td id="' + cd.id + '">' + cd.data + '</td>';
 
-              cdl.push(cd);
+              cr.arr.push(cd);
             }
             strdata += '</tr>';
 
             this.arrRow.push(cr);
-            this.arrData.push(cdl);
+            this.arrData.push(cr.arr);
+          } else {
+            // 不允许有错误行，如果要处理错误行，排序会带来额外的开销，暂时不考虑这个
+            return;
           }
         }
-      } else {
+      } else if (dsHead.length == 1) {
         for (let i = 0; i < dsData.length; i++) {
-          const cr = {data: dsData[i], id: this.buildID('r', -1, i)};
+          const cr = {
+            data: [dsData[i]],
+            id: this.buildID('r', -1, i),
+            arr: [],
+          };
           const cd = {data: dsData[i], id: this.buildID('d', 0, i)};
 
           strdata +=
@@ -73,10 +97,10 @@ class SortTable {
             '</td>' +
             '</tr>';
 
-          const cdl = [cd];
+          cr.arr.push(cd);
 
           this.arrRow.push(cr);
-          this.arrData.push(cdl);
+          this.arrData.push(cr.arr);
         }
       }
     }
@@ -99,6 +123,19 @@ class SortTable {
     }
 
     this.eleTable = eleTable;
+    this.dsHead = dsHead;
+
+    if (dsHead.length == 1 && !Array.isArray(dsData[0])) {
+      this.dsData = [];
+
+      for (let i = 0; i < dsData.length; ++i) {
+        this.dsData.push([dsData[i]]);
+      }
+    } else {
+      this.dsData = dsData;
+    }
+
+    mapSortTable[eleID] = this;
   }
 
   /**
@@ -129,6 +166,74 @@ class SortTable {
 
     return this.eleID + '_d_' + y + '_' + x;
   }
+
+  /**
+   * rebuild
+   */
+  rebuild() {
+    this.arrData = [];
+    for (let i = 0; i < this.dsData.length; i++) {
+      const cr = this.arrRow[i];
+
+      cr.data = this.dsData[i];
+      cr.arr = [];
+
+      let strdata = '';
+      for (let j = 0; j < this.dsData[i].length; j++) {
+        const cd = {data: this.dsData[i][j], id: this.buildID('d', j, i)};
+
+        strdata += '<td id="' + cd.id + '">' + cd.data + '</td>';
+
+        cr.arr.push(cd);
+      }
+
+      cr.ele.innerHTML = strdata;
+
+      this.arrData.push(cr.arr);
+
+      for (let j = 0; j < this.arrData[i].length; ++j) {
+        this.arrData[i][j].ele = document.getElementById(this.arrData[i][j].id);
+      }
+    }
+  }
+
+  /**
+   * sort
+   * @param {string} x - x
+   */
+  sort(x) {
+    if (x >= 0 && x < this.arrHead.length) {
+      if (this.arrHead[x].sort != 1) {
+        this.arrHead[x].sort = 1;
+      } else {
+        this.arrHead[x].sort = -1;
+      }
+
+      if (this.arrHead[x].sort == 1) {
+        this.dsData.sort((a, b) => {
+          if (a[x] < b[x]) {
+            return -1;
+          } else if (a[x] > b[x]) {
+            return 1;
+          }
+
+          return 0;
+        });
+      } else {
+        this.dsData.sort((a, b) => {
+          if (a[x] < b[x]) {
+            return 1;
+          } else if (a[x] > b[x]) {
+            return -1;
+          }
+
+          return 0;
+        });
+      }
+
+      this.rebuild();
+    }
+  }
 }
 
-export {SortTable};
+export {mapSortTable, SortTable};
