@@ -1,12 +1,12 @@
 'use strict';
 
 const yaml = require('js-yaml');
-const {compileString} = require('../../handlebars.utils');
+const {compileString} = require('../../ejs.utils');
 const {makeBlockFunc} = require('../../md.utils');
 const path = require('path');
 const fs = require('fs');
 
-const tmpbuf = fs.readFileSync(path.join(__dirname, 'template.hbs'));
+const tmpbuf = fs.readFileSync(path.join(__dirname, 'template.ejs'));
 const template = compileString(tmpbuf.toString());
 
 /**

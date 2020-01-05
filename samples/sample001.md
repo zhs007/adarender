@@ -934,3 +934,33 @@ C-->D;
 $$mermaid$$
 
 ![This a svg image](heyalgo002.svg)
+
+$$ada.commodity$$
+id: tbitems001
+items:
+  - title: 这是一件商品
+    img: c.jpg
+    curprice: 999.99
+    shop:
+      name: 这是一个店铺
+  - title: 这是一件商品2
+    img: c.jpg
+    curprice: 999.99
+    shop:
+      name: 这是一个店铺2
+  - title: 这是一件商品3
+    img: c.jpg
+    curprice: 999.99
+    shop:
+      name: 这是一个店铺1
+  - title: 这是一件商品4
+    img: c.jpg
+    curprice: 999.99
+    shop:
+      name: 这是一个店铺2
+  - title: 这是一件商品5
+    img: c.jpg
+    curprice: 999.99
+    shop:
+      name: 这是一个店铺2      
+$$ada.commodity$$

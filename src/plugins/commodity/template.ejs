@@ -1,0 +1,42 @@
+<div id="<%= id %>">
+  <div class="item-wrap">
+    <% for(var i = 0; i < items.length; ++i) { %>
+    <div class="item">
+      <div
+        class="pic"
+        style="background-image: url('<%= items[i].img %>')"
+      ></div>
+      <div class="ctx">
+        <div class="price clearfix">
+          <div class="g-price-highlight">
+            <span class="H">￥</span>
+            <strong class="H"><%= items[i].curprice %></strong>
+            <span class="posttage">包邮</span>
+          </div>
+          <div class="deal-cnt">
+            299人付款
+          </div>
+        </div>
+        <div class="title">
+          <div>
+            <span><%= items[i].title %></span>
+          </div>
+        </div>
+        <div class="shop clearfix">
+          <span>
+            <span class="iconfont icon-menu"></span>
+            <span><%= items[i].shop.name %></span>
+          </span>
+          <span>
+            上海
+          </span>
+        </div>
+        <div class="feature">
+          <span class="iconfont icon-tianmao"><span class="hot">新</span></span>
+          <span class="iconfont icon-wangwang"></span>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
