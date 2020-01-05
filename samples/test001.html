@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Ada Render - Ada Render Sample</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/default.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@4.6.0/dist/echarts.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mermaid@8.4.4/dist/mermaid.min.js"></script>
+  <script type="text/javascript" src="../dist/adarender.js"></script>
+</head>
+
+<body class='markdown-body'>
+  <div class="adarender">
+    <h1>Ada Render Sample</h1>
+<p>This is a <code>markdown</code> file.</p>
+<pre class="hljs"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+	<span class="hljs-string">"context"</span>
+	<span class="hljs-string">"fmt"</span>
+	<span class="hljs-string">"io/ioutil"</span>
+
+	<span class="hljs-string">"github.com/zhs007/adacore"</span>
+	adacorepb <span class="hljs-string">"github.com/zhs007/adacore/proto"</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">genMarkdown</span><span class="hljs-params">()</span> <span class="hljs-title">string</span></span> {
+	km, err := adacore.LoadKeywordMappingList(<span class="hljs-string">"./keywordmapping.yaml"</span>)
+	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+		fmt.Printf(<span class="hljs-string">"load keywordmapping error %v"</span>, err)
+	}
+
+	md := adacore.NewMakrdown(<span class="hljs-string">"Ada Core"</span>)
+
+	md.AppendParagraph(<span class="hljs-string">"This is a Markdown API for Ada."</span>)
+	md.AppendParagraph(<span class="hljs-string">"This libraray is write by Zerro.\nThis is a multi-line text."</span>)
+
+	md.AppendTable([]<span class="hljs-keyword">string</span>{<span class="hljs-string">"head0"</span>, <span class="hljs-string">"head1"</span>, <span class="hljs-string">"head2"</span>}, [][]<span class="hljs-keyword">string</span>{
+		[]<span class="hljs-keyword">string</span>{<span class="hljs-string">"text0_0"</span>, <span class="hljs-string">"text1_0"</span>, <span class="hljs-string">"text2_0"</span>},
+		[]<span class="hljs-keyword">string</span>{<span class="hljs-string">"text0_1"</span>, <span class="hljs-string">"text1_1"</span>, <span class="hljs-string">"text2_1"</span>}})
+
+	fd, err := ioutil.ReadFile(<span class="hljs-string">"./main.go"</span>)
+	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+		<span class="hljs-keyword">return</span> <span class="hljs-string">""</span>
+	}
+
+	md.AppendCode(<span class="hljs-keyword">string</span>(fd), <span class="hljs-string">"golang"</span>)
+
+	<span class="hljs-keyword">return</span> md.GetMarkdownString(km)
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">startClient</span><span class="hljs-params">(cfg *adacore.Config)</span> <span class="hljs-title">error</span></span> {
+	client := adacore.NewClient(<span class="hljs-string">"47.91.209.141:7201"</span>, <span class="hljs-string">"x7sSGGHgmKwUMoa5S4VZlr9bUF2lCCzF"</span>)
+
+	reply, err := client.BuildWithMarkdown(context.Background(), &amp;adacorepb.MarkdownData{
+		StrData:      genMarkdown(),
+		TemplateName: <span class="hljs-string">"default"</span>,
+	})
+	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+		fmt.Printf(<span class="hljs-string">"startClient BuildWithMarkdownFile %v"</span>, err)
+
+		<span class="hljs-keyword">return</span> err
+	}
+
+	<span class="hljs-keyword">if</span> reply != <span class="hljs-literal">nil</span> {
+		<span class="hljs-comment">// fmt.Print(reply.HashName)</span>
+		fmt.Print(reply.Url)
+	}
+
+	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+	cfg, err := adacore.LoadConfig(<span class="hljs-string">"./config.yaml"</span>)
+	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+		fmt.Printf(<span class="hljs-string">"startServ LoadConfig %v"</span>, err)
+
+		<span class="hljs-keyword">return</span>
+	}
+
+	adacore.InitLogger(cfg)
+
+	startClient(cfg)
+}
+</code></pre>
+<p>This is a <code>markdown</code> file.<br>
+This a multiline string.</p>
+<p><img src="8RrjxRnyp7_KMrwwaQf8XAgDgi_NBlVet3AgTpI+EF4.jpg" alt="This a image"></p>
+<p>This is a <code>markdown</code> file.<br>
+This a multiline string too.</p>
+<script type="text/javascript">
+var adadata_testdata = {
+  namedata: ["a","b","c","d","e"],
+  valdata: [[5,4,3,2,1]],
+  multivaldata: [[5,4,3,2,1],[6,5,4,3,2],[7,6,5,4,3],[8,7,6,5,4],[9,8,7,6,5],[10,9,8,7,6]],
+};
+</script><div style="text-align:center">
+  <table id="testtable2" style="margin:auto;width:auto;display:table;"></table>
+  <script type="text/javascript">
+    var sttesttable2 = new adarender.SortTable('testtable2',       
+      document.getElementById('testtable2'),
+      adadata_testdata.namedata,
+      adadata_testdata.valdata);
+  </script>
+</div>
+<p><p style="text-align: center;">I am center text.</p></p>
+<div style="text-align:center">
+  <table id="testtable3" style="margin:auto;width:auto;display:table;"></table>
+  <script type="text/javascript">
+    var sttesttable3 = new adarender.SortTable('testtable3',       
+      document.getElementById('testtable3'),
+      adadata_testdata.namedata,
+      adadata_testdata.multivaldata);
+  </script>
+</div>
+<p></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th style="text-align:center">111</th>
+<th style="text-align:center">222</th>
+<th style="text-align:center">333</th>
+<th style="text-align:right">444</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aaa</td>
+<td style="text-align:center">bbb</td>
+<td style="text-align:center">ccc</td>
+<td style="text-align:center">ddd</td>
+<td style="text-align:right">eee</td>
+</tr>
+<tr>
+<td>fff</td>
+<td style="text-align:center">ggg</td>
+<td style="text-align:center">hhh</td>
+<td style="text-align:center">iii</td>
+<td style="text-align:right">000</td>
+</tr>
+</tbody>
+</table>
+<div style="width:100%;text-align:center;">
+  <div id="pie001" style="width:92%;height:0;padding-bottom:69%;margin:auto;"></div>
+  <p>Pie - this is a test pie</p>
+  <p></p>
+</div>
+<script type="text/javascript">
+  var pdret_pie001 = adarender.buildAllPieData(adadata_testdata, 'namedata', 'valdata', 'sort');
+
+  var option = {
+    tooltip: {
+      trigger: 'item',
+      formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+      type: 'scroll',
+      orient: 'vertical',
+      right: 10,
+      top: 20,
+      bottom: 20,
+      data: pdret_pie001.ds.namedata,
+    },
+    series: [
+      {
+        name: '',
+        type: 'pie',
+        radius: '55%',
+        center: ['40%', '50%'],
+        data: pdret_pie001.piedata,
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  };
+
+  var chart_pie001 = adarender.initChart(document.getElementById('pie001'), option);
+</script><div style="width:100%;text-align:center;">
+  <div id="line001" style="width:92%;height:0;padding-bottom:69%;margin:auto;"></div>
+  <p>Line - this is a test line</p>
+  <p></p>
+</div>
+<script type="text/javascript">
+  var option = {
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: adadata_testdata.namedata
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+    {
+        name: 'val1',
+        data: adadata_testdata.valdata,
+        type: 'line',
+        areaStyle: {}
+    },
+    ]
+  };
+
+  var chart_line001 = adarender.initChart(document.getElementById('line001'), option);
+</script><div style="width:100%;text-align:center;">
+  <div id="bar001" style="width:92%;height:0;padding-bottom:69%;margin:auto;"></div>
+  <p>Bar - this is a test bar</p>
+  <p></p>
+</div>
+<script type="text/javascript">
+  var option = {
+    legend: {
+      data: [
+        'val1',
+      ],
+    },    
+    xAxis: {
+        type: 'category',
+        silent: false,
+        splitLine: {
+            show: false
+        },
+        axisLabel: {
+          interval:0
+        },
+        data: adadata_testdata.namedata
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+    {
+        name: 'val1',
+        data: adadata_testdata.valdata,
+        type: 'bar',
+        areaStyle: {}
+    },
+    ]
+  };
+
+  var chart_bar001 = adarender.initChart(document.getElementById('bar001'), option);
+</script><div style="width:100%;text-align:center;">
+  <div id="bar002" style="width:92%;height:0;padding-bottom:69%;margin:auto;"></div>
+  <p>Bar - this is a test bar</p>
+  <p></p>
+</div>
+<script type="text/javascript">
+  var option = {
+    legend: {
+      data: [
+        'val1',
+      ],
+    },    
+    xAxis: {
+        type: 'category',
+        silent: false,
+        splitLine: {
+            show: false
+        },
+        axisLabel: {
+          interval:0
+        },
+        data: adadata_testdata.namedata
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+    {
+        name: 'val1',
+        data: adadata_testdata.valdata,
+        type: 'bar',
+        areaStyle: {}
+    },
+    ]
+  };
+
+  var chart_bar002 = adarender.initChart(document.getElementById('bar002'), option);
+</script><div style="width:100%;text-align:center;">
+  <div id="treemap001" style="width:92%;height:0;padding-bottom:69%;margin:auto;"></div>
+  <p>Treemap - this is a test treemap</p>
+  <p></p>
+</div>
+<script type="text/javascript">
+  var option = {
+    legend: {
+      data: [
+        'test1',
+      ],
+      selected: {
+        'test1': true,
+      },      
+    },
+    series: [
+    {
+      name: 'test1',
+      type: 'treemap',
+      leafDepth: 1,
+      levels: adarender.buildTreemapLevels(),
+      data: [{"name":"nodeA","children":[{"name":"nodeAa","value":4,"url":"https://www.google.com"},{"name":"nodeAb","value":6}],"value":5},{"name":"nodeB","children":[{"name":"nodeBa","value":20,"children":[{"name":"nodeBa1","value":20}]}],"value":20}],
+      roam: false,
+    },
+    ]
+  };
+
+  var chart_treemap001 = adarender.initChart(document.getElementById('treemap001'), option);
+  adarender.onInitTreemap(chart_treemap001);
+</script><div style="width:100%;text-align:center;">
+  <div id="restreemap" style="width:92%;height:0;padding-bottom:69%;margin:auto;"></div>
+  <p>资源大小分布</p>
+  <p></p>
+</div>
+<script type="text/javascript">
+  var option = {
+    legend: {
+      data: [
+        'http://47.90.46.159:8090',
+        'http://at.alicdn.com',
+        'https://dtresource.phtdreamtech.com',
+      ],
+      selected: {
+        'http://47.90.46.159:8090': true,
+        'http://at.alicdn.com': false,
+        'https://dtresource.phtdreamtech.com': false,
+      },      
+    },
+    series: [
+    {
+      name: 'http://47.90.46.159:8090',
+      type: 'treemap',
+      leafDepth: 1,
+      levels: adarender.buildTreemapLevels(),
+      data: [{"name":"html","value":16289,"children":[{"name":"game.html","value":16289,"children":[]}]},{"name":"css","value":4217,"children":[{"name":"index.css","value":4217,"children":[]}]},{"name":"json","value":1326,"children":[{"name":"gametrial","value":1326,"children":[]}]},{"name":"js","value":26509,"children":[{"name":"setbtn.js","value":3953,"children":[]},{"name":"nowdebug.js","value":22556,"children":[]}]}],
+      roam: false,
+    },
+    {
+      name: 'http://at.alicdn.com',
+      type: 'treemap',
+      leafDepth: 1,
+      levels: adarender.buildTreemapLevels(),
+      data: [{"name":"css","value":3081,"children":[{"name":"font_908809_yescakidb6b.css","value":3081,"children":[]}]}],
+      roam: false,
+    },
+    {
+      name: 'https://dtresource.phtdreamtech.com',
+      type: 'treemap',
+      leafDepth: 1,
+      levels: adarender.buildTreemapLevels(),
+      data: [{"name":"js","value":2258354,"children":[{"name":"protobuf.min.js","value":20834,"children":[]},{"name":"dtsdk.js","value":156096,"children":[]},{"name":"base.min.js","value":1451649,"children":[]},{"name":"common.min.js","value":372963,"children":[]},{"name":"game1.min.js","value":256812,"children":[]}]},{"name":"json","value":4485696,"children":[{"name":"project.json","value":136,"children":[]},{"name":"resource.json","value":6278,"children":[]},{"name":"resource.json","value":6013,"children":[]},{"name":"jackpot_layer_Fr4lLgWd46l1FAv6c1QcVL4QGMDA.json","value":18220,"children":[]},{"name":"jackpot_ani_FqFFJgnqIzaGORZNvV_me3__tPTU.json","value":93024,"children":[]},{"name":"jackpot_aninotice_FrE_sP9CYTCHVb191DuMsWYd7gBe.json","value":3675,"children":[]},{"name":"jackpot_list_FmFTjW-d7aff52Q-oyRfGLdAF1bm.json","value":36249,"children":[]},{"name":"jackpot_game_FsjHqZMNSofZDB_QR6sY0c6BXuqD.json","value":68368,"children":[]},{"name":"menubar_layer_FnnXwC8cpgDilG4nul-b3WnjTcd9.json","value":25314,"children":[]},{"name":"gameitem_Fhogxxl4kymQV6rmC-6nM59Wk_0c.json","value":4754,"children":[]},{"name":"menubar_setup_FqwxexuqvBziqwTuQygIXiVdLTxv.json","value":104632,"children":[]},{"name":"menubar_soundtips_FrHp0qeNPzgu597k2THbtFw2x3j2.json","value":7217,"children":[]},{"name":"menubar_usernotice_FsRlti5hDp0fCoTEwytlkJk70YVl.json","value":14041,"children":[]},{"name":"menubar_dlg_Fqh2_oilSumP4VjMWt3FJ4jhzcwT.json","value":9412,"children":[]},{"name":"menubar_dlg1_FiEX1Y_Vf54hUXWeSFPx_LOAbW_g.json","value":12318,"children":[]},{"name":"menubar_autodlg_Ftjjjl0xPviwEw-KDKmWfKjHqyHF.json","value":27107,"children":[]},{"name":"giftgame_new_layer_Fl2AuAMnpVCAW0U7b-xhzKbpgNoi.json","value":190524,"children":[]},{"name":"giftgame_new_layer1_FufTi4bnKycfVklwxHrCAbhWFDPp.json","value":201448,"children":[]},{"name":"giftrain_new_layer_FuszGmzn9RMWRcQhcJhsAfKjgs25.json","value":170621,"children":[]},{"name":"RPNotice_FkYX4ad-3aFSussEuth7fkgtmZ_Q.json","value":24876,"children":[]},{"name":"string_FqtiKxWUYULAdsp7mVZBmtdnLSUf.json","value":12385,"children":[]},{"name":"dbzgamelayer_FtUqj9AP1TsjAY7mLpHNmv-wddXc.json","value":77817,"children":[]},{"name":"dbzselectautolayer_Ft_ZGPGJboJnvm_KOVb8IeFC9-Eh.json","value":141588,"children":[]},{"name":"dbzfreeresultlayer_FkYGkPtcZr76Ajan_E412vr4yKWN.json","value":112190,"children":[]},{"name":"dbzdisconnectlayer_FhGdQDUoMksIdyaE6MsXZguJ1S5x.json","value":18398,"children":[]},{"name":"dbzhelplayer1_FhFN53RTT5ds3p9vXw79psDWRFRj.json","value":26126,"children":[]},{"name":"dbzhelplayer2_Fvcn-VyzllNw1h9tUcQHF2Rxg4rf.json","value":123841,"children":[]},{"name":"dbzhelplayer3_Ft7Bu6ZwWfM7qHlm1G-9YbcBL4Y-.json","value":139437,"children":[]},{"name":"dbzsetuplayer_FqC1J0u8m0RVC2aArC18EHa5gDzl.json","value":10024,"children":[]},{"name":"dbzsoundtipslayer_FoSkDzoB8H66geOiuWcyJvPdJHCZ.json","value":7124,"children":[]},{"name":"dbzgamebackani1_Fmwv504lxf3KoqKuhwTlam1F6GWl.json","value":37421,"children":[]},{"name":"dbzgamebackani2_Fg-o9FDTWIYT3nW-wh2JaOzOgX3k.json","value":24438,"children":[]},{"name":"dbzgamebackani3_FhqhKs0URDdpHiSt0nhJrc9_Th_s.json","value":11024,"children":[]},{"name":"dbzdownani1_FseGnjMUepYaJG5xXp1lj6JSWr8_.json","value":5629,"children":[]},{"name":"dbzdownani2_Fryr9MW2iRD65BNQO_olXgcnM2SH.json","value":5633,"children":[]},{"name":"dbzappearani0_FttLTcasJjVRajSuxJIoIpgeQO1Y.json","value":16748,"children":[]},{"name":"dbzappearani1_FvDTXXpGcAD3RZ_nVpzvNRENucqv.json","value":19771,"children":[]},{"name":"dbzappearani2_Fp74C8Reo3d1H58B5EC4LvaUvxP0.json","value":20424,"children":[]},{"name":"dbzdisappearani_Fq3OxPZ_Tj_3q_FWhYk30hy6Shup.json","value":125506,"children":[]},{"name":"dbzendani_FpxLJn-aya2FfBzl36Abri-W_GAL.json","value":18282,"children":[]},{"name":"dbzendani2_Fm5BM-eFeLQD4hL_zGH2aO-ZnXkm.json","value":20116,"children":[]},{"name":"dbzbeginani_FnmGl3Rq4eoU2ZtLIKFEJ_JWGV8M.json","value":103703,"children":[]},{"name":"dbzfreebackani_FipFID1FwA-5fiZLrC68GogLNBx5.json","value":100946,"children":[]},{"name":"dbzfightani1_Fhtw9zlsF1WvLMbcesyLg4kp61Zt.json","value":12744,"children":[]},{"name":"dbzfightani2_Fl4gem9UPmsQLVuQmvRsfpahmUKJ.json","value":32638,"children":[]},{"name":"dbzfightani3_Fo6jbnH1-QWNUDn3HNUXxPgoFjQl.json","value":26451,"children":[]},{"name":"dbzfightani4_FjuVyL-COJ3cas2Q6HD7ofhJLt0-.json","value":27233,"children":[]},{"name":"dbzfightani5_Fi2nk_rEZQs4M_rUGPPsTt0PV4kX.json","value":27251,"children":[]},{"name":"dbzfightani6_Fk4UrjM0sXUldcmRvubeRDXOQHzU.json","value":27233,"children":[]},{"name":"dbzfightani7_Fut0RI-22JS2-MzhwiR9iLv2KA-o.json","value":20816,"children":[]},{"name":"dbzfightani8_FmYvTApfsHME7egdJin6THm-SWfN.json","value":401171,"children":[]},{"name":"dbzfightani9_Fgu064y6S3XiFTeW2Iz_3KWysN7b.json","value":12726,"children":[]},{"name":"dbzfightani10_FlWJsgUVn9rnMvSUJTFkVgGYxtyp.json","value":32637,"children":[]},{"name":"dbzfightani11_FvUjAkF3ODKM55tlpS6EHy3CYzYv.json","value":26414,"children":[]},{"name":"dbzfightani12_FgNzZBiVNesuHbQxbWAVHM-zxo9M.json","value":27196,"children":[]},{"name":"dbzfightani13_FgFUpmTCpKbAEOlWfDnf18WJwdu4.json","value":27214,"children":[]},{"name":"dbzfightani14_FhghkwSRZVDnuWBh9M_HWdHkk5CQ.json","value":27234,"children":[]},{"name":"dbzfightani15_FkkwNnDlCAN7JmMHkbBx9QMJNni4.json","value":20838,"children":[]},{"name":"dbzfightani16_FjBGnNzoZ4_VtRpGqmJAUL9OurgH.json","value":13062,"children":[]},{"name":"dbzfightani17_FrN7vWxHsXH_eMTjiClhESgkAFOQ.json","value":122593,"children":[]},{"name":"dbzfightani18_Fi27uKSzbzX99INB3p8lPV26xWPD.json","value":122661,"children":[]},{"name":"dbzfightani19_Fnfjth5p_4G6Y1k26xbTkLoCQSgn.json","value":56064,"children":[]},{"name":"dbzfightani20_FsXTiLTSAPftBxEA5IzK8ahM6Kls.json","value":13062,"children":[]},{"name":"dbzfightani21_FqpdByMOa83Iiy2nvij5ira-m4wo.json","value":13062,"children":[]},{"name":"dbzfightani22_Flg0swBAchz72aLefqDziCfsC5Kb.json","value":122644,"children":[]},{"name":"dbzfightani23_Fhw82dts_W8xGifpm6R-UpsDP-SZ.json","value":122602,"children":[]},{"name":"dbzfightani24_FlJzP-hSXdI3bpEKYCk7vvrBLrVk.json","value":56131,"children":[]},{"name":"dbzfightani25_FkP9weTGWWNY4gpG3Psgnif-lv7G.json","value":13032,"children":[]},{"name":"dbzfightani26_FoiOSKL9uYZQLwwkBojW5gguKtRE.json","value":112408,"children":[]},{"name":"dbzfreeresultani1_FjIdFq9fozF1B6DutIqVAkm2uvPA.json","value":9391,"children":[]},{"name":"dbzfreeresultani2_FkFEo3MCp5ZJkkvQcWANXzOpL5wJ.json","value":87342,"children":[]},{"name":"dbzfreeresultani3_Fo7n7uhCkpvr6_9JPaGHWcPbHYMo.json","value":8094,"children":[]},{"name":"dbzaddfreeani_FmBYdJwDS500aoGB3xO-FmOVZBnT.json","value":32524,"children":[]},{"name":"dbzwinani1_Fmoqg14wNR2RzzVHm2SzW1bR_a-B.json","value":309655,"children":[]},{"name":"dbzwinani2_Fm-ipfuYhXVChxZW8-XGaF8fEjft.json","value":190425,"children":[]},{"name":"dbzwinani3_Frw0nkjtPvwlGgNe3QB877FgUzrF.json","value":93495,"children":[]},{"name":"dbzhitsani_FuLikOix1IE_9w9eOIsJj4HpQCKu.json","value":34855,"children":[]}]},{"name":"xml","value":196093,"children":[{"name":"jackpot_png_Fo_F5YpYSFPFyU-RxnO4rDvo5BUI.plist","value":13215,"children":[]},{"name":"menubar_png_FsIofCeh7uREps8PVEs3YFKhzv6Y.plist","value":29110,"children":[]},{"name":"giftgame_new_png_FsoRXcYYB6mLyhMY5sZRJVSxdIvP.plist","value":21510,"children":[]},{"name":"dbzpngres_FjHUTwjoPfgRtUnV3iSKZgWY5OHw.plist","value":68618,"children":[]},{"name":"dbzjpgres_Fsp4H60CvAnkZCg4tPUCh9G_UXr9.plist","value":7016,"children":[]},{"name":"dbzanipng_FrqwBkyQ4VK4B-VA0GCv0CewVbmn.plist","value":51102,"children":[]},{"name":"dbzanijpg_Fgc01sxjzTfrImFkIaU6O0sM-Io8.plist","value":5522,"children":[]}]},{"name":"octet-stream","value":569119,"children":[{"name":"giftgame_jpg_FhNlzm9yMplR7PmQDNKlaUzUW6Di.plist","value":3887,"children":[]},{"name":"jackpot_FtWKPrrkFREWlI60w2U-eD3SbnmU.ExportJson","value":106133,"children":[]},{"name":"jackpot0_Fs5uKhCfPYREbqGwyN1YgX-EAabI.plist","value":4078,"children":[]},{"name":"jlgg_FkXF4jKL2Aa8MhA-OXL9CdHRX7Qe.ExportJson","value":55058,"children":[]},{"name":"jlgg0_Fkf7HsgcBslCZrddb3roMFPxYFQQ.plist","value":4875,"children":[]},{"name":"zhuanpan_Fji-L7g7mwYLg81N3m1Hpli3Lt5F.ExportJson","value":331426,"children":[]},{"name":"zhuanpan0_Fr9p8E0kp4bfmT3t8yyrCrQLHwDl.plist","value":23919,"children":[]},{"name":"jackpotfnt1_Fv6VarDwDY_K1WsamnbFzZtcm8oo.fnt","value":1978,"children":[]},{"name":"jackpotfnt2_Fs1WfIfntxBgbms1piqgUDey62b0.fnt","value":2107,"children":[]},{"name":"menubarfnt1_Fgaz51q2h7SD-jIJOkITKkiHHMwo.fnt","value":2016,"children":[]},{"name":"menubarfnt2_FtYhGPfx7JW1HXIuDEnCxcvVZAox.fnt","value":2016,"children":[]},{"name":"menubarfnt3_Fs6m7hJzfOHvzdIu_oWPg3TNc-AM.fnt","value":14379,"children":[]},{"name":"menubarfnt4_Fhe0VJWng0ZYzdFTwUGlhLm2GFTj.fnt","value":4618,"children":[]},{"name":"font_a_FkZFLnjdzXZ70O5IQeO48Mjx4JNZ.fnt","value":1665,"children":[]},{"name":"font_b_Fg08OsPFo6YMse1KWtW03t4ofXxt.fnt","value":4515,"children":[]},{"name":"dbzfont1_Flweg-i_4JTftJiaT125Emufr0Sl.fnt","value":2233,"children":[]},{"name":"dbzfont3_FpqBrQ48PfCy_q6NwFNxruBuwZVN.fnt","value":2108,"children":[]},{"name":"dbzfont2_Fo3ba7MmbbfSLiMOH26ad3qOrqVJ.fnt","value":2108,"children":[]}]},{"name":"mpeg","value":4564494,"children":[{"name":"addmoney_Fki26SNMa7i9ig88zD84pZurV_DA.mp3","value":4441,"children":[]},{"name":"finishmoney_FrvFpV9d2xSxsHiFobp5fRh9WSkb.mp3","value":5486,"children":[]},{"name":"notice_FqOqoqbBZmYXaCc49pG7CgYqEs1K.mp3","value":18808,"children":[]},{"name":"run_Fo6RmSq_qIVf8Z6d41iQ93BOiIPC.mp3","value":20106,"children":[]},{"name":"stop_FtnYeW0qUirvgvYCamtPeKkAcB_3.mp3","value":35570,"children":[]},{"name":"begin_FvHDbCCAN4a0loYHowulN-1c9SFh.mp3","value":71515,"children":[]},{"name":"step_FvX1twivvEMugEgGWsVWx_qHo_b4.mp3","value":2133,"children":[]},{"name":"fly1_FqPUD_9E3bFu-SKKR2lovNc8IOIC.mp3","value":32644,"children":[]},{"name":"fly2_Ful2HjwMvP_0eQeSj_1yWcPly-mN.mp3","value":25121,"children":[]},{"name":"fly3_FnpGtmKuc_hJm-rFS7iNww4mJGaX.mp3","value":24285,"children":[]},{"name":"fly4_FvnVJGtl53BAqi3pICVvNFnzHn6j.mp3","value":23449,"children":[]},{"name":"win_FiYtRRiJYg7kVnZBLibuqLeiKICR.mp3","value":11746,"children":[]},{"name":"btnclick_Fr3-AjmdKfJsp4GIumAU6OEaIEVB.mp3","value":12640,"children":[]},{"name":"btnrun_FhAMzKnanBZmpiLPNjbRoKyR0ZdV.mp3","value":3448,"children":[]},{"name":"stopwheel_FgaYiTM9WTQNGKpo4TJAYQjvWUI4.mp3","value":783,"children":[]},{"name":"disappearwheel_FlhEKJ5CsZEHvnlxHKYs0y6G8cDj.mp3","value":1728,"children":[]},{"name":"clearwheel_FpEcwadaAxw90kLsy2Wnf3QOG9hK.mp3","value":32171,"children":[]},{"name":"c1sound_FmVRC_0EKtgPys33nevTn13DLnlD.mp3","value":2160,"children":[]},{"name":"fight1_FodsTgjcKdcd1qTx3LznYZxMUKgY.mp3","value":8320,"children":[]},{"name":"fight2_FodsTgjcKdcd1qTx3LznYZxMUKgY.mp3","value":8320,"children":[]},{"name":"fight3_FnTiobNYzRHFkYi665UoHWlNI3ux.mp3","value":1254,"children":[]},{"name":"fight4_FpMPvsZgEETiDpl1PvnuiuZ4rb_D.mp3","value":2298,"children":[]},{"name":"fight5_Fh5R_peJA4Dsp0DNqTYJKLHKcDUH.mp3","value":3343,"children":[]},{"name":"fight6_FrrtpW5vtuqp7s7J7aPHfA3YEcUY.mp3","value":30816,"children":[]},{"name":"fight7_FroHX1STgBkTmlXI9v8z_2tw7fq4.mp3","value":31973,"children":[]},{"name":"dbzmusic1_FiJJzNEHcfikja0eKkyHFqnWur9N.mp3","value":1392336,"children":[]},{"name":"dbzmusic2_FlKVBAE8Xk0i9tYCvcdYybw3At3Q.mp3","value":1199664,"children":[]},{"name":"dbzmusic3_Fim6lvBNZgU2K9z6M_mBYE-ymvPJ.mp3","value":1426896,"children":[]},{"name":"freemusic1_FpMSQFtGF1PcWzPHh4x5wZNjMNPa.mp3","value":69336,"children":[]},{"name":"effwin1_Fss9maJZ7CBOQ2wU3sO09_L_wysd.mp3","value":23328,"children":[]},{"name":"effwin2_FuAGUNJ4RdqdGL6hIa1D18DzX5-V.mp3","value":17064,"children":[]},{"name":"effwin3_FgWAKx5BorSNdNwcVSWqtbo-6Sxf.mp3","value":21312,"children":[]}]},{"name":"png","value":10338707,"children":[{"name":"2022x540","value":885234,"children":[{"name":"jackpot_png_FisEzLvnugomhUolqEKbkj1ZXEhP.png","value":885234,"children":[]}]},{"name":"1686x506","value":462513,"children":[{"name":"menubar_png_FuSmKM-Ss7kGWmoI6ogf0LlrOTHC.png","value":462513,"children":[]}]},{"name":"1508x1020","value":1411286,"children":[{"name":"giftgame_new_png_Fmqm71EyZrTXeJI3RTsftMbSVFvy.png","value":1411286,"children":[]}]},{"name":"1024x1024","value":230336,"children":[{"name":"jackpot0_FrJeHmEdPKDk8qXoSRiXADU-7Thk.png","value":230336,"children":[]}]},{"name":"2048x512","value":146599,"children":[{"name":"jlgg0_Fs4XvQZrX2-aade6aoW0h8SomdQE.png","value":146599,"children":[]}]},{"name":"2048x2048","value":1166763,"children":[{"name":"zhuanpan0_FojfacMW1KCs3NhWBVwMC1trqEmf.png","value":1166763,"children":[]}]},{"name":"118x41","value":10602,"children":[{"name":"menubar_img_noticeicon1_FoPXlVtTSk3zBwJ91pOxvMImfPxp.png","value":10602,"children":[]}]},{"name":"117x41","value":17368,"children":[{"name":"menubar_img_noticeicon2_FtKsRDNC3c0yxGzD4TC-tjl6Hefh.png","value":8391,"children":[]},{"name":"menubar_img_noticeicon3_FqnCLdfkQB6_5E28py7GJTClbF5a.png","value":8977,"children":[]}]},{"name":"116x41","value":8927,"children":[{"name":"menubar_img_noticeicon4_FkipVu5jesJ6iq2DasRDZErgGtXt.png","value":8927,"children":[]}]},{"name":"256x256","value":66663,"children":[{"name":"jackpotfnt1_FriQTJIuVqX1Kh8hhpgUvbB0udoV.png","value":36823,"children":[]},{"name":"dbzfont3_FopDrIlmZ2QfHRcW94Q_MCrXT6-m.png","value":16302,"children":[]},{"name":"dbzfont2_FkLRuifH2IfXgmEEbGUl7HFgGFZ4.png","value":13538,"children":[]}]},{"name":"128x64","value":30648,"children":[{"name":"jackpotfnt2_Fjc6ALV3rzuKSnFJCPChNyPifrfT.png","value":7016,"children":[]},{"name":"menubarfnt1_FiLXCOs6V6IYOYsXzqCCvckElWxb.png","value":5062,"children":[]},{"name":"menubarfnt2_FoiMf0wOCvkC7ts2YO2jR7N1ELpa.png","value":18570,"children":[]}]},{"name":"256x128","value":37084,"children":[{"name":"menubarfnt3_FscSqN_2Ek8lYieMdFYFG05LnlCi.png","value":28667,"children":[]},{"name":"font_b_0_Fn1KZ6HN0PSXgmEge3OP28wReUnR.png","value":8417,"children":[]}]},{"name":"128x128","value":14644,"children":[{"name":"menubarfnt4_Fsdd0VK88Pv-s35VSkKD4-NAYoaU.png","value":6878,"children":[]},{"name":"font_a_0_FhMGyGiHa_mVP--U9KWt0PvhiZKY.png","value":3033,"children":[]},{"name":"dbzfont1_FlDUlV7aATkxbWt1_wVc7bh9cnz-.png","value":4733,"children":[]}]},{"name":"2040x2039","value":3667389,"children":[{"name":"dbzpngres_Fn4rGGTiJnqzGNDQZb2sKgKgStww.png","value":3667389,"children":[]}]},{"name":"1929x1023","value":2182651,"children":[{"name":"dbzanipng_Ftidnohyx4U9fHj9gR7u4B290X9U.png","value":2182651,"children":[]}]}]},{"name":"jpg","value":487483,"children":[{"name":"1172x996","value":115842,"children":[{"name":"giftgame_jpg_FjYcZBIa8h3A30DAL9nLrE_cue3P.jpg","value":115842,"children":[]}]},{"name":"1982x1026","value":318030,"children":[{"name":"dbzjpgres_FpnMtQg9qUEI7YjrVCwxRKjOE6JZ.jpg","value":318030,"children":[]}]},{"name":"1097x499","value":53611,"children":[{"name":"dbzanijpg_Fop7oMxaJDgIRlaO7BEEBFjCFia-.jpg","value":53611,"children":[]}]}]}],
+      roam: false,
+    },
+    ]
+  };
+
+  var chart_restreemap = adarender.initChart(document.getElementById('restreemap'), option);
+  adarender.onInitTreemap(chart_restreemap);
+</script><div style="width:100%;text-align:center;">
+  <div id="mermaidp1" style="width:92%;margin:auto;">
+    <div id="mermaid1"></div>
+  </div>
+  <p></p>
+</div>
+<script type="text/javascript">
+  var adamermaidinited;
+  if (!adamermaidinited) {
+    mermaid.initialize({
+      theme: 'default',
+      startOnLoad: true,
+    });
+    adamermaidinited = true;
+  }
+  var mermaidcb1 = function(svgGraph) {
+    var pnode = document.getElementById('mermaidp1');
+    if (pnode) {
+      pnode.innerHTML = svgGraph;
+    }
+  };  
+  mermaid.render('mermaid1', `graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+`, mermaidcb1);
+</script><div style="width:100%;text-align:center;">
+  <div id="mermaidp2" style="width:92%;margin:auto;">
+    <div id="mermaid2"></div>
+  </div>
+  <p></p>
+</div>
+<script type="text/javascript">
+  var adamermaidinited;
+  if (!adamermaidinited) {
+    mermaid.initialize({
+      theme: 'default',
+      startOnLoad: true,
+    });
+    adamermaidinited = true;
+  }
+  var mermaidcb2 = function(svgGraph) {
+    var pnode = document.getElementById('mermaidp2');
+    if (pnode) {
+      pnode.innerHTML = svgGraph;
+    }
+  };  
+  mermaid.render('mermaid2', `graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;
+`, mermaidcb2);
+</script><p><img src="39EgATCQXmoneMU9w8co1GUhC8BJ8CHtNRuJ7u1aNRM.svg" alt="This a svg image"></p>
+<div id="tbitems001">
+  <div class="item-wrap">
+    
+    <div class="item">
+      <div
+        class="pic"
+        style="background-image: url('ZSeVBs96x4vihon_nY9X6SfqhiB_N2GKHm0tBto7CGs.jpg')"
+      ></div>
+      <div class="ctx">
+        <div class="price clearfix">
+          <div class="g-price-highlight">
+            <span class="H">￥</span>
+            <strong class="H">999.99</strong>
+            <span class="posttage">包邮</span>
+          </div>
+          <div class="deal-cnt">
+            299人付款
+          </div>
+        </div>
+        <div class="title">
+          <div>
+            <span>这是一件商品</span>
+          </div>
+        </div>
+        <div class="shop clearfix">
+          <span>
+            <span class="iconfont icon-menu"></span>
+            <span>这是一个店铺</span>
+          </span>
+          <span>
+            上海
+          </span>
+        </div>
+        <div class="feature">
+          <span class="iconfont icon-tianmao"><span class="hot">新</span></span>
+          <span class="iconfont icon-wangwang"></span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div
+        class="pic"
+        style="background-image: url('ZSeVBs96x4vihon_nY9X6SfqhiB_N2GKHm0tBto7CGs.jpg')"
+      ></div>
+      <div class="ctx">
+        <div class="price clearfix">
+          <div class="g-price-highlight">
+            <span class="H">￥</span>
+            <strong class="H">999.99</strong>
+            <span class="posttage">包邮</span>
+          </div>
+          <div class="deal-cnt">
+            299人付款
+          </div>
+        </div>
+        <div class="title">
+          <div>
+            <span>这是一件商品 2</span>
+          </div>
+        </div>
+        <div class="shop clearfix">
+          <span>
+            <span class="iconfont icon-menu"></span>
+            <span>这是一个店铺 2</span>
+          </span>
+          <span>
+            上海
+          </span>
+        </div>
+        <div class="feature">
+          <span class="iconfont icon-tianmao"><span class="hot">新</span></span>
+          <span class="iconfont icon-wangwang"></span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div
+        class="pic"
+        style="background-image: url('ZSeVBs96x4vihon_nY9X6SfqhiB_N2GKHm0tBto7CGs.jpg')"
+      ></div>
+      <div class="ctx">
+        <div class="price clearfix">
+          <div class="g-price-highlight">
+            <span class="H">￥</span>
+            <strong class="H">999.99</strong>
+            <span class="posttage">包邮</span>
+          </div>
+          <div class="deal-cnt">
+            299人付款
+          </div>
+        </div>
+        <div class="title">
+          <div>
+            <span>这是一件商品 3</span>
+          </div>
+        </div>
+        <div class="shop clearfix">
+          <span>
+            <span class="iconfont icon-menu"></span>
+            <span>这是一个店铺 1</span>
+          </span>
+          <span>
+            上海
+          </span>
+        </div>
+        <div class="feature">
+          <span class="iconfont icon-tianmao"><span class="hot">新</span></span>
+          <span class="iconfont icon-wangwang"></span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div
+        class="pic"
+        style="background-image: url('ZSeVBs96x4vihon_nY9X6SfqhiB_N2GKHm0tBto7CGs.jpg')"
+      ></div>
+      <div class="ctx">
+        <div class="price clearfix">
+          <div class="g-price-highlight">
+            <span class="H">￥</span>
+            <strong class="H">999.99</strong>
+            <span class="posttage">包邮</span>
+          </div>
+          <div class="deal-cnt">
+            299人付款
+          </div>
+        </div>
+        <div class="title">
+          <div>
+            <span>这是一件商品 4</span>
+          </div>
+        </div>
+        <div class="shop clearfix">
+          <span>
+            <span class="iconfont icon-menu"></span>
+            <span>这是一个店铺 2</span>
+          </span>
+          <span>
+            上海
+          </span>
+        </div>
+        <div class="feature">
+          <span class="iconfont icon-tianmao"><span class="hot">新</span></span>
+          <span class="iconfont icon-wangwang"></span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div
+        class="pic"
+        style="background-image: url('ZSeVBs96x4vihon_nY9X6SfqhiB_N2GKHm0tBto7CGs.jpg')"
+      ></div>
+      <div class="ctx">
+        <div class="price clearfix">
+          <div class="g-price-highlight">
+            <span class="H">￥</span>
+            <strong class="H">999.99</strong>
+            <span class="posttage">包邮</span>
+          </div>
+          <div class="deal-cnt">
+            299人付款
+          </div>
+        </div>
+        <div class="title">
+          <div>
+            <span>这是一件商品 5</span>
+          </div>
+        </div>
+        <div class="shop clearfix">
+          <span>
+            <span class="iconfont icon-menu"></span>
+            <span>这是一个店铺 2</span>
+          </span>
+          <span>
+            上海
+          </span>
+        </div>
+        <div class="feature">
+          <span class="iconfont icon-tianmao"><span class="hot">新</span></span>
+          <span class="iconfont icon-wangwang"></span>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+  </div>
+</body>
+
+</html>

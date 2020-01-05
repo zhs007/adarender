@@ -1,12 +1,12 @@
 {
   "name": "adarender",
-  "version": "0.6.15",
+  "version": "0.6.16",
   "description": "Ada Render",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode=production",
     "lint": "eslint ./browser/index.js",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
