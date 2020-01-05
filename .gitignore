@@ -60,6 +60,6 @@ typings/
 # next.js build output
 .next
 .vscode
-samples/*.html
-samples/*.jpg
+# samples/*.html
+# samples/*.jpg
 cfg/*.yaml

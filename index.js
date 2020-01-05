@@ -12,6 +12,7 @@ const markdownitAdaSunburst = require('./src/plugins/adasunburst');
 const markdownitCenterInfo = require('./src/plugins/cinfo');
 const markdownitAdaEmptyLine = require('./src/plugins/emptyline');
 const markdownitMermaid = require('./src/plugins/mermaid');
+const markdownitAdaCommodity = require('./src/plugins/commodity');
 
 /**
  * registerAllPlugins
@@ -30,6 +31,7 @@ function registerAllPlugins(md, cfg) {
   md.use(markdownitMermaid, cfg.adamermaid);
   md.use(markdownitCenterInfo, cfg.cinfo);
   md.use(markdownitAdaEmptyLine, cfg.emptyline);
+  md.use(markdownitAdaCommodity, cfg.commodity);
 }
 
 exports.registerAllPlugins = registerAllPlugins;

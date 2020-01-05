@@ -68,7 +68,6 @@
 .item-wrap .item .pic {
     width: 180px;
     height:180px;
-    background-image: url('../img/c.jpg')
 }
 .item-wrap .item .ctx {
     display: block;

@@ -5,14 +5,6 @@ const {compileString} = require('../handlebars.utils');
 const hljs = require('highlight.js');
 const pluginEncodeImgName = require('../plugins/encode-imgname');
 const {registerAllPlugins} = require('../../index');
-// const markdownitAdaDataset = require('../plugins/adadataset');
-// const markdownitAdaPie = require('../plugins/adapie');
-// const markdownitAdaLine = require('../plugins/adaline');
-// const markdownitAdaBar = require('../plugins/adabar');
-// const markdownitAdaTreeMap = require('../plugins/adatreemap');
-// const markdownitAdaTable = require('../plugins/adatable');
-// const markdownitAdaCommodity = require('../plugins/commodity');
-// const markdownitAdaSunburst = require('../plugins/adasunburst');
 
 /**
  * getTitle
@@ -84,15 +76,9 @@ function exportMarkdown(mdstr, tmpstr, inpath, outputpath, vfs) {
       vfs: vfs,
     });
 
-    registerAllPlugins(md, {});
-    // md.use(markdownitAdaDataset, {});
-    // md.use(markdownitAdaPie, {});
-    // md.use(markdownitAdaLine, {});
-    // md.use(markdownitAdaBar, {});
-    // md.use(markdownitAdaTreeMap, {});
-    // md.use(markdownitAdaTable, {});
-    // md.use(markdownitAdaCommodity, {});
-    // md.use(markdownitAdaSunburst, {});
+    registerAllPlugins(md, {
+      commodity: {input: inpath, output: outputpath, onlyname: true, vfs: vfs},
+    });
 
     const title = getTitle(md, mdstr);
     const htmlstr = md.render(mdstr);

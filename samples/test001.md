@@ -207,93 +207,6 @@ treemap:
         value: 20
 ```
 
-```ada.sunburst
-id: sunburst001
-datasetname: testdata
-title: Sunburst
-width: 1280
-height: 800
-recounttype: sum
-subtext: this is a test sunburst
-legenddata:
-- test1
-treemap:
-- name: category
-  data:
-    - name: Jackets
-      value: 1042
-      url: ""
-      children:
-      - name: Down Jackets
-        value: 110
-        url: ""
-        children: []
-      - name: One-Piece Snowsuits
-        value: 4
-        url: ""
-        children: []
-      - name: Technical Shells
-        value: 65
-        url: ""
-        children: []
-      - name: Ski & Snowboard Jackets
-        value: 149
-        url: ""
-        children:
-        - name: Ski Jackets
-          value: 117
-          url: ""
-          children: []
-        - name: 3-in-1 Jackets
-          value: 17
-          url: ""
-          children: []
-        - name: Snowboard Jackets
-          value: 15
-          url: ""
-          children: []
-      - name: Synthetic Insulation Jackets
-        value: 167
-        url: ""
-        children: []
-      - name: Fishing Jackets
-        value: 8
-        url: ""
-        children: []
-      - name: Softshell Jackets
-        value: 45
-        url: ""
-        children: []
-      - name: Rain Jackets
-        value: 79
-        url: ""
-        children: []
-      - name: Casual Jackets
-        value: 86
-        url: ""
-        children: []
-      - name: Fleece Jackets
-        value: 185
-        url: ""
-        children: []
-      - name: Wind Shells
-        value: 61
-        url: ""
-        children: []
-      - name: Performance Jackets
-        value: 11
-        url: ""
-        children: []
-      - name: Vests
-        value: 71
-        url: ""
-        children: []
-      - name: Performance Vests
-        value: 1
-        url: ""
-        children: []
-```
-
 ```ada.treemap
 id: restreemap
 title: 资源大小分布
@@ -943,24 +856,24 @@ items:
     curprice: 999.99
     shop:
       name: 这是一个店铺
-  - title: 这是一件商品2
+  - title: 这是一件商品 2
     img: c.jpg
     curprice: 999.99
     shop:
-      name: 这是一个店铺2
-  - title: 这是一件商品3
+      name: 这是一个店铺 2
+  - title: 这是一件商品 3
     img: c.jpg
     curprice: 999.99
     shop:
-      name: 这是一个店铺1
-  - title: 这是一件商品4
+      name: 这是一个店铺 1
+  - title: 这是一件商品 4
     img: c.jpg
     curprice: 999.99
     shop:
-      name: 这是一个店铺2
-  - title: 这是一件商品5
+      name: 这是一个店铺 2
+  - title: 这是一件商品 5
     img: c.jpg
     curprice: 999.99
     shop:
-      name: 这是一个店铺2      
+      name: 这是一个店铺 2
 $$ada.commodity$$
