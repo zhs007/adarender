@@ -97,8 +97,8 @@ data:
  tablebody: valdata
 
 ```
--=I am center text.=-
 
+-=I am center text.=-
 
 ```ada.table2
  id: testtable3
@@ -108,7 +108,7 @@ data:
 
 ```
 
-
+$_$
 
 | name | 111 | 222 | 333 | 444 |
 | ---- | :-: | :-: | :-: | --: |
@@ -173,9 +173,10 @@ xshowall: true
 xdata: namedata
 ytype: value
 ydata:
-  - name: val1
-    data: valdata
-$$ada.bar$$
+
+- name: val1
+  data: valdata
+  $$ada.bar$$
 
 ```ada.treemap
 id: treemap001
@@ -916,8 +917,7 @@ treemap:
         children: []
 ```
 
-
-``` mermaid
+```mermaid
 graph TD;
     A-->B;
     A-->C;
@@ -927,10 +927,10 @@ graph TD;
 
 $$mermaid$$
 graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+A-->B;
+A-->C;
+B-->D;
+C-->D;
 $$mermaid$$
 
 ![This a svg image](heyalgo002.svg)

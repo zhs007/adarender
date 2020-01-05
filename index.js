@@ -10,6 +10,7 @@ const markdownitAdaTable = require('./src/plugins/adatable');
 const markdownitAdaTable2 = require('./src/plugins/adatable2');
 const markdownitAdaSunburst = require('./src/plugins/adasunburst');
 const markdownitCenterInfo = require('./src/plugins/cinfo');
+const markdownitAdaEmptyLine = require('./src/plugins/emptyline');
 const markdownitMermaid = require('./src/plugins/mermaid');
 
 /**
@@ -28,6 +29,7 @@ function registerAllPlugins(md, cfg) {
   md.use(markdownitAdaSunburst, cfg.adasunburst);
   md.use(markdownitMermaid, cfg.adamermaid);
   md.use(markdownitCenterInfo, cfg.cinfo);
+  md.use(markdownitAdaEmptyLine, cfg.emptyline);
 }
 
 exports.registerAllPlugins = registerAllPlugins;
