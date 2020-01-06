@@ -7,7 +7,22 @@
 
 `adarender`的初衷是提供一套方便的文档输出方案，让用户专注于文档本身，而不需要关注复杂的 css 排版技巧。
 
-`adarender`适合用于文档或报表输出的渲染步骤。
+`adarender`适合用于文档或报表输出的渲染步骤。  
+`adarender`适用于研发阶段的数据分析中间件的输出模块。  
+
+`adarender`扩展了基本的markdown语法，现在已经支持：
+
+- 线图
+- 柱形图
+- 饼图
+- treemap
+- sunburst
+- 流程图
+- 类图
+- 居中段落
+- 空行
+- 自动hash图片
+- 商品组件
 
 ### 安装 & 使用
 
@@ -110,7 +125,7 @@ npm run build
 
 - 支持grpc服务。
 - 提供Docker部署。
-- Golangadacore
+- Golang下的客户端库adacore
 
 ##### v0.1
 
