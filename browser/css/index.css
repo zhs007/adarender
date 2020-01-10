@@ -1,10 +1,7 @@
-html {
-  font-size: 10px;
-}
 .adarender {
   width: 960px;
   margin: 0 auto;
-  font-size: 1.8rem;
+  font-size: 14px;
 }
 .adarender table {
   border-collapse: collapse;
@@ -48,10 +45,10 @@ div.center {
   text-align: center;
 }
 .adarender p {
-  font-size: 1.8rem;
+  font-size: 14px;
 }
 p.caption {
-  font-size: 1.6rem;
+  font-size: 12px;
   color: #333 !important;
   text-align: center;
 }
