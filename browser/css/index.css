@@ -26,6 +26,9 @@
   background-color: #fff;
   /* border-top: 1px solid #c6cbd1; */
 }
+.adarender table tr:hover td {
+  background-color: #e6f7ff;
+}
 .adarender table tr th {
   /* border: 1px solid #dfe2e5; */
   /* padding: 16px 16px; */
