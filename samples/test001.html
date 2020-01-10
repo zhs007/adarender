@@ -6,15 +6,13 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/default.min.css">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@4.6.0/dist/echarts.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mermaid@8.4.4/dist/mermaid.min.js"></script>
   <script type="text/javascript" src="../dist/adarender.js"></script>
 </head>
 
-<body class='markdown-body'>
+<body>
   <div class="adarender">
     <h1>Ada Render Sample</h1>
 <p>This is a <code>markdown</code> file.</p>
@@ -99,8 +97,8 @@ var adadata_testdata = {
   valdata: [[5,4,3,2,1]],
   multivaldata: [[5,4,3,2,1],[6,5,4,3,2],[7,6,5,4,3],[8,7,6,5,4],[9,8,7,6,5],[10,9,8,7,6]],
 };
-</script><div style="text-align:center">
-  <table id="testtable2" style="margin:auto;width:auto;display:table;"></table>
+</script><div class="center">
+  <table id="testtable2" class="centertable"></table>
   <script type="text/javascript">
     var sttesttable2 = new adarender.SortTable('testtable2',       
       document.getElementById('testtable2'),
@@ -108,9 +106,9 @@ var adadata_testdata = {
       adadata_testdata.valdata);
   </script>
 </div>
-<p><p style="text-align: center;">I am center text.</p></p>
-<div style="text-align:center">
-  <table id="testtable3" style="margin:auto;width:auto;display:table;"></table>
+<p><p class="caption">I am center text.</p></p>
+<div class="center">
+  <table id="testtable3" class="centertable"></table>
   <script type="text/javascript">
     var sttesttable3 = new adarender.SortTable('testtable3',       
       document.getElementById('testtable3'),
@@ -118,7 +116,9 @@ var adadata_testdata = {
       adadata_testdata.multivaldata);
   </script>
 </div>
-<p></p>
+<p>
+  <br />
+</p>
 <table>
 <thead>
 <tr>
