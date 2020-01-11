@@ -9,7 +9,10 @@ function setTableData(eleTable, dsHead, dsData) {
   let strhead = '';
   if (dsHead && dsHead.length > 0) {
     for (let i = 0; i < dsHead.length; i++) {
-      strhead += '<th>' + dsHead[i] + '</th>';
+      strhead +=
+        '<th>' +
+        dsHead[i] +
+        ' <svg class="icon" aria-hidden="true"><use xlink:href="#icon-up"></use></svg></th>';
     }
   } else {
     return undefined;
