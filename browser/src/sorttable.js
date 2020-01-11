@@ -37,7 +37,9 @@ class SortTable {
           i +
           ')">' +
           ch.data +
-          '</th>';
+          ' <svg class="icon" aria-hidden="true" style="fill-opacity: 0.2;">' +
+          '<use xlink:href="#icon-up"></use>' +
+          '</svg></th>';
 
         this.arrHead.push(ch);
       }
@@ -168,6 +170,29 @@ class SortTable {
   }
 
   /**
+   * rebuildHead
+   * @param {string} x - x
+   */
+  rebuildHead(x) {
+    if (x >= 0 && x < this.arrHead.length) {
+      for (let i = 0; i < this.arrHead.length; ++i) {
+        const strsort = this.arrHead[i].sort == -1 ? 'down' : 'up';
+        const strfo = i == x ? '1' : '0.2';
+        const strth =
+          this.arrHead[i].data +
+          ' <svg class="icon" aria-hidden="true" style="fill-opacity: ' +
+          strfo +
+          ';">' +
+          '<use xlink:href="#icon-' +
+          strsort +
+          '"></use></svg>';
+
+        this.arrHead[i].ele.innerHTML = strth;
+      }
+    }
+  }
+
+  /**
    * rebuild
    */
   rebuild() {
@@ -231,6 +256,7 @@ class SortTable {
         });
       }
 
+      this.rebuildHead(x);
       this.rebuild();
     }
   }
