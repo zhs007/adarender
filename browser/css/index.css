@@ -1,11 +1,54 @@
-html {
-  font-size: 10px;
+@media screen and (min-width: 1029px) {
+  .adarender {
+    width: 960px;
+    margin: 0 auto;
+    font-size: 16px;
+  }
+  .adarender h1 {
+    font-size: 32px;
+  }
+  .adarender h2,
+  .adarender h3,
+  .adarender h4,
+  .adarender h5,
+  .adarender h6 {
+    font-size: 20px;
+  }
+  .adarender p {
+    font-size: 16px;
+  }
+  p.caption {
+    font-size: 14px;
+    color: #333 !important;
+    text-align: center;
+  }
 }
-.adarender {
-  width: 960px;
-  margin: 0 auto;
-  font-size: 1.8rem;
+@media screen and (max-width: 1024px) {
+  .adarender {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 24px;
+  }
+  .adarender h1 {
+    font-size: 32px;
+  }
+  .adarender h2,
+  .adarender h3,
+  .adarender h4,
+  .adarender h5,
+  .adarender h6 {
+    font-size: 28px;
+  }
+  .adarender p {
+    font-size: 24px;
+  }
+  p.caption {
+    font-size: 20px;
+    color: #333 !important;
+    text-align: center;
+  }
 }
+
 .adarender table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -29,6 +72,9 @@ html {
   background-color: #fff;
   /* border-top: 1px solid #c6cbd1; */
 }
+.adarender table tr:hover td {
+  background-color: #e6f7ff !important;
+}
 .adarender table tr th {
   /* border: 1px solid #dfe2e5; */
   /* padding: 16px 16px; */
@@ -47,14 +93,6 @@ html {
 div.center {
   text-align: center;
 }
-.adarender p {
-  font-size: 1.8rem;
-}
-p.caption {
-  font-size: 1.6rem;
-  color: #333 !important;
-  text-align: center;
-}
 .adarender table {
   width: 100%;
   text-align: left;
@@ -64,64 +102,25 @@ p.caption {
   width: auto;
   display: table;
 }
-table.ant-table {
-  /* width: 100%; */
-  text-align: left;
-  border-radius: 4px 4px 0 0;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin: auto;
-  width: auto;
-  display: table;
+.adarender code {
+  margin: 0 1px;
+  padding: 0.2em 0.4em;
+  font-size: 0.9em;
+  background: #f2f4f5;
+  border: 1px solid #eee;
+  border-radius: 3px;
 }
-table.ant-table .ant-table-body td,
-table.ant-table .ant-table-head th {
+.adarender pre code {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: initial;
   border: 0;
 }
-table tr {
-  border-top: 0;
-}
-table.ant-table .ant-table-head > tr > th,
-table.ant-table .ant-table-body > tr > td {
-  padding: 16px 16px;
-}
-table.ant-table .ant-table-head > tr > th {
-  color: rgba(0, 0, 0, 0.85);
-  font-weight: 500;
-  text-align: left;
-  background-color: #fafafa;
-  border-bottom: 1px solid #e8e8e8;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-table.ant-table .ant-table-body > tr > td {
-  border-bottom: 1px solid #e8e8e8;
-  -webkit-transition: all 0.3s, border 0s;
-  transition: all 0.3s, border 0s;
-}
-table.ant-table tr:nth-child(2n) {
-  background-color: transparent;
-}
-table.ant-table .ant-table-head > tr > th:hover {
-  background-color: #f2f2f2;
-}
-table.ant-table .ant-table-body > tr:hover {
-  background: #e6f7ff;
-}
-table.ant-table .ant-table-head th {
-  position: relative;
-}
-table.ant-table .ant-table-head th .icon-sortdesc,
-table.ant-table .ant-table-head th .icon-sort-up {
-  color: #bfbfbf;
-  position: absolute;
-  margin-left: 5px;
-}
-table.ant-table .ant-table-head th.SortDescCss .icon-sortdesc,
-table.ant-table .ant-table-head th.SortAscCss .icon-sort-up {
-  color: #1890ff;
-}
-
 /* commodity start */
 .item-wrap {
   width: 100%;
