@@ -1,8 +1,54 @@
-.adarender {
-  width: 960px;
-  margin: 0 auto;
-  font-size: 14px;
+@media screen and (min-width: 1029px) {
+  .adarender {
+    width: 960px;
+    margin: 0 auto;
+    font-size: 16px;
+  }
+  .adarender h1 {
+    font-size: 32px;
+  }
+  .adarender h2,
+  .adarender h3,
+  .adarender h4,
+  .adarender h5,
+  .adarender h6 {
+    font-size: 20px;
+  }
+  .adarender p {
+    font-size: 16px;
+  }
+  p.caption {
+    font-size: 14px;
+    color: #333 !important;
+    text-align: center;
+  }
 }
+@media screen and (max-width: 1024px) {
+  .adarender {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 24px;
+  }
+  .adarender h1 {
+    font-size: 32px;
+  }
+  .adarender h2,
+  .adarender h3,
+  .adarender h4,
+  .adarender h5,
+  .adarender h6 {
+    font-size: 28px;
+  }
+  .adarender p {
+    font-size: 24px;
+  }
+  p.caption {
+    font-size: 20px;
+    color: #333 !important;
+    text-align: center;
+  }
+}
+
 .adarender table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -45,14 +91,6 @@
   max-width: 80%;
 }
 div.center {
-  text-align: center;
-}
-.adarender p {
-  font-size: 14px;
-}
-p.caption {
-  font-size: 12px;
-  color: #333 !important;
   text-align: center;
 }
 .adarender table {
