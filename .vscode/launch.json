@@ -29,6 +29,14 @@
             "program": "${workspaceFolder}/samples/telegraph/upload.js",
             "args": [],
             "env": {"HTTP_PROXY":"http://127.0.0.1:1087"}
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "telegraph.account",
+            "program": "${workspaceFolder}/samples/telegraph/account.js",
+            "args": [],
+            "env": {"HTTP_PROXY":"http://127.0.0.1:1087"}
         }
     ]
 }
