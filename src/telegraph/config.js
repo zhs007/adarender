@@ -49,6 +49,10 @@ function checkConfig(cfg) {
     cfg.timeout = 30 * 1000;
   }
 
+  if (!cfg.outputpath) {
+    cfg.outputpath = './telegraph';
+  }
+
   return undefined;
 }
 

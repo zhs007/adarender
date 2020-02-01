@@ -9,7 +9,7 @@ const request = require('request');
 /**
  * initAccount - init a account, https://api.telegra.ph/createAccount?short_name=Sandbox&author_name=Anonymous
  * @param {string} cfgfn - cfgfile
- * @return {Promise<object>} ret - {error, token}
+ * @return {Promise<object>} ret - {error, telegraph}
  */
 async function initAccount(cfgfn) {
   return new Promise((resolve, reject) => {
@@ -21,7 +21,7 @@ async function initAccount(cfgfn) {
     }
 
     if (cfg.token) {
-      resolve({token: cfg.token});
+      resolve({telegraph: cfg});
 
       return;
     }
@@ -78,7 +78,83 @@ async function initAccount(cfgfn) {
                   return;
                 }
 
-                resolve({token: ret.result.access_token});
+                cfg.token = ret.result.access_token;
+                resolve({telegraph: cfg});
+              } catch (err) {
+                resolve({error: err});
+              }
+            },
+        )
+        .on('error', (err1) => {
+          resolve({error: err1});
+
+          return;
+        });
+  });
+}
+
+/**
+ * getAccountInfo - get account info
+ * @param {object} telegraph - telegraph
+ * @return {Promise<object>} ret - {error, account}
+ */
+async function getAccountInfo(telegraph) {
+  return new Promise((resolve, reject) => {
+    const requrl =
+      'https://api.telegra.ph/getAccountInfo?access_token=' +
+      telegraph.token +
+      '&fields=["short_name","author_name","author_url","auth_url","page_count"]';
+
+    request
+        .get(
+            requrl,
+            {
+              timeout: telegraph.timeout,
+            },
+            (err, response, body) => {
+              // {
+              //   "ok": true,
+              //   "result": {
+              //     "short_name": "Zerro",
+              //     "author_name": "Zerro Zhao",
+              //     "author_url": "",
+              //     "auth_url": "https://edit.telegra.ph/auth/gy0CcOwkRBd6VZwMxWpIlfEmWL3NM9a3H8FRW9bOLo",
+              //     "page_count": 0
+              //   }
+              // }
+
+              if (err) {
+                resolve({error: err});
+
+                return;
+              }
+
+              try {
+                const ret = JSON.parse(body);
+                if (!ret) {
+                  resolve({
+                    error: new Error(
+                        'telegraph.getAccountInfo getAccountInfo invalid body. ' +
+                    body,
+                    ),
+                  });
+
+                  return;
+                }
+
+                if (!ret.ok) {
+                  resolve({
+                    error: new Error(
+                        'telegraph.getAccountInfo getAccountInfo fail. ' + body,
+                    ),
+                  });
+
+                  return;
+                }
+
+                telegraph.account = ret.result;
+
+                resolve({account: telegraph.account});
               } catch (err) {
                 resolve({error: err});
               }
@@ -93,3 +169,4 @@ async function initAccount(cfgfn) {
 }
 
 exports.initAccount = initAccount;
+exports.getAccountInfo = getAccountInfo;
