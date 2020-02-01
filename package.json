@@ -1,6 +1,6 @@
 {
   "name": "adarender",
-  "version": "0.6.31",
+  "version": "0.6.32",
   "description": "Ada Render",
   "main": "index.js",
   "scripts": {
@@ -36,6 +36,7 @@
     "js-yaml": "^3.13.1",
     "markdown-it": "^10.0.0",
     "mermaid": "^8.4.6",
+    "request": "^2.88.0",
     "telegraph-node": "^1.0.4"
   },
   "devDependencies": {

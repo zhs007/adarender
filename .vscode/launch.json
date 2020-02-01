@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "service",
+            "program": "${workspaceFolder}/bin/adarender.js",
+            "args": ["startservice", "./cfg/service.yaml"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "client",
+            "program": "${workspaceFolder}/src/service/client.js",
+            "args": []
+        },        
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "export",
+            "program": "${workspaceFolder}/bin/adarender.js",
+            "args": ["exportmd", "-o", "samples/output001.html", "-t", "samples/template.hbs", "-p", "./samples", "-i", "./samples", "sample001.md"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "telegraph.upload",
+            "program": "${workspaceFolder}/samples/telegraph/upload.js",
+            "args": [],
+            "env": {"HTTP_PROXY":"http://127.0.0.1:1087"}
+        }
+    ]
+}
