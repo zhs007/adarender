@@ -168,5 +168,86 @@ async function getAccountInfo(telegraph) {
   });
 }
 
+/**
+ * newPage - new a page
+ * @param {object} telegraph - telegraph
+ * @param {string} title - title
+ * @param {array} lst - nodes
+ * @return {Promise<object>} ret - {error, page}
+ */
+async function newPage(telegraph, title, lst) {
+  return new Promise((resolve, reject) => {
+    const requrl =
+      'https://api.telegra.ph/createPage?access_token=' +
+      telegraph.token +
+      '&title=' +
+      encodeURIComponent(title) +
+      '&author_name=' +
+      encodeURIComponent(telegraph.authorname) +
+      '&content=' +
+      JSON.stringify(lst);
+
+    request
+        .get(
+            requrl,
+            {
+              timeout: telegraph.timeout,
+            },
+            (err, response, body) => {
+              // {
+              //   "ok": true,
+              //   "result": {
+              //     "short_name": "Zerro",
+              //     "author_name": "Zerro Zhao",
+              //     "author_url": "",
+              //     "auth_url": "https://edit.telegra.ph/auth/gy0CcOwkRBd6VZwMxWpIlfEmWL3NM9a3H8FRW9bOLo",
+              //     "page_count": 0
+              //   }
+              // }
+
+              if (err) {
+                resolve({error: err});
+
+                return;
+              }
+
+              try {
+                const ret = JSON.parse(body);
+                if (!ret) {
+                  resolve({
+                    error: new Error(
+                        'telegraph.newPage createPage invalid body. ' +
+                    body,
+                    ),
+                  });
+
+                  return;
+                }
+
+                if (!ret.ok) {
+                  resolve({
+                    error: new Error(
+                        'telegraph.newPage createPage fail. ' + body,
+                    ),
+                  });
+
+                  return;
+                }
+
+                resolve({page: ret.result});
+              } catch (err) {
+                resolve({error: err});
+              }
+            },
+        )
+        .on('error', (err1) => {
+          resolve({error: err1});
+
+          return;
+        });
+  });
+}
+
 exports.initAccount = initAccount;
 exports.getAccountInfo = getAccountInfo;
+exports.newPage = newPage;

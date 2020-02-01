@@ -23,10 +23,10 @@ function parsefn(fn) {
 /**
  * upload - upload a file
  * @param {string} fn - filename
- * @param {number} timeout - timeout in second
+ * @param {object} telegraph - telegraph
  * @return {Promise<object>} ret - {error, buf}
  */
-function upload(fn, timeout) {
+function upload(fn, telegraph) {
   return new Promise((resolve, reject) => {
     const fnret = parsefn(fn);
     if (!fnret) {
@@ -91,3 +91,4 @@ function upload(fn, timeout) {
 }
 
 exports.upload = upload;
+exports.parsefn = parsefn;
