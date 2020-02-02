@@ -47,6 +47,22 @@ function copyFile(srcfn, targetfn) {
   } catch (err) {}
 }
 
+/**
+ * isError
+ * @param {object} e - Error
+ * @return {boolean} isError - isError
+ */
+function isError(e) {
+  return (
+    e &&
+    e.stack &&
+    e.message &&
+    typeof e.stack === 'string' &&
+    typeof e.message === 'string'
+  );
+}
+
 exports.hashFile = hashFile;
 exports.copyFile = copyFile;
 exports.hashBuffer = hashBuffer;
+exports.isError = isError;

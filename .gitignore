@@ -59,7 +59,8 @@ typings/
 
 # next.js build output
 .next
-.vscode
+# .vscode
 # samples/*.html
 # samples/*.jpg
 cfg/*.yaml
+telegraphdata

@@ -34,4 +34,7 @@ function registerAllPlugins(md, cfg) {
   md.use(markdownitAdaCommodity, cfg.commodity);
 }
 
+const {telegraph} = require('./src/telegraph');
+
 exports.registerAllPlugins = registerAllPlugins;
+exports.telegraph = telegraph;
