@@ -2,4 +2,4 @@ shortname: Zerro
 authorname: Zerro Zhao
 token: 
 timeout: 30000
-outputpath: ./telegraph
+outputpath: ./telegraphdata

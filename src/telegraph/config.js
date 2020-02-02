@@ -50,7 +50,7 @@ function checkConfig(cfg) {
   }
 
   if (!cfg.outputpath) {
-    cfg.outputpath = './telegraph';
+    cfg.outputpath = './telegraphdata';
   }
 
   return undefined;
