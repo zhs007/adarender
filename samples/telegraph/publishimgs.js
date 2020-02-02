@@ -1,6 +1,7 @@
 const {
   initAccount,
   getAccountInfo,
+  getTotalPageList,
 } = require('../../src/telegraph/telegraph');
 const {publishImgs} = require('../../src/telegraph/publish');
 const path = require('path');
@@ -12,6 +13,9 @@ const fs = require('fs');
 
   const ai = await getAccountInfo(ret.telegraph);
   console.log(JSON.stringify(ai));
+
+  const pl = await getTotalPageList(ret.telegraph);
+  console.log(JSON.stringify(pl));
 
   const page = await publishImgs(
       ret.telegraph,
