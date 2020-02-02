@@ -3,6 +3,8 @@
 const {loadConfig} = require('./config');
 const {isError} = require('../utils');
 const request = require('request');
+const fs = require('fs');
+const path = require('path');
 // const Telegraph = require('telegraph-node');
 // const ph = new Telegraph();
 
@@ -26,16 +28,17 @@ async function initAccount(cfgfn) {
       return;
     }
 
-    const requrl =
-      'https://api.telegra.ph/createAccount?short_name=' +
-      encodeURIComponent(cfg.shortname) +
-      '&author_name=' +
-      encodeURIComponent(cfg.authorname);
+    // const requrl =
+    //   'https://api.telegra.ph/createAccount?short_name=' +
+    //   encodeURIComponent(cfg.shortname) +
+    //   '&author_name=' +
+    //   encodeURIComponent(cfg.authorname);
 
     request
-        .get(
-            requrl,
+        .post(
             {
+              url: 'https://api.telegra.ph/createAccount',
+              formData: {short_name: cfg.shortname, author_name: cfg.authorname},
               timeout: cfg.timeout,
             },
             (err, response, body) => {
@@ -52,6 +55,16 @@ async function initAccount(cfgfn) {
 
               if (err) {
                 resolve({error: err});
+
+                return;
+              }
+
+              if (response.statusCode != 200) {
+                resolve({
+                  error: new Error(
+                      'telegraph.initAccount response ' + response.statusCode,
+                  ),
+                });
 
                 return;
               }
@@ -100,15 +113,25 @@ async function initAccount(cfgfn) {
  */
 async function getAccountInfo(telegraph) {
   return new Promise((resolve, reject) => {
-    const requrl =
-      'https://api.telegra.ph/getAccountInfo?access_token=' +
-      telegraph.token +
-      '&fields=["short_name","author_name","author_url","auth_url","page_count"]';
+    // const requrl =
+    //   'https://api.telegra.ph/getAccountInfo?access_token=' +
+    //   telegraph.token +
+    //   '&fields=["short_name","author_name","author_url","auth_url","page_count"]';
 
     request
-        .get(
-            requrl,
+        .post(
             {
+              url: 'https://api.telegra.ph/getAccountInfo',
+              formData: {
+                access_token: telegraph.token,
+                fields: JSON.stringify([
+                  'short_name',
+                  'author_name',
+                  'author_url',
+                  'auth_url',
+                  'page_count',
+                ]),
+              },
               timeout: telegraph.timeout,
             },
             (err, response, body) => {
@@ -125,6 +148,16 @@ async function getAccountInfo(telegraph) {
 
               if (err) {
                 resolve({error: err});
+
+                return;
+              }
+
+              if (response.statusCode != 200) {
+                resolve({
+                  error: new Error(
+                      'telegraph.getAccountInfo response ' + response.statusCode,
+                  ),
+                });
 
                 return;
               }
@@ -154,6 +187,11 @@ async function getAccountInfo(telegraph) {
 
                 telegraph.account = ret.result;
 
+                fs.writeFileSync(
+                    path.join(telegraph.outputpath, 'account.json'),
+                    JSON.stringify(telegraph.account),
+                );
+
                 resolve({account: telegraph.account});
               } catch (err) {
                 resolve({error: err});
@@ -177,20 +215,26 @@ async function getAccountInfo(telegraph) {
  */
 async function newPage(telegraph, title, lst) {
   return new Promise((resolve, reject) => {
-    const requrl =
-      'https://api.telegra.ph/createPage?access_token=' +
-      telegraph.token +
-      '&title=' +
-      encodeURIComponent(title) +
-      '&author_name=' +
-      encodeURIComponent(telegraph.authorname) +
-      '&content=' +
-      JSON.stringify(lst);
+    // const requrl =
+    //   'https://api.telegra.ph/createPage?access_token=' +
+    //   telegraph.token +
+    //   '&title=' +
+    //   encodeURIComponent(title) +
+    //   '&author_name=' +
+    //   encodeURIComponent(telegraph.authorname) +
+    //   '&content=' +
+    //   JSON.stringify(lst);
 
     request
-        .get(
-            requrl,
+        .post(
             {
+              url: 'https://api.telegra.ph/createPage',
+              formData: {
+                access_token: telegraph.token,
+                title: title,
+                author_name: telegraph.authorname,
+                content: JSON.stringify(lst),
+              },
               timeout: telegraph.timeout,
             },
             (err, response, body) => {
@@ -211,13 +255,22 @@ async function newPage(telegraph, title, lst) {
                 return;
               }
 
+              if (response.statusCode != 200) {
+                resolve({
+                  error: new Error(
+                      'telegraph.newPage response ' + response.statusCode,
+                  ),
+                });
+
+                return;
+              }
+
               try {
                 const ret = JSON.parse(body);
                 if (!ret) {
                   resolve({
                     error: new Error(
-                        'telegraph.newPage createPage invalid body. ' +
-                    body,
+                        'telegraph.newPage createPage invalid body. ' + body,
                     ),
                   });
 
@@ -226,9 +279,7 @@ async function newPage(telegraph, title, lst) {
 
                 if (!ret.ok) {
                   resolve({
-                    error: new Error(
-                        'telegraph.newPage createPage fail. ' + body,
-                    ),
+                    error: new Error('telegraph.newPage createPage fail. ' + body),
                   });
 
                   return;
