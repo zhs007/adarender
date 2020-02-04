@@ -66,6 +66,14 @@ function upload(fn, telegraph) {
                   return;
                 }
 
+                if (ret.error) {
+                  resolve({
+                    error: new Error('telegraph.upload revice error ' + ret.error),
+                  });
+
+                  return;
+                }
+
                 if (!Array.isArray(ret)) {
                   resolve({
                     error: new Error(
