@@ -19,10 +19,10 @@ const fs = require('fs');
 
   const page = await publishImgs(
       ret.telegraph,
-      '金田一R 第二卷',
+      '金田一R 第十四卷',
       // 'test',
       (i) => {
-        const fn = path.join('../jarviscrawlercore/comic/715/2', i + '.jpg');
+        const fn = path.join('../jarviscrawlercore/comic/715/14', i + '.jpg');
         if (fs.existsSync(fn)) {
           return fn;
         }
