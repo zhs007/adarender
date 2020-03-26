@@ -1,4 +1,5 @@
 import {initChart} from './src/utils';
+import {buildPNL, buildPNLXDataDay} from './src/pnl';
 import {AdaRender} from './src/adarender';
 import {buildPieData, buildAllPieData} from './src/datapie';
 import {sortDataset} from './src/dataset.utils';
@@ -17,4 +18,6 @@ export {
   onInitTreemap,
   mapSortTable,
   SortTable,
+  buildPNL,
+  buildPNLXDataDay,
 };
