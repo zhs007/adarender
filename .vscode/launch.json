@@ -45,6 +45,17 @@
             "program": "${workspaceFolder}/samples/telegraph/publishimgs.js",
             "args": [],
             "env": {"HTTP_PROXY":"http://127.0.0.1:1087"}
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "tests",
+            "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+            "stopOnEntry": false,
+            "args": ["--runInBand"],
+            "cwd": "${workspaceRoot}",
+            "sourceMaps": true,
+            "console": "integratedTerminal"
         }
     ]
 }
