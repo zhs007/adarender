@@ -14,6 +14,9 @@
   let option_<%= id %> = {
       tooltip: {
           trigger: 'axis',
+          textStyle: {
+            align:'left'
+          },
           position: function (pt) {
               return [pt[0], '10%'];
           }
@@ -37,7 +40,12 @@
       },
       yAxis: {
           type: 'value',
-          boundaryGap: [0, '100%']
+          min: (val) => { return parseInt(val.min * 0.8 / <%= valoff %>) * <%= valoff %>; },
+          max: (val) => { return parseInt(val.max * 1.2 / <%= valoff %>) * <%= valoff %>; },
+          // boundaryGap: [0, '100%'],
+          // axisLabel: {
+          //   formatter: '{value}'
+          // }
       },
       dataZoom: [{
           type: 'inside',
@@ -63,7 +71,10 @@
               smooth: true,
               symbol: 'none',
               sampling: 'average',
-              data: adadata_<%= datasetname %>.<%= assets[key].valname %>
+              data: adadata_<%= datasetname %>.<%= assets[key].valname %>,
+              markPoint: {
+                data: adadata_<%= datasetname %>.<%= assets[key].markname %>
+            },
         },<% } %>
       ]
   };

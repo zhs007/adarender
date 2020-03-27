@@ -4,7 +4,7 @@ const {csv2pnl, csv2pnlex} = require('./csv2pnl');
 const {exportMarkdown} = require('../../export/exportmd');
 const fs = require('fs');
 
-const isgenfiles = false;
+const isgenfiles = false; // true;
 
 test('csv2pnl', () => {
   const str = csv2pnl(
@@ -13,6 +13,7 @@ test('csv2pnl', () => {
       'PNL 001',
       'pnl 001',
       'mypnl001',
+      1000,
   );
 
   if (isgenfiles) {
@@ -39,12 +40,21 @@ test('csv2pnl', () => {
 test('csv2pnlex', () => {
   const str = csv2pnlex(
       {
-        pnl0: {title: 'pnl001', csvfn: './samples/roc.110022.csv'},
-        pnl1: {title: 'pnl002', csvfn: './samples/buyandhold.110022.csv'},
+        pnl0: {
+          title: 'pnl001',
+          csvfn: './samples/roc.110022.csv',
+          markstate: 'state',
+        },
+        pnl1: {
+          title: 'pnl002',
+          csvfn: './samples/buyandhold.110022.csv',
+          markstate: 'none',
+        },
       },
       'pnl110022',
       'PNL 001',
       'pnl 001',
+      1000,
   );
 
   if (isgenfiles) {
