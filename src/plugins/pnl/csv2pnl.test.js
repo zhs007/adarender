@@ -4,7 +4,8 @@ const {csv2pnl, csv2pnlex} = require('./csv2pnl');
 const {exportMarkdown} = require('../../export/exportmd');
 const fs = require('fs');
 
-const isgenfiles = false; // true;
+const isgenfiles = false;
+// const isgenfiles = true;
 
 test('csv2pnl', () => {
   const str = csv2pnl(
