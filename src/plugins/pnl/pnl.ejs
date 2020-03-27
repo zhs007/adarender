@@ -3,8 +3,7 @@ name: ds_<%= id %>
 data:
   date: [<%= date %>]
 <% for(var key in assets) { %>  val_<%= key %>: [<%= assets[key].val %>]
-<% } %>
-```
+<% } %>```
 
 ```ada.pnl
 id: <%= id %>
@@ -15,5 +14,4 @@ assets:
 <% for(var key in assets) { %>  <%= key %>: 
     title: <%= assets[key].title %>
     valname: val_<%= key %>
-<% } %>
-```
+<% } %>```
