@@ -58,17 +58,14 @@
           }
       }],
       series: [
-          {
-              name: 'PNL',
+        <% for(var key in assets) { %>{
+              name: '<%= assets[key].title %>',
               type: 'line',
               smooth: true,
               symbol: 'none',
               sampling: 'average',
-              itemStyle: {
-                  color: 'rgb(255, 70, 131)'
-              },
-              data: adadata_<%= datasetname %>.val
-          }
+              data: adadata_<%= datasetname %>.<%= assets[key].valname %>
+        },<% } %>
       ]
   };
 
