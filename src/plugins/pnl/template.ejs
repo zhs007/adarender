@@ -18,9 +18,8 @@
               return [pt[0], '10%'];
           }
       },
-      title: {
-          left: 'center',
-          text: '<%= title %>',
+      legend: {
+        data: [<% for(var key in assets) { %>'<%= assets[key].title %>', <% } %>]
       },
       toolbox: {
           feature: {

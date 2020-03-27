@@ -4,16 +4,7 @@ const {csv2pnl, csv2pnlex} = require('./csv2pnl');
 const {exportMarkdown} = require('../../export/exportmd');
 const fs = require('fs');
 
-test('adarender', () => {
-  const mdstr = fs.readFileSync('./samples/test001.md', 'utf8').toString();
-  const tmpstr = fs.readFileSync('./samples/template.hbs', 'utf8').toString();
-  const ret = exportMarkdown(mdstr, tmpstr, './samples', './samples');
-
-  // fs.writeFileSync('./samples/test001.html', ret.html, 'utf8');
-  const resultsucess = fs.readFileSync('./samples/test001.html', 'utf8');
-
-  expect(ret.html).toBe(resultsucess);
-});
+const isgenfiles = false;
 
 test('csv2pnl', () => {
   const str = csv2pnl(
@@ -24,7 +15,10 @@ test('csv2pnl', () => {
       'mypnl001',
   );
 
-  // fs.writeFileSync('./samples/pnl.md', str, 'utf8');
+  if (isgenfiles) {
+    fs.writeFileSync('./samples/pnl.md', str, 'utf8');
+  }
+
   const resultsucess = fs.readFileSync('./samples/pnl.md', 'utf8');
 
   expect(str).toBe(resultsucess);
@@ -33,7 +27,10 @@ test('csv2pnl', () => {
   const tmpstr = fs.readFileSync('./samples/template.hbs', 'utf8').toString();
   const ret = exportMarkdown(mdstr, tmpstr, './samples', './samples');
 
-  // fs.writeFileSync('./samples/pnl.html', ret.html, 'utf8');
+  if (isgenfiles) {
+    fs.writeFileSync('./samples/pnl.html', ret.html, 'utf8');
+  }
+
   const resultsucess1 = fs.readFileSync('./samples/pnl.html', 'utf8');
 
   expect(ret.html).toBe(resultsucess1);
@@ -50,7 +47,10 @@ test('csv2pnlex', () => {
       'pnl 001',
   );
 
-  // fs.writeFileSync('./samples/pnl1.md', str, 'utf8');
+  if (isgenfiles) {
+    fs.writeFileSync('./samples/pnl1.md', str, 'utf8');
+  }
+
   const resultsucess = fs.readFileSync('./samples/pnl1.md', 'utf8');
 
   expect(str).toBe(resultsucess);
@@ -59,7 +59,10 @@ test('csv2pnlex', () => {
   const tmpstr = fs.readFileSync('./samples/template.hbs', 'utf8').toString();
   const ret = exportMarkdown(mdstr, tmpstr, './samples', './samples');
 
-  // fs.writeFileSync('./samples/pnl1.html', ret.html, 'utf8');
+  if (isgenfiles) {
+    fs.writeFileSync('./samples/pnl1.html', ret.html, 'utf8');
+  }
+
   const resultsucess1 = fs.readFileSync('./samples/pnl1.html', 'utf8');
 
   expect(ret.html).toBe(resultsucess1);
