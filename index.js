@@ -14,6 +14,7 @@ const markdownitAdaEmptyLine = require('./src/plugins/emptyline');
 const markdownitMermaid = require('./src/plugins/mermaid');
 const markdownitAdaCommodity = require('./src/plugins/commodity');
 const markdownitAdaPNL = require('./src/plugins/pnl');
+const markdownitAdaAssets = require('./src/plugins/assets');
 
 /**
  * registerAllPlugins
@@ -34,6 +35,7 @@ function registerAllPlugins(md, cfg) {
   md.use(markdownitAdaEmptyLine, cfg.emptyline);
   md.use(markdownitAdaCommodity, cfg.commodity);
   md.use(markdownitAdaPNL, cfg.pnl);
+  md.use(markdownitAdaAssets, cfg.assets);
 }
 
 const {telegraph} = require('./src/telegraph');
