@@ -44,7 +44,7 @@ test('csv2pnlex', () => {
         pnl0: {
           title: 'pnl001',
           // csvfn: './samples/roc.110022.csv',
-          csvfn: './samples/110022.rsi-[40.000/46.000].[61.000/71.000].csv',
+          csvfn: './samples/110022.rsi-[40.000:46.000].[61.000:71.000].csv',
           markstate: 'state',
         },
         pnl1: {
