@@ -44,11 +44,19 @@ test('csv2pnlex', () => {
         pnl0: {
           title: 'pnl001',
           // csvfn: './samples/roc.110022.csv',
-          csvfn: './samples/110022.rsi-[40.000:46.000].[61.000:71.000].csv',
-          markstate: 'state',
+          // csvfn: './samples/110022.rsi-[40.000:46.000].[61.000:71.000].csv',
+          csvfn: './samples/110022.rsi-1[44.000-50.000].0[61.000-65.000].csv',
+          markstate: 'none',
         },
         pnl1: {
           title: 'pnl002',
+          // csvfn: './samples/roc.110022.csv',
+          // csvfn: './samples/110022.rsi-[40.000:46.000].[61.000:71.000].csv',
+          csvfn: './samples/110022.rsi-1[18.000-26.000].0[31.000-37.000].csv',
+          markstate: 'none',
+        },
+        pnl2: {
+          title: 'pnl003',
           csvfn: './samples/buyandhold.110022.csv',
           markstate: 'none',
         },
