@@ -7,6 +7,7 @@ import {setTableData} from './src/table.utils';
 import {mapSortTable, SortTable} from './src/sorttable';
 import {buildTreemapLevels, onInitTreemap} from './src/treemap';
 import './css/index.css';
+import './css/commodity.css';
 export {
   initChart,
   AdaRender,
