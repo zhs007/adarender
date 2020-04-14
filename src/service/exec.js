@@ -1,6 +1,7 @@
 'use strict';
 
 const {startService} = require('./service');
+const {printInfo} = require('../utils');
 
 /**
  * serviceexec
@@ -12,7 +13,8 @@ async function execStartService(program, version) {
       .command('startservice [cfgfile]')
       .description('start a grpc service')
       .action(function(cfgfile, options) {
-        console.log('version is ', version);
+        printInfo('adaserv');
+        // console.log('version is ', version);
 
         if (!cfgfile) {
           console.log(
