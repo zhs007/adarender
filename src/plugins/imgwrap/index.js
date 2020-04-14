@@ -11,12 +11,12 @@ const tmpbuf = fs.readFileSync(path.join(__dirname, 'template.ejs'));
 const template = compileString(tmpbuf.toString());
 
 /**
- * renderCommodity - render for commodity
+ * renderImgWrap - render for image wrap
  * @param {string} content - token.content
  * @param {object} config - config
  * @return {string} str - HTML string
  */
-function renderCommodity(content, config) {
+function renderImgWrap(content, config) {
   let output = './';
   if (typeof config.output == 'string') {
     output = config.output;
@@ -33,11 +33,11 @@ function renderCommodity(content, config) {
   }
 
   try {
-    const commodity = yaml.safeLoad(content);
-    if (commodity) {
-      if (Array.isArray(commodity.items) && commodity.items.length > 0) {
-        for (let i = 0; i < commodity.items.length; ++i) {
-          let url = commodity.items[i].img;
+    const imgwrap = yaml.safeLoad(content);
+    if (imgwrap) {
+      if (Array.isArray(imgwrap.items) && imgwrap.items.length > 0) {
+        for (let i = 0; i < imgwrap.items.length; ++i) {
+          let url = imgwrap.items[i].img;
 
           const newname =
             hashFileEx(config.vfs, input, url) + '.' + getImgType(url);
@@ -49,55 +49,55 @@ function renderCommodity(content, config) {
             url = newnamewithpath;
           }
 
-          commodity.items[i].img = url;
+          imgwrap.items[i].img = url;
         }
 
-        const html = template(commodity);
+        const html = template(imgwrap);
 
         return html;
       } else {
-        console.log('renderCommodity:invalid items');
+        console.log('renderImgWrap:invalid items');
       }
     }
   } catch (err) {
-    console.log('renderCommodity:catch', err);
+    console.log('renderImgWrap:catch', err);
   }
 
   return '';
 }
 
 /**
- * markdownitAdaCommodity
+ * markdownitAdaImgWrap
  * @param {object} md - MarkdownIt
  * @param {object} config - {}
  */
-function markdownitAdaCommodity(md, config) {
+function markdownitAdaImgWrap(md, config) {
   config = config || {};
 
   const oldRule = md.renderer.rules.fence.bind(md.renderer.rules);
   md.renderer.rules.fence = (tokens, idx, options, env, slf) => {
     const token = tokens[idx];
     const info = token.info.trim();
-    if (info === 'ada.commodity') {
-      return renderCommodity(token.content, config);
+    if (info === 'ada.imgwrap') {
+      return renderImgWrap(token.content, config);
     }
 
     return oldRule(tokens, idx, options, env, slf);
   };
 
-  const adacommodityblock = makeBlockFunc(
-      '$$ada.commodity$$',
-      '$$ada.commodity$$',
-      'adacommodity_block',
-      'adacommodity',
+  const adaimgwrapblock = makeBlockFunc(
+      '$$ada.imgwrap$$',
+      '$$ada.imgwrap$$',
+      'adaimgwrap_block',
+      'adaimgwrap',
   );
 
-  md.block.ruler.after('blockquote', 'adacommodity_block', adacommodityblock, {
+  md.block.ruler.after('blockquote', 'adaimgwrap_block', adaimgwrapblock, {
     alt: ['paragraph', 'reference', 'blockquote', 'list'],
   });
-  md.renderer.rules.adacommodity_block = (tokens, idx) => {
-    return renderCommodity(tokens[idx].content, config);
+  md.renderer.rules.adaimgwrap_block = (tokens, idx) => {
+    return renderImgWrap(tokens[idx].content, config);
   };
 }
 
-module.exports = markdownitAdaCommodity;
+module.exports = markdownitAdaImgWrap;

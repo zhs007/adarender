@@ -1,7 +1,8 @@
 'use strict';
 
 const MarkdownIt = require('markdown-it');
-const {compileString} = require('../handlebars.utils');
+// const {compileString} = require('../handlebars.utils');
+const {compileString} = require('../ejs.utils');
 const hljs = require('highlight.js');
 const pluginEncodeImgName = require('../plugins/encode-imgname');
 const {registerAllPlugins} = require('../../index');
@@ -77,7 +78,13 @@ function exportMarkdown(mdstr, tmpstr, inpath, outputpath, vfs) {
     });
 
     registerAllPlugins(md, {
-      commodity: {input: inpath, output: outputpath, onlyname: true, vfs: vfs},
+      commodity: {
+        input: inpath,
+        output: outputpath,
+        onlyname: true,
+        vfs: vfs,
+      },
+      imgwrap: {input: inpath, output: outputpath, onlyname: true, vfs: vfs},
     });
 
     const title = getTitle(md, mdstr);

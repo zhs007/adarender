@@ -20,7 +20,7 @@
             "request": "launch",
             "name": "export",
             "program": "${workspaceFolder}/bin/adarender.js",
-            "args": ["exportmd", "-o", "samples/output001.html", "-t", "samples/template.hbs", "-p", "./samples", "-i", "./samples", "sample001.md"]
+            "args": ["exportmd", "-o", "samples/output001.html", "-t", "samples/template.ejs", "-p", "./samples", "-i", "./samples", "sample001.md"]
         },
         {
             "type": "node",
@@ -56,6 +56,13 @@
             "cwd": "${workspaceRoot}",
             "sourceMaps": true,
             "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "imgwrap",
+            "program": "${workspaceFolder}/bin/adarender.js",
+            "args": ["exportmd", "-o", "samples/imgwrap/example.html", "-t", "samples/imgwrap/template.ejs", "-p", "./samples/imgwrap", "-i", "./samples/imgwrap", "example.md"]
         }
     ]
 }

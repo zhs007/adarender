@@ -8,6 +8,7 @@ import {mapSortTable, SortTable} from './src/sorttable';
 import {buildTreemapLevels, onInitTreemap} from './src/treemap';
 import './css/index.css';
 import './css/commodity.css';
+import './css/imgwrap.css';
 export {
   initChart,
   AdaRender,
