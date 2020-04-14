@@ -2,6 +2,7 @@
 
 const crypto = require('crypto');
 const fs = require('fs');
+const path = require('path');
 
 /**
  * hashFile
@@ -62,7 +63,22 @@ function isError(e) {
   );
 }
 
+/**
+ * printInfo - print infomation
+ * @param {string} projname - project's name
+ */
+function printInfo(projname) {
+  const proj = JSON.parse(
+      fs.readFileSync(path.join(__dirname, '../package.json')),
+  );
+
+  console.log(projname + ' (jarviscrawlercore) v' + proj.version + '.');
+  console.log('The project\'s url is https://github.com/zhs007/adarender .');
+  console.log('Author is  Zerro Zhao (zerrozhao@gmail.com).');
+}
+
 exports.hashFile = hashFile;
 exports.copyFile = copyFile;
 exports.hashBuffer = hashBuffer;
 exports.isError = isError;
+exports.printInfo = printInfo;
