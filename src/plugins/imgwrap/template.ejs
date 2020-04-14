@@ -1,19 +1,23 @@
 <div id="<%= id %>" class="img-wrap-bd">
   <div class="img-wrap">
     <% for(var i = 0; i < items.length; ++i) { %>
-    <div class="item">
-      <div
-        class="pic"
-        style="background-image: url('<%= items[i].img %>');"
-      ></div>
-      <div class="ctx">
-        <div class="title">
-          <div>
-            <span><%= items[i].title %></span>
-          </div>
-        </div>
+    <a class="img-item" target="_blank" href="<%= items[i].url %>">
+      <div class="cover-wp">
+        <img src="<%- items[i].img %>" alt="<%= items[i].title %>" />
       </div>
-    </div>
+      <p>
+        <% if (items[i].isnew) {%>
+        <span class="green">
+          <img
+            src="https://cdn.jsdelivr.net/npm/adarender@0.6.60/dist/iw_new.png"
+            width="16"
+            class="new"
+          />
+        </span>
+        <% } %> <%= items[i].title %>
+        <strong><%= items[i].score %></strong>
+      </p>
+    </a>
     <% } %>
   </div>
 </div>
