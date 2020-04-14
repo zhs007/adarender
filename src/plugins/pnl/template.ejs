@@ -1,0 +1,83 @@
+<div style="width:100%;text-align:center;">
+  <div
+    id="<%= id %>"
+    style="width:92%;height:0;padding-bottom:60%;margin:auto;"
+  ></div>
+  <% if (subtext) { %>
+  <p><%= title %> - <%= subtext %></p>
+  <% } else { %>
+  <p><%= title %></p>
+  <% } %>
+  <p></p>
+</div>
+<script type="text/javascript">
+  let option_<%= id %> = {
+      tooltip: {
+          trigger: 'axis',
+          textStyle: {
+            align:'left'
+          },
+          position: function (pt) {
+              return [pt[0], '10%'];
+          }
+      },
+      legend: {
+        data: [<% for(var key in assets) { %>'<%= assets[key].title %>', <% } %>]
+      },
+      toolbox: {
+          feature: {
+              dataZoom: {
+                  yAxisIndex: 'none'
+              },
+              restore: {},
+              saveAsImage: {}
+          }
+      },
+      xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: adarender.buildPNLXDataDay(adadata_<%= datasetname %>.date)
+      },
+      yAxis: {
+          type: 'value',
+          min: (val) => { return parseInt(val.min * 0.8 / <%= valoff %>) * <%= valoff %>; },
+          max: (val) => { return parseInt(val.max * 1.2 / <%= valoff %>) * <%= valoff %>; },
+          // boundaryGap: [0, '100%'],
+          // axisLabel: {
+          //   formatter: '{value}'
+          // }
+      },
+      dataZoom: [{
+          type: 'inside',
+          start: 0,
+          end: 10
+      }, {
+          start: 0,
+          end: 10,
+          handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+          handleSize: '80%',
+          handleStyle: {
+              color: '#fff',
+              shadowBlur: 3,
+              shadowColor: 'rgba(0, 0, 0, 0.6)',
+              shadowOffsetX: 2,
+              shadowOffsetY: 2
+          }
+      }],
+      series: [
+        <% for(var key in assets) { %>{
+              name: '<%= assets[key].title %>',
+              type: 'line',
+              smooth: true,
+              symbol: 'none',
+              sampling: 'average',
+              data: adadata_<%= datasetname %>.<%= assets[key].valname %>,
+              markPoint: {
+                data: adadata_<%= datasetname %>.<%= assets[key].markname %>
+            },
+        },<% } %>
+      ]
+  };
+
+  var chart_<%= id %> = adarender.initChart(document.getElementById('<%= id %>'), option_<%= id %>);
+</script>

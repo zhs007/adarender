@@ -13,6 +13,9 @@ const markdownitCenterInfo = require('./src/plugins/cinfo');
 const markdownitAdaEmptyLine = require('./src/plugins/emptyline');
 const markdownitMermaid = require('./src/plugins/mermaid');
 const markdownitAdaCommodity = require('./src/plugins/commodity');
+const markdownitAdaImgWrap = require('./src/plugins/imgwrap');
+const markdownitAdaPNL = require('./src/plugins/pnl');
+const markdownitAdaAssets = require('./src/plugins/assets');
 
 /**
  * registerAllPlugins
@@ -32,9 +35,16 @@ function registerAllPlugins(md, cfg) {
   md.use(markdownitCenterInfo, cfg.cinfo);
   md.use(markdownitAdaEmptyLine, cfg.emptyline);
   md.use(markdownitAdaCommodity, cfg.commodity);
+  md.use(markdownitAdaImgWrap, cfg.imgwrap);
+  md.use(markdownitAdaPNL, cfg.pnl);
+  md.use(markdownitAdaAssets, cfg.assets);
 }
 
 const {telegraph} = require('./src/telegraph');
 
 exports.registerAllPlugins = registerAllPlugins;
 exports.telegraph = telegraph;
+
+const {csv2pnl} = require('./src/plugins/pnl/csv2pnl');
+
+exports.csv2pnl = csv2pnl;

@@ -1,0 +1,57 @@
+.adarender .img-wrap-bd {
+  width: 100%;
+  text-align: center;
+}
+.adarender .img-wrap {
+  margin-right: -10px;
+}
+.adarender .img-wrap .img-item {
+  display: block;
+  float: left;
+  font-size: 13px;
+  text-align: center;
+  margin: 0 25px 10px 0;
+  width: 115px;
+}
+.adarender .img-wrap .img-item:link,
+.adarender .img-wrap .img-item:visited,
+.adarender .img-wrap .img-item:hover,
+.adarender .img-wrap .img-item:active {
+  text-decoration: none;
+  background: none;
+  color: #37a;
+}
+.adarender .img-wrap .img-item .cover-wp {
+  background-size: 100%;
+  height: 161px;
+  overflow: hidden;
+}
+.adarender .img-wrap .img-item .cover-wp img {
+  max-width: 100%;
+}
+.adarender .img-wrap .img-item p {
+  margin: 5px 0 0;
+  height: 44px;
+  overflow: hidden;
+  font-size: 13px;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+.adarender .img-wrap .img-item .new {
+  display: inline-block;
+  opacity: 1;
+  position: relative;
+  top: -2px;
+  border-width: 0;
+  vertical-align: middle;
+  width: 16px;
+}
+.adarender .img-wrap .img-item .green {
+  color: #58a05a;
+}
+.adarender .img-wrap .img-item strong {
+  color: #e09015;
+}

@@ -11,7 +11,7 @@ const tmpbuf = fs.readFileSync(path.join(__dirname, 'template.ejs'));
 const template = compileString(tmpbuf.toString());
 
 /**
- * renderCommodity - render for table
+ * renderCommodity - render for commodity
  * @param {string} content - token.content
  * @param {object} config - config
  * @return {string} str - HTML string

@@ -1,0 +1,20 @@
+```ada.dataset
+name: ds_<%= id %>
+data:
+  date: [<%= date %>]
+<% for(var key in assets) { %>  val_<%= key %>: [<%= assets[key].val %>]
+  mark_<%= key %>: <%- assets[key].mark %>
+<% } %>```
+
+```ada.assets
+id: <%= id %>
+datasetname: ds_<%= id %>
+title: <%= title %>
+subtext: <%= subtext %>
+valoff: <%= valoff %>
+assets:
+<% for(var key in assets) { %>  <%= key %>: 
+    title: <%= assets[key].title %>
+    valname: val_<%= key %>
+    markname: mark_<%= key %>
+<% } %>```
