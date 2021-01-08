@@ -1,6 +1,6 @@
 {
   "name": "adarender",
-  "version": "0.6.68",
+  "version": "0.6.69",
   "description": "Ada Render",
   "main": "index.js",
   "scripts": {
@@ -51,6 +51,7 @@
     "eslint-config-google": "^0.14.0",
     "jest": "^26.6.3",
     "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.0.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.11.1",
