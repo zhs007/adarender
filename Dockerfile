@@ -1,6 +1,6 @@
 FROM node:lts-slim
 
-MAINTAINER zerro "zerrozhao@gmail.com"
+# MAINTAINER zerro "zerrozhao@gmail.com"
 
 RUN apt-get update -y && rm -rf /var/lib/apt/lists/*
 
