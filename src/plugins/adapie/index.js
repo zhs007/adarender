@@ -16,7 +16,7 @@ const template = compileString(tmpbuf.toString());
  */
 function renderPie(content) {
   try {
-    const pie = yaml.safeLoad(content);
+    const pie = yaml.load(content);
     if (pie) {
       //   const params = {
       //     datasetname: dataset.name,

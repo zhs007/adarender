@@ -12,7 +12,7 @@ function loadConfig(cfgfile) {
   const fd = fs.readFileSync(cfgfile);
   if (fd) {
     try {
-      const cfg = yaml.safeLoad(fd);
+      const cfg = yaml.load(fd);
       const err = checkConfig(cfg);
       if (err) {
         return err;

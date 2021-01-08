@@ -16,7 +16,7 @@ const template = compileString(tmpbuf.toString());
  */
 function renderDataset(content) {
   try {
-    const dataset = yaml.safeLoad(content);
+    const dataset = yaml.load(content);
     if (dataset && dataset.name && dataset.data) {
       const params = {
         datasetname: dataset.name,

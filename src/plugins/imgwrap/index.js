@@ -33,7 +33,7 @@ function renderImgWrap(content, config) {
   }
 
   try {
-    const imgwrap = yaml.safeLoad(content);
+    const imgwrap = yaml.load(content);
     if (imgwrap) {
       if (Array.isArray(imgwrap.items) && imgwrap.items.length > 0) {
         for (let i = 0; i < imgwrap.items.length; ++i) {
