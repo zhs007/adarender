@@ -30,7 +30,7 @@ function deserialize_adarender_MarkdownStream(buffer_arg) {
 // AdaRenderService - AdaRender service
 var AdaRenderServiceService = exports.AdaRenderServiceService = {
   // render - render markdown
-  render: {
+render: {
     path: '/adarender.AdaRenderService/render',
     requestStream: true,
     responseStream: true,

@@ -164,7 +164,7 @@ const thirdLevel = [
  */
 function renderSunburst(content) {
   try {
-    const treemap = yaml.safeLoad(content);
+    const treemap = yaml.load(content);
     if (treemap && treemap.treemap && Array.isArray(treemap.treemap)) {
       for (let i = 0; i < treemap.treemap.length; ++i) {
         for (let j = 0; j < treemap.treemap[i].data.length; ++j) {

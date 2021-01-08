@@ -16,7 +16,7 @@ const template = compileString(tmpbuf.toString());
  */
 function renderTable(content) {
   try {
-    const table = yaml.safeLoad(content);
+    const table = yaml.load(content);
     if (table) {
       const html = template(table);
 

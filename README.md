@@ -108,6 +108,7 @@ npm run build
 
 - 切换 ``handlebars`` 到 ``ejs``。
 - 前端项目结构调整，取消public目录。
+- 插件结构微调，例子放独立目录。
 
 ##### v0.5
 

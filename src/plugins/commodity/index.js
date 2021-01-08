@@ -33,7 +33,7 @@ function renderCommodity(content, config) {
   }
 
   try {
-    const commodity = yaml.safeLoad(content);
+    const commodity = yaml.load(content);
     if (commodity) {
       if (Array.isArray(commodity.items) && commodity.items.length > 0) {
         for (let i = 0; i < commodity.items.length; ++i) {

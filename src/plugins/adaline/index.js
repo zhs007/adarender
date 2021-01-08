@@ -16,7 +16,7 @@ const template = compileString(tmpbuf.toString());
  */
 function renderLine(content) {
   try {
-    const line = yaml.safeLoad(content);
+    const line = yaml.load(content);
     if (line) {
       const html = template(line);
 
